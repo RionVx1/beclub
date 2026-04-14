@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — BE Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red:     #CC0000;
+      --red-dim: #990000;
+      --black:   #0f0f0f;
+      --dark:    #1a1a1a;
+      --card:    #222222;
+      --border:  #333333;
+      --white:   #f5f5f5;
+      --muted:   #888888;
+      --font-h:  'Bebas Neue', sans-serif;
+      --font-b:  'Inter', sans-serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-b);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Nav ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      height: 64px;
+      background: var(--black);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 99;
+    }
+
+    .logo {
+      font-family: var(--font-h);
+      font-size: 2rem;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .logo .b { color: var(--red); }
+    .logo-sub {
+      font-family: var(--font-b);
+      font-size: .65rem;
+      color: var(--muted);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-left: .6rem;
+      border-left: 1px solid var(--border);
+      padding-left: .6rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: .78rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.active { color: var(--white); }
+
+    .nav-btn {
+      font-family: var(--font-b);
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      background: var(--red);
+      color: var(--white);
+      padding: .5rem 1.3rem;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+      transition: background .2s;
+    }
+    .nav-btn:hover { background: var(--red-dim); }
+
+    /* ── Page header ── */
+    .page-header {
+      padding: 5rem 3rem 4rem;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 4rem;
+    }
+
+    .breadcrumb {
+      font-size: .68rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .breadcrumb a { color: var(--red); }
+    .breadcrumb span { color: var(--border); }
+
+    .page-title {
+      font-family: var(--font-h);
+      font-size: clamp(4rem, 8vw, 7rem);
+      letter-spacing: 3px;
+      line-height: 1;
+      color: var(--white);
+    }
+    .page-title .accent { color: var(--red); }
+
+    .page-intro {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.9;
+      max-width: 440px;
+      align-self: end;
+    }
+    .page-intro strong { color: var(--white); }
+
+    /* ── Shared section styles ── */
+    .section {
+      padding: 5rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sec-label {
+      font-size: .68rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: .6rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .sec-label::before {
+      content: '';
+      width: 20px; height: 2px;
+      background: var(--red);
+    }
+
+    .sec-title {
+      font-family: var(--font-h);
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: 2px;
+      color: var(--white);
+      margin-bottom: 2.5rem;
+      line-height: 1.05;
+    }
+
+    /* ── Mission ── */
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .mission-card {
+      background: var(--dark);
+      padding: 2.5rem;
+      transition: background .2s;
+    }
+    .mission-card:hover { background: var(--card); }
+
+    .mission-icon {
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+    }
+    .mission-card h3 {
+      font-family: var(--font-h);
+      font-size: 1.5rem;
+      letter-spacing: 1px;
+      color: var(--white);
+      margin-bottom: .8rem;
+    }
+    .mission-card p {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    /* ── Interests ── */
+    .interests-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .interest-item {
+      background: var(--dark);
+      display: grid;
+      grid-template-columns: 60px 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.8rem 2.5rem;
+      border-left: 3px solid transparent;
+      transition: border-color .2s, background .2s;
+    }
+    .interest-item:hover {
+      border-left-color: var(--red);
+      background: var(--card);
+    }
+
+    .interest-num {
+      font-family: var(--font-h);
+      font-size: 2rem;
+      letter-spacing: 1px;
+      color: var(--border);
+    }
+
+    .interest-name {
+      font-family: var(--font-h);
+      font-size: 1.4rem;
+      letter-spacing: 1px;
+      color: var(--white);
+      margin-bottom: .2rem;
+    }
+    .interest-desc {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .interest-tag {
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .3rem .8rem;
+      border: 1px solid var(--red);
+      color: var(--red);
+      white-space: nowrap;
+    }
+    .interest-tag.it {
+      border-color: var(--border);
+      color: var(--muted);
+    }
+
+    /* ── Follow us ── */
+    .follow-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .follow-card {
+      background: var(--dark);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: background .2s;
+    }
+    .follow-card:hover { background: var(--card); }
+
+    .follow-platform {
+      font-family: var(--font-h);
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+      color: var(--white);
+    }
+    .follow-handle {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    .follow-stat {
+      font-family: var(--font-h);
+      font-size: 2.5rem;
+      letter-spacing: 1px;
+      color: var(--red);
+      line-height: 1;
+    }
+    .follow-stat-label {
+      font-size: .65rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .follow-btn {
+      display: inline-block;
+      margin-top: auto;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .6rem 1.2rem;
+      border: 1px solid var(--red);
+      color: var(--red);
+      transition: background .2s, color .2s;
+      width: fit-content;
+    }
+    .follow-btn:hover {
+      background: var(--red);
+      color: var(--white);
+    }
+
+    /* ── Contact ── */
+    .contact-box {
+      background: var(--dark);
+      border: 1px solid var(--border);
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .contact-left h3 {
+      font-family: var(--font-h);
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      color: var(--white);
+      margin-bottom: .8rem;
+    }
+    .contact-left p {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .contact-info { display: flex; flex-direction: column; gap: 1.2rem; }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .contact-icon {
+      width: 40px; height: 40px;
+      background: #2a2a2a;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .contact-label {
+      font-size: .62rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .contact-val {
+      font-size: .85rem;
+      color: var(--white);
+      font-weight: 500;
+    }
+    .contact-val a { color: var(--red); }
+    .contact-val a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer {
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .7rem;
+      letter-spacing: .08em;
+      color: var(--muted);
+    }
+    .footer-logo {
+      font-family: var(--font-h);
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+    }
+    .footer-logo .b { color: var(--red); }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--red); }
+
+    /* ── Mobile ── */
+    @media (max-width: 860px) {
+      nav { padding: 0 1.2rem; }
+      .nav-links, .logo-sub { display: none; }
+      .page-header { grid-template-columns: 1fr; padding: 3rem 1.2rem 2rem; gap: 1.5rem; }
+      .mission-grid { grid-template-columns: 1fr; }
+      .follow-grid { grid-template-columns: 1fr; }
+      .interest-item { grid-template-columns: 40px 1fr; }
+      .interest-tag { display: none; }
+      .contact-box { grid-template-columns: 1fr; padding: 2rem; }
+      .section { padding: 3rem 1.2rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" style="display:flex;align-items:center">
+      <div class="logo"><span class="b">B</span>E</div>
+      <span class="logo-sub">Biotechnology Engineering Club</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#areas">Focus Areas</a></li>
+      <li><a href="index.html#events">Events</a></li>
+      <li><a href="index.html#join">Join</a></li>
+      <li><a href="about.html" class="active" style="color:var(--white)">About</a></li>
+    </ul>
+    <a href="index.html#join" class="nav-btn">Join Us</a>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        About
+      </div>
+      <h1 class="page-title">
+        ABOUT<br/>
+        <span class="accent">BE</span><br/>
+        CLUB
+      </h1>
+    </div>
+    <p class="page-intro">
+      <strong>BE Club</strong> is the scientific student club of the
+      École Nationale Supérieure de Biotechnologie (ENSBiotech), Algeria.
+      We bring together students who are passionate about
+      <strong>Biotechnology</strong> and <strong>Information Technology</strong> —
+      two fields that together define the science of tomorrow.
+    </p>
+  </div>
+
+  <!-- MISSION -->
+  <section class="section">
+    <div class="sec-label">Who We Are</div>
+    <h2 class="sec-title">MISSION & VALUES</h2>
+
+    <div class="mission-grid">
+      <div class="mission-card">
+        <div class="mission-icon">🎯</div>
+        <h3>OUR MISSION</h3>
+        <p>
+          To build a community where science and technology intersect.
+          BE Club empowers students to develop real skills — in the lab
+          and behind the keyboard — while fostering collaboration,
+          curiosity, and innovation across disciplines.
+        </p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-icon">🔭</div>
+        <h3>OUR VISION</h3>
+        <p>
+          We believe the scientists and engineers of the future will be
+          fluent in both biology and code. BE Club exists to give students
+          that head start — through workshops, events, research projects,
+          and a strong peer community.
+        </p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-icon">🤝</div>
+        <h3>COMMUNITY</h3>
+        <p>
+          More than a club — a network. We connect students with
+          professionals, academics, and industry leaders, creating
+          opportunities that go beyond the classroom walls.
+        </p>
+      </div>
+      <div class="mission-card">
+        <div class="mission-icon">⚗️</div>
+        <h3>HANDS-ON LEARNING</h3>
+        <p>
+          Theory is the starting point. We run real lab sessions,
+          coding sprints, and science events where members gain
+          practical experience that complements their academic journey.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERESTS -->
+  <section class="section">
+    <div class="sec-label">What Drives Us</div>
+    <h2 class="sec-title">OUR INTERESTS</h2>
+
+    <div class="interests-list">
+      <div class="interest-item">
+        <div class="interest-num">01</div>
+        <div>
+          <div class="interest-name">Genetic Engineering</div>
+          <div class="interest-desc">CRISPR, gene editing, plasmid design, and synthetic biology</div>
+        </div>
+        <span class="interest-tag">Biotech</span>
+      </div>
+      <div class="interest-item">
+        <div class="interest-num">02</div>
+        <div>
+          <div class="interest-name">Agricultural Biotechnology</div>
+          <div class="interest-desc">GMO research, microbiome analysis, and sustainable food science</div>
+        </div>
+        <span class="interest-tag">Biotech</span>
+      </div>
+      <div class="interest-item">
+        <div class="interest-num">03</div>
+        <div>
+          <div class="interest-name">Lab Skills & Research</div>
+          <div class="interest-desc">PCR, gel electrophoresis, microscopy, and experimental design</div>
+        </div>
+        <span class="interest-tag">Biotech</span>
+      </div>
+      <div class="interest-item">
+        <div class="interest-num">04</div>
+        <div>
+          <div class="interest-name">Artificial Intelligence</div>
+          <div class="interest-desc">Machine learning, neural networks, and AI applications in science</div>
+        </div>
+        <span class="interest-tag it">IT</span>
+      </div>
+      <div class="interest-item">
+        <div class="interest-num">05</div>
+        <div>
+          <div class="interest-name">Software Development</div>
+          <div class="interest-desc">Python, web development, and tools built for biological research</div>
+        </div>
+        <span class="interest-tag it">IT</span>
+      </div>
+      <div class="interest-item">
+        <div class="interest-num">06</div>
+        <div>
+          <div class="interest-name">Bioinformatics</div>
+          <div class="interest-desc">Sequence alignment, protein structure prediction, and data-driven biology</div>
+        </div>
+        <span class="interest-tag">IT × Biotech</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOLLOW US -->
+  <section class="section">
+    <div class="sec-label">Stay Connected</div>
+    <h2 class="sec-title">FOLLOW US</h2>
+
+    <div class="follow-grid">
+      <div class="follow-card">
+        <div class="follow-platform">Instagram</div>
+        <div class="follow-handle">@b.e.club</div>
+        <div>
+          <div class="follow-stat">3,400</div>
+          <div class="follow-stat-label">Followers</div>
+        </div>
+        <a href="https://www.instagram.com/b.e.club?igsh=bnYweGVzejdhMmF0"
+           target="_blank" class="follow-btn">Follow →</a>
+      </div>
+
+      <div class="follow-card">
+        <div class="follow-platform">Facebook</div>
+        <div class="follow-handle">BEClub</div>
+        <div>
+          <div class="follow-stat" style="font-size:1.5rem;padding-top:.6rem">Biotechnology<br/>Engineering Club</div>
+        </div>
+        <a href="https://www.facebook.com/BiotechnologyEngineeringClub"
+           target="_blank" class="follow-btn">Follow →</a>
+      </div>
+
+      <div class="follow-card">
+        <div class="follow-platform">Email</div>
+        <div class="follow-handle">Direct Contact</div>
+        <div>
+          <div class="follow-stat" style="font-size:1.1rem;padding-top:.6rem;word-break:break-all">
+            beclub@<br/>ensbiotech.edu.dz
+          </div>
+        </div>
+        <a href="mailto:beclub@ensbiotech.edu.dz" class="follow-btn">Write to Us →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section">
+    <div class="sec-label">Get in Touch</div>
+    <h2 class="sec-title">CONTACT US</h2>
+
+    <div class="contact-box">
+      <div class="contact-left">
+        <h3>WE'D LOVE<br/>TO HEAR<br/>FROM YOU</h3>
+        <p>
+          Have a question, a project idea, or want to join the club?
+          Reach out through any of the channels below.
+          We usually respond within 48 hours.
+        </p>
+      </div>
+
+      <div class="contact-info">
+        <div class="contact-row">
+          <div class="contact-icon">✉</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-val">
+              <a href="mailto:beclub@ensbiotech.edu.dz">beclub@ensbiotech.edu.dz</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">📸</div>
+          <div>
+            <div class="contact-label">Instagram</div>
+            <div class="contact-val">
+              <a href="https://www.instagram.com/b.e.club?igsh=bnYweGVzejdhMmF0" target="_blank">@b.e.club</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">📘</div>
+          <div>
+            <div class="contact-label">Facebook</div>
+            <div class="contact-val">
+              <a href="https://www.facebook.com/BiotechnologyEngineeringClub" target="_blank">BiotechnologyEngineeringClub</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Location</div>
+            <div class="contact-val">École Nationale Supérieure de Biotechnologie — Algeria</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><span class="b">B</span>E CLUB</div>
+    <div>© 2025 BE Club — Biotechnology Engineering Club · ENSBiotech, Algeria</div>
+    <a href="index.html" style="color:var(--red);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase">← Back to Home</a>
+  </footer>
+
+</body>
+  </html>
