@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>White Biotechnology — BE Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red:     #CC0000;
+      --red-dim: #990000;
+      --black:   #0f0f0f;
+      --dark:    #1a1a1a;
+      --card:    #222222;
+      --border:  #333333;
+      --white:   #f5f5f5;
+      --muted:   #888888;
+      --font-h:  'Bebas Neue', sans-serif;
+      --font-b:  'Inter', sans-serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-b);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Nav ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      height: 64px;
+      background: var(--black);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 99;
+    }
+    .logo {
+      font-family: var(--font-h);
+      font-size: 2rem;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+    }
+    .logo .b { color: var(--red); }
+    .logo-sub {
+      font-size: .65rem;
+      font-family: var(--font-b);
+      color: var(--muted);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-left: .6rem;
+      border-left: 1px solid var(--border);
+      padding-left: .6rem;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: .78rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-btn {
+      font-family: var(--font-b);
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      background: var(--red);
+      color: var(--white);
+      padding: .5rem 1.3rem;
+      display: inline-block;
+      transition: background .2s;
+    }
+    .nav-btn:hover { background: var(--red-dim); }
+
+    /* ── Page Header ── */
+    .page-header {
+      padding: 5rem 3rem 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .breadcrumb {
+      font-size: .68rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .breadcrumb a { color: var(--red); }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { color: var(--border); }
+
+    .header-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 3rem;
+    }
+
+    .area-icon-big {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .page-title {
+      font-family: var(--font-h);
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      letter-spacing: 3px;
+      line-height: 1;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .page-desc {
+      font-size: .9rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.9;
+    }
+
+    .area-cat-badge {
+      font-size: .68rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: .4rem 1rem;
+      border: 1px solid var(--red);
+      color: var(--red);
+      white-space: nowrap;
+      align-self: start;
+      margin-top: 1rem;
+    }
+    .area-cat-badge.it {
+      border-color: var(--border);
+      color: var(--muted);
+    }
+
+    /* ── Shared ── */
+    .section {
+      padding: 5rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sec-label {
+      font-size: .68rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: .6rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .sec-label::before {
+      content: '';
+      width: 20px; height: 2px;
+      background: var(--red);
+    }
+
+    .sec-title {
+      font-family: var(--font-h);
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: 2px;
+      color: var(--white);
+      margin-bottom: 2.5rem;
+      line-height: 1.05;
+    }
+
+    /* ── Overview ── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .overview-main {
+      background: var(--dark);
+      padding: 2.5rem;
+      grid-column: 1 / -1;
+    }
+    .overview-main p {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 2;
+      max-width: 720px;
+    }
+    .overview-main p + p { margin-top: 1rem; }
+
+    .key-point {
+      background: var(--dark);
+      padding: 2rem;
+      transition: background .2s;
+    }
+    .key-point:hover { background: var(--card); }
+    .key-point h4 {
+      font-family: var(--font-h);
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      color: var(--white);
+      margin-bottom: .5rem;
+    }
+    .key-point p {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* ── Articles ── */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .article-card {
+      background: var(--dark);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+      transition: background .2s;
+    }
+    .article-card:hover { background: var(--card); }
+
+    .article-tag {
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--red);
+      border: 1px solid rgba(204,0,0,.3);
+      padding: .2rem .6rem;
+      width: fit-content;
+    }
+    .article-tag.ext {
+      color: var(--muted);
+      border-color: var(--border);
+    }
+
+    .article-title {
+      font-family: var(--font-h);
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .article-desc {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.8;
+      flex: 1;
+    }
+
+    .article-link {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--red);
+      transition: color .2s;
+      margin-top: auto;
+    }
+    .article-link:hover { color: var(--white); }
+
+    /* ── Activities ── */
+    .activity-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .activity-item {
+      background: var(--dark);
+      padding: 1.8rem 2rem;
+      display: grid;
+      grid-template-columns: 40px 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      transition: background .2s;
+    }
+    .activity-item:hover { background: var(--card); }
+
+    .activity-num {
+      font-family: var(--font-h);
+      font-size: 1.4rem;
+      color: var(--red);
+      letter-spacing: 1px;
+    }
+
+    .activity-name {
+      font-family: var(--font-h);
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      color: var(--white);
+      margin-bottom: .3rem;
+    }
+
+    .activity-desc {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .activity-badge {
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .3rem .8rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ── Back nav ── */
+    .back-bar {
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .back-link {
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      transition: color .2s;
+    }
+    .back-link:hover { color: var(--white); }
+
+    .other-areas {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+    }
+    .area-pill {
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .3rem .8rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      transition: border-color .2s, color .2s;
+    }
+    .area-pill:hover { border-color: var(--red); color: var(--white); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .7rem;
+      letter-spacing: .08em;
+      color: var(--muted);
+    }
+    .footer-logo { font-family: var(--font-h); font-size: 1.2rem; letter-spacing: 2px; }
+    .footer-logo .b { color: var(--red); }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--red); }
+
+    /* ── Mobile ── */
+    @media (max-width: 860px) {
+      nav { padding: 0 1.2rem; }
+      .nav-links, .logo-sub { display: none; }
+      .page-header { padding: 3rem 1.2rem 2rem; }
+      .header-inner { grid-template-columns: 1fr; }
+      .overview-grid { grid-template-columns: 1fr; }
+      .overview-main { grid-column: 1; }
+      .articles-grid { grid-template-columns: 1fr; }
+      .activity-item { grid-template-columns: 40px 1fr; }
+      .activity-badge { display: none; }
+      .section { padding: 3rem 1.2rem; }
+      .back-bar { flex-direction: column; gap: 1rem; align-items: flex-start; padding: 1.5rem 1.2rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="../index.html" style="display:flex;align-items:center">
+      <div class="logo"><span class="b">B</span>E</div>
+      <span class="logo-sub">Biotechnology Engineering Club</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html#areas">Focus Areas</a></li>
+      <li><a href="../index.html#events">Events</a></li>
+      <li><a href="../index.html#join">Join</a></li>
+      <li><a href="../about.html">About</a></li>
+    </ul>
+    <a href="../index.html#join" class="nav-btn">Join Us</a>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a>
+      <span>/</span>
+      <a href="../index.html#areas">Focus Areas</a>
+      <span>/</span>
+      White Biotechnology
+    </div>
+
+    <div class="header-inner">
+      <div>
+        <div class="area-icon-big">⚗️</div>
+        <h1 class="page-title">WHITE<br/>BIOTECHNOLOGY</h1>
+        <p class="page-desc">
+          Biology meets industry. White biotechnology — also called industrial biotechnology —
+          uses microorganisms and enzymes to manufacture chemicals, materials, fuels, and
+          products in ways that are cleaner and more sustainable than conventional chemistry.
+        </p>
+      </div>
+      <span class="area-cat-badge">Biotech · Industrial</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: OVERVIEW -->
+  <section class="section">
+    <div class="sec-label">Overview</div>
+    <h2 class="sec-title">WHAT IS IT?</h2>
+
+    <div class="overview-grid">
+      <div class="overview-main">
+        <p>
+          White biotechnology (also called industrial biotechnology) applies biological systems —
+          microorganisms, enzymes, and cell cultures — to industrial production processes. It powers
+          the manufacture of biofuels, biodegradable plastics, detergents, food additives, and specialty
+          chemicals. Compared to traditional petrochemical processes, it typically offers lower energy
+          consumption, reduced waste, and a smaller environmental footprint.
+        </p>
+        <p>
+          At BE Club, we explore how fermentation science, metabolic engineering, and enzyme technology
+          are reshaping industries from textiles to energy — and what that means for Algeria's
+          industrial and environmental future.
+        </p>
+      </div>
+
+      <div class="key-point">
+        <h4>Fermentation Technology</h4>
+        <p>Using microorganisms like bacteria and yeast to convert raw materials into valuable products — from ethanol and lactic acid to antibiotics and vitamins.</p>
+      </div>
+      <div class="key-point">
+        <h4>Enzyme Engineering</h4>
+        <p>Designing and optimizing biological catalysts to perform industrial reactions with high specificity, efficiency, and minimal side products.</p>
+      </div>
+      <div class="key-point">
+        <h4>Metabolic Engineering</h4>
+        <p>Reprogramming the metabolic pathways of microorganisms to maximize the production of a target compound — a core tool of industrial biotech.</p>
+      </div>
+      <div class="key-point">
+        <h4>Bioplastics & Biofuels</h4>
+        <p>Producing plastics and fuels from renewable biological feedstocks instead of fossil fuels — reducing carbon emissions and plastic pollution.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: ARTICLES & RESOURCES -->
+  <section class="section">
+    <div class="sec-label">Learn More</div>
+    <h2 class="sec-title">ARTICLES & RESOURCES</h2>
+
+    <div class="articles-grid">
+      <div class="article-card">
+        <span class="article-tag">Beginner</span>
+        <div class="article-title">What is Industrial Biotechnology?</div>
+        <p class="article-desc">
+          An accessible overview of white biotechnology — how microbes and enzymes are
+          used to manufacture products sustainably at industrial scale.
+        </p>
+        <a href="#" class="article-link">Read Article →</a>
+      </div>
+
+      <div class="article-card">
+        <span class="article-tag">Intermediate</span>
+        <div class="article-title">Fermentation: From Bread to Biofuel</div>
+        <p class="article-desc">
+          The science of fermentation — microbial biochemistry, industrial reactor design,
+          and the range of products that fermentation makes possible.
+        </p>
+        <a href="#" class="article-link">Read Article →</a>
+      </div>
+
+      <div class="article-card">
+        <span class="article-tag ext">External</span>
+        <div class="article-title">EuropaBio: Industrial Biotechnology Explained</div>
+        <p class="article-desc">
+          A policy and science overview from EuropaBio on how industrial biotechnology
+          contributes to the circular economy and green industrial transition.
+        </p>
+        <a href="https://www.europabio.org" target="_blank" class="article-link">Visit Source →</a>
+      </div>
+
+      <div class="article-card">
+        <span class="article-tag">Deep Dive</span>
+        <div class="article-title">Metabolic Engineering for Chemical Production</div>
+        <p class="article-desc">
+          How researchers redesign microbial metabolic networks to overproduce
+          target compounds — covering pathway design, flux analysis, and strain optimization.
+        </p>
+        <a href="#" class="article-link">Read Article →</a>
+      </div>
+
+      <div class="article-card">
+        <span class="article-tag ext">External</span>
+        <div class="article-title">Khan Academy: Cellular Respiration</div>
+        <p class="article-desc">
+          Free lessons covering glycolysis, the Krebs cycle, and oxidative phosphorylation —
+          the metabolic foundation behind industrial fermentation processes.
+        </p>
+        <a href="https://www.khanacademy.org" target="_blank" class="article-link">Visit Source →</a>
+      </div>
+
+      <div class="article-card">
+        <span class="article-tag">Intermediate</span>
+        <div class="article-title">Bioplastics: The Science of Sustainable Materials</div>
+        <p class="article-desc">
+          How microorganisms and engineered enzymes are used to produce PHA, PLA,
+          and other biodegradable polymers as alternatives to petroleum-based plastics.
+        </p>
+        <a href="#" class="article-link">Read Article →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: CLUB ACTIVITIES -->
+  <section class="section">
+    <div class="sec-label">At BE Club</div>
+    <h2 class="sec-title">WHAT WE DO</h2>
+
+    <div class="activity-list">
+      <div class="activity-item">
+        <div class="activity-num">01</div>
+        <div>
+          <div class="activity-name">Fermentation Lab Sessions</div>
+          <div class="activity-desc">Practical experiments with yeast and bacterial cultures — observing fermentation kinetics and measuring product yields.</div>
+        </div>
+        <span class="activity-badge">Lab</span>
+      </div>
+      <div class="activity-item">
+        <div class="activity-num">02</div>
+        <div>
+          <div class="activity-name">Enzyme Activity Assays</div>
+          <div class="activity-desc">Lab practicals measuring enzymatic activity under different conditions — temperature, pH, substrate concentration.</div>
+        </div>
+        <span class="activity-badge">Lab</span>
+      </div>
+      <div class="activity-item">
+        <div class="activity-num">03</div>
+        <div>
+          <div class="activity-name">Industrial Case Studies</div>
+          <div class="activity-desc">Analyzing real industrial biotech companies and processes — from bioethanol plants to biosurfactant production in North Africa.</div>
+        </div>
+        <span class="activity-badge">Academic</span>
+      </div>
+      <div class="activity-item">
+        <div class="activity-num">04</div>
+        <div>
+          <div class="activity-name">Green Chemistry Seminars</div>
+          <div class="activity-desc">Talks on sustainable manufacturing, the circular bioeconomy, and the potential of white biotech for Algeria's industrial sector.</div>
+        </div>
+        <span class="activity-badge">Seminar</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BACK / OTHER AREAS -->
+  <div class="back-bar">
+    <a href="../index.html#areas" class="back-link">← Back to All Focus Areas</a>
+    <div class="other-areas">
+      <span style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);align-self:center;margin-right:.4rem">Other Areas:</span>
+      <a href="red-biotech.html"   class="area-pill">Red Biotechnology</a>
+      <a href="green-biotech.html" class="area-pill">Green Biotechnology</a>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><span class="b">B</span>E CLUB</div>
+    <div>© 2026 BE Club — Biotechnology Engineering Club</div>
+    <a href="../index.html" style="color:var(--red);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase">← Home</a>
+  </footer>
+
+</body>
+</html>

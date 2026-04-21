@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Red Biotechnology — BE Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red:     #CC0000;
+      --red-dim: #990000;
+      --black:   #0f0f0f;
+      --dark:    #1a1a1a;
+      --card:    #222222;
+      --border:  #333333;
+      --white:   #f5f5f5;
+      --muted:   #888888;
+      --font-h:  'Bebas Neue', sans-serif;
+      --font-b:  'Inter', sans-serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-b);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Nav ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      height: 64px;
+      background: var(--black);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 99;
+    }
+    .logo {
+      font-family: var(--font-h);
+      font-size: 2rem;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+    }
+    .logo .b { color: var(--red); }
+    .logo-sub {
+      font-size: .65rem;
+      font-family: var(--font-b);
+      color: var(--muted);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-left: .6rem;
+      border-left: 1px solid var(--border);
+      padding-left: .6rem;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: .78rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-btn {
+      font-family: var(--font-b);
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      background: var(--red);
+      color: var(--white);
+      padding: .5rem 1.3rem;
+      display: inline-block;
+      transition: background .2s;
+    }
+    .nav-btn:hover { background: var(--red-dim); }
+
+    /* ── Page Header ── */
+    .page-header {
+      padding: 5rem 3rem 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .breadcrumb {
+      font-size: .68rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .breadcrumb a { color: var(--red); }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { color: var(--border); }
+
+    .header-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 3rem;
+    }
+
+    .area-icon-big {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .page-title {
+      font-family: var(--font-h);
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      letter-spacing: 3px;
+      line-height: 1;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .page-desc {
+      font-size: .9rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.9;
+    }
+
+    .area-cat-badge {
+      font-size: .68rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: .4rem 1rem;
+      border: 1px solid var(--red);
+      color: var(--red);
+      white-space: nowrap;
+      align-self: start;
+      margin-top: 1rem;
+    }
+    .area-cat-badge.it {
+      border-color: var(--border);
+      color: var(--muted);
+    }
+
+    /* ── Shared ── */
+    .section {
+      padding: 5rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sec-label {
+      font-size: .68rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: .6rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .sec-label::before {
+      content: '';
+      width: 20px; height: 2px;
+      background: var(--red);
+    }
+
+    .sec-title {
+      font-family: var(--font-h);
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: 2px;
+      color: var(--white);
+      margin-bottom: 2.5rem;
+      line-height: 1.05;
+    }
+
+    /* ── Overview ── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .overview-main {
+      background: var(--dark);
+      padding: 2.5rem;
+      grid-column: 1 / -1;
+    }
+    .overview-main p {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 2;
+      max-width: 720px;
+    }
+    .overview-main p + p { margin-top: 1rem; }
+
+    .key-point {
+      background: var(--dark);
+      padding: 2rem;
+      transition: background .2s;
+    }
+    .key-point:hover { background: var(--card); }
+    .key-point h4 {
+      font-family: var(--font-h);
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      color: var(--white);
+      margin-bottom: .5rem;
+    }
+    .key-point p {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* ── Articles ── */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .article-card {
+      background: var(--dark);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+      transition: background .2s;
+    }
+    .article-card:hover { background: var(--card); }
+
+    .article-tag {
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--red);
+      border: 1px solid rgba(204,0,0,.3);
+      padding: .2rem .6rem;
+      width: fit-content;
+    }
+    .article-tag.ext {
+      color: var(--muted);
+      border-color: var(--border);
+    }
+
+    .article-title {
+      font-family: var(--font-h);
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .article-desc {
+      font-size: .78rem;
+      color: var(--muted);
+      line-height: 1.8;
+      flex: 1;
+    }
+
+    .article-link {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--red);
+      transition: color .2s;
+      margin-top: auto;
+    }
+    .article-link:hover { color: var(--white); }
+
+    /* ── Activities ── */
+    .activity-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .activity-item {
+      background: var(--dark);
+      padding: 1.8rem 2rem;
+      display: grid;
+      grid-template-columns: 40px 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      transition: background .2s;
+    }
+    .activity-item:hover { background: var(--card); }
+
+    .activity-num {
+      font-family: var(--font-h);
+      font-size: 1.4rem;
+      color: var(--red);
+      letter-spacing: 1px;
+    }
+
+    .activity-name {
+      font-family: var(--font-h);
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      color: var(--white);
+      margin-bottom: .3rem;
+    }
+
+    .activity-desc {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .activity-badge {
+      font-size: .6rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .3rem .8rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ── Back nav ── */
+    .back-bar {
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .back-link {
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      transition: color .2s;
+    }
+    .back-link:hover { color: var(--white); }
+
+    .other-areas {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+    }
+    .area-pill {
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .3rem .8rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      transition: border-color .2s, color .2s;
+    }
+    .area-pill:hover { border-color: var(--red); color: var(--white); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .7rem;
+      letter-spacing: .08em;
+      color: var(--muted);
+    }
+    .footer-logo { font-family: var(--font-h); font-size: 1.2rem; letter-spacing: 2px; }
+    .footer-logo .b { color: var(--red); }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--red); }
+
+    /* ── Mobile ── */
+    @media (max-width: 860px) {
+      nav { padding: 0 1.2rem; }
+      .nav-links, .logo-sub { display: none; }
+      .page-header { padding: 3rem 1.2rem 2rem; }
+      .header-inner { grid-template-columns: 1fr; }
+      .overview-grid { grid-template-columns: 1fr; }
+      .overview-main { grid-column: 1; }
+      .articles-grid { grid-template-columns: 1fr; }
+      .activity-item { grid-template-columns: 40px 1fr; }
+      .activity-badge { display: none; }
+      .section { padding: 3rem 1.2rem; }
+      .back-bar { flex-direction: column; gap: 1rem; align-items: flex-start; padding: 1.5rem 1.2rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="../index.html" style="display:flex;align-items:center">
+      <div class="logo"><span class="b">B</span>E</div>
+      <span class="logo-sub">Biotechnology Engineering Club</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html#areas">Focus Areas</a></li>
+      <li><a href="../index.html#events">Events</a></li>
+      <li><a href="../index.html#join">Join</a></li>
+      <li><a href="../about.html">About</a></li>
+    </ul>
+    <a href="../index.html#join" class="nav-btn">Join Us</a>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a>
+      <span>/</span>
+      <a href="../index.html#areas">Focus Areas</a>
+      <span>/</span>
+      Red Biotechnology
+    </div>
+
+    <div class="header-inner">
+      <div>
+        <div class="area-icon-big">🩸</div>
+        <h1 class="page-title">RED<br/>BIOTECHNOLOGY</h1>
+        <p class="page-desc">
+          Where biology saves lives. Red biotechnology applies the tools of molecular science
+          to medicine — developing vaccines, therapies, diagnostics, and drugs that treat
+          disease at the genetic and cellular level.
+        </p>
+      </div>
+      <span class="area-cat-badge">Biotech · Medical</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: OVERVIEW -->
+  <section class="section">
+    <div class="sec-label">Overview</div>
+    <h2 class="sec-title">WHAT IS IT?</h2>
+
+    <div class="overview-grid">
+      <div class="overview-main">
+        <p>
+          Red biotechnology refers to the application of biotechnological techniques in the medical
+          and pharmaceutical sectors. It includes the development of new medicines using living cells,
+          the production of biopharmaceuticals such as insulin and monoclonal antibodies, gene therapy,
+          tissue engineering, and the creation of diagnostic tools.
+        </p>
+        <p>
+          It is one of the most impactful branches of biotechnology, directly addressing human disease.
+          At BE Club, we explore how molecular biology intersects with clinical science — from lab bench
+          to patient bedside.
+        </p>
+      </div>
+
+      <div class="key-point">
+        <h4>Gene Therapy</h4>
+        <p>Treating or preventing disease by inserting, altering, or replacing genetic material within a patient's cells.</p>
+      </div>
+      <div class="key-point">
+        <h4>Monoclonal Antibodies</h4>
+        <p>Laboratory-produced molecules engineered to serve as substitute antibodies that restore, enhance, or mimic the immune system's attack on disease.</p>
+      </div>
+      <div class="key-point">
+        <h4>Biopharmaceuticals</h4>
+        <p>Medical drugs produced using biological sources — including proteins, nucleic acids, and living cells — rather than chemical synthesis.</p>
+      </div>
+      <div class="key-point">
+        <h4>Regenerative Medicine</h4>
+        <p>Using stem cells and tissue engineering to repair or replace damaged organs and tissues through the body's own biological mechanisms.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: ARTICLES & RESOURCES -->
+  <section class="section">
+    <div class="sec-label">Learn More</div>
+    <h2 class="sec-title">ARTICLES & RESOURCES</h2>
+
+    <div class="articles-grid">
+      <div class="article-card">
+        <span class="article-tag">Beginner</span>
+        <div class="article-title">What is Gene Therapy?</div>
+        <p class="article-desc">
+          An accessible introduction to gene therapy — how it works, what diseases it targets,
+          and why it represents one of medicine's most exciting frontiers.
+        </p>
+        <a href="#" class="article-link">Read Article →</a>
+      </div>
+
+      <div class="article-card">
+        <span class="article-tag">Intermediate</span>
+        <div class="article-title">mRNA Vaccines: The Technology Behind COVID-19</div>
+        <p class="article-desc">
+          How messenger RNA vaccines work, why they were developed so fast,
+          and what they mean for the future of immunization science.
+        </p>
+        <a href="#" class="article-link">Read Article →</a>
+      </div>
+
+      <div class="article-card">
+        <span class="article-tag ext">External</span>
+        <div class="article-title">NIH: Introduction to Biopharmaceuticals</div>
+        <p class="article-desc">
+          An official overview from the National Institutes of Health covering
+          the production, regulation, and clinical use of biopharmaceutical drugs.
+        </p>
+        <a href="https://www.nih.gov" target="_blank" class="article-link">Visit Source →</a>
+      </div>
+
+      <div class="article-card">
+        <span class="article-tag">Deep Dive</span>
+        <div class="article-title">Stem Cells and Regenerative Medicine</div>
+        <p class="article-desc">
+          Exploring the biology of stem cells — embryonic, adult, and induced pluripotent —
+          and their role in building the next generation of tissue therapies.
+        </p>
+        <a href="#" class="article-link">Read Article →</a>
+      </div>
+
+      <div class="article-card">
+        <span class="article-tag ext">External</span>
+        <div class="article-title">Khan Academy: Immunology & Vaccines</div>
+        <p class="article-desc">
+          Free lessons on how the immune system works, how vaccines are designed,
+          and the molecular basis of antibody production.
+        </p>
+        <a href="https://www.khanacademy.org" target="_blank" class="article-link">Visit Source →</a>
+      </div>
+
+      <div class="article-card">
+        <span class="article-tag">Intermediate</span>
+        <div class="article-title">Monoclonal Antibodies in Cancer Treatment</div>
+        <p class="article-desc">
+          How engineered antibodies are used to target and destroy cancer cells
+          with remarkable specificity, transforming oncology over the last decade.
+        </p>
+        <a href="#" class="article-link">Read Article →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: CLUB ACTIVITIES -->
+  <section class="section">
+    <div class="sec-label">At BE Club</div>
+    <h2 class="sec-title">WHAT WE DO</h2>
+
+    <div class="activity-list">
+      <div class="activity-item">
+        <div class="activity-num">01</div>
+        <div>
+          <div class="activity-name">Medical Biotech Seminars</div>
+          <div class="activity-desc">Guest lectures and reading sessions on current developments in gene therapy, vaccines, and drug discovery.</div>
+        </div>
+        <span class="activity-badge">Seminar</span>
+      </div>
+      <div class="activity-item">
+        <div class="activity-num">02</div>
+        <div>
+          <div class="activity-name">Case Study Sessions</div>
+          <div class="activity-desc">Analyzing real-world clinical biotechnology breakthroughs — from insulin production to CAR-T cell therapy.</div>
+        </div>
+        <span class="activity-badge">Workshop</span>
+      </div>
+      <div class="activity-item">
+        <div class="activity-num">03</div>
+        <div>
+          <div class="activity-name">Diagnostic Lab Practicals</div>
+          <div class="activity-desc">Hands-on sessions with diagnostic tools including ELISA, Western blot, and immunostaining techniques.</div>
+        </div>
+        <span class="activity-badge">Lab</span>
+      </div>
+      <div class="activity-item">
+        <div class="activity-num">04</div>
+        <div>
+          <div class="activity-name">Research Paper Reviews</div>
+          <div class="activity-desc">Weekly journal club format — members present and discuss cutting-edge papers from medical biotech publications.</div>
+        </div>
+        <span class="activity-badge">Academic</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BACK / OTHER AREAS -->
+  <div class="back-bar">
+    <a href="../index.html#areas" class="back-link">← Back to All Focus Areas</a>
+    <div class="other-areas">
+      <span style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);align-self:center;margin-right:.4rem">Other Areas:</span>
+      <a href="green-biotech.html"   class="area-pill">Green Biotechnology</a>
+      <a href="white-biotech.html"   class="area-pill">White Biotechnology</a>
+      
+      
+      
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><span class="b">B</span>E CLUB</div>
+    <div>© 2026 BE Club — Biotechnology Engineering Club</div>
+    <a href="../index.html" style="color:var(--red);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase">← Home</a>
+  </footer>
+
+</body>
+</html>
