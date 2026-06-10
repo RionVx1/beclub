@@ -1024,6 +1024,16 @@ footer {
   font-size: 1rem;
   flex-shrink: 0;
 }
+.contact-icon:has(> img) {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+.contact-icon > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
 .contact-label {
   font-size: 0.62rem;
@@ -1050,11 +1060,22 @@ footer {
 
 /* About — mobile */
 @media (max-width: 860px) {
-  .page-header {
+  .page-header:has(> .page-intro) {
     grid-template-columns: 1fr;
+    align-items: start;
     padding: 3rem 1.2rem 2rem;
     gap: 1.5rem;
   }
+
+  .page-intro {
+    max-width: none;
+    align-self: auto;
+  }
+
+  .page-header {
+    padding: 3rem 1.2rem 2rem;
+  }
+
   .mission-grid { grid-template-columns: 1fr; }
   .follow-grid  { grid-template-columns: 1fr; }
   .interest-item { grid-template-columns: 40px 1fr; }
