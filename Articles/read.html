@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Read Article — BE Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .pdf-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      margin-bottom: 1.5rem;
+    }
+    .pdf-toolbar button {
+      font-family: var(--font-b);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: var(--dark);
+      color: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      padding: 0.5rem 1.2rem;
+      cursor: pointer;
+    }
+    .pdf-toolbar button:hover:not(:disabled) {
+      border-color: var(--red);
+      color: var(--red);
+    }
+    .pdf-toolbar button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .pdf-page-info {
+      color: var(--muted);
+      font-size: 0.85rem;
+      min-width: 7rem;
+      text-align: center;
+    }
+    .pdf-viewport {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      padding: 1rem;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+    }
+    .pdf-viewport canvas {
+      max-width: 100%;
+      height: auto;
+      box-shadow: var(--shadow-soft);
+    }
+    .pdf-status {
+      color: var(--muted);
+      text-align: center;
+      padding: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" style="display:flex;align-items:center">
+      <div class="logo">
+        <img src="../pics/club-logo.png" alt="BE Club" class="logo-img" />
+      </div>
+      <span class="logo-sub">Biotechnology Engineering Club</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html#interests">Focus Areas</a></li>
+      <li><a href="../index.html#events">Events</a></li>
+      <li class="nav-mobile-visible"><a href="../fields/projects.html">Projects</a></li>
+      <li><a href="../about.html">About</a></li>
+    </ul>
+    <a href="../index.html#join" class="nav-btn">Join Us</a>
+  </nav>
+
+  <div class="page-header">
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a>
+      <span>/</span>
+      <a href="../fields/articles-list.html">Articles</a>
+      <span>/</span>
+      <span id="breadcrumb-title">Reading</span>
+    </div>
+    <div class="header-inner">
+      <div>
+        <h1 class="page-title" id="article-heading">ARTICLE</h1>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="pdf-toolbar" id="pdf-toolbar" hidden>
+      <button type="button" id="pdf-prev">← Prev</button>
+      <span class="pdf-page-info" id="pdf-page-info">Page 1 / 1</span>
+      <button type="button" id="pdf-next">Next →</button>
+    </div>
+    <div class="pdf-viewport" id="pdf-viewport" hidden>
+      <canvas id="pdf-canvas"></canvas>
+    </div>
+    <p class="pdf-status" id="pdf-status">Loading PDF…</p>
+  </section>
+
+  <div class="back-bar">
+    <a href="../fields/articles-list.html" class="back-link">← Back to Articles</a>
+  </div>
+
+  <footer>
+    <div class="footer-logo"><span class="b">B</span>E CLUB</div>
+    <div>© 2026 BE Club — Biotechnology Engineering Club</div>
+    <a href="../index.html" style="color:var(--red);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase">← Home</a>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    (async function () {
+      const params = new URLSearchParams(window.location.search);
+      const file = params.get('file');
+      const title = params.get('title') || 'Article';
+      const statusEl = document.getElementById('pdf-status');
+      const toolbar = document.getElementById('pdf-toolbar');
+      const viewport = document.getElementById('pdf-viewport');
+      const canvas = document.getElementById('pdf-canvas');
+      const pageInfo = document.getElementById('pdf-page-info');
+      const prevBtn = document.getElementById('pdf-prev');
+      const nextBtn = document.getElementById('pdf-next');
+
+      document.getElementById('article-heading').textContent = title.toUpperCase();
+      document.getElementById('breadcrumb-title').textContent = title;
+      document.title = title + ' — BE Club';
+
+      if (!file || file.includes('/') || file.includes('..') || !/\.pdf$/i.test(file)) {
+        statusEl.textContent = 'Invalid or missing PDF file.';
+        return;
+      }
+
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+      let pdfDoc = null;
+      let pageNum = 1;
+
+      function updateButtons() {
+        prevBtn.disabled = pageNum <= 1;
+        nextBtn.disabled = pageNum >= pdfDoc.numPages;
+      }
+
+      async function renderPage(num) {
+        const page = await pdfDoc.getPage(num);
+        const scale = Math.min(1.5, (viewport.clientWidth - 32) / page.getViewport({ scale: 1 }).width);
+        const vp = page.getViewport({ scale: Math.max(scale, 0.8) });
+        canvas.height = vp.height;
+        canvas.width = vp.width;
+        await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
+        pageInfo.textContent = 'Page ' + num + ' / ' + pdfDoc.numPages;
+        updateButtons();
+      }
+
+      prevBtn.addEventListener('click', function () {
+        if (pageNum > 1) renderPage(--pageNum);
+      });
+      nextBtn.addEventListener('click', function () {
+        if (pageNum < pdfDoc.numPages) renderPage(++pageNum);
+      });
+
+      try {
+        pdfDoc = await pdfjsLib.getDocument(encodeURI(file)).promise;
+        statusEl.hidden = true;
+        toolbar.hidden = false;
+        viewport.hidden = false;
+        await renderPage(1);
+      } catch (e) {
+        statusEl.textContent = 'Could not load PDF. It may still be deploying on GitHub Pages.';
+      }
+    })();
+  </script>
+</body>
+</html>

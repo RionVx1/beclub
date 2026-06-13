@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — BE Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body class="admin-body">
+
+  <div class="admin-card wide">
+    <div class="panel-header">
+      <div class="admin-logo">
+        <img src="../pics/club-logo.png" alt="BE Club" />
+        <span>BE Club Admin</span>
+      </div>
+      <button class="btn-logout" id="logout-btn">Log Out</button>
+    </div>
+
+    <h1 class="admin-title">ADMIN PANEL</h1>
+    <p class="admin-subtitle">Upload articles directly to <code>Articles/</code> on GitHub Pages via the GitHub API.</p>
+
+    <div class="github-box">
+      <label for="github-token">GitHub Token</label>
+      <p class="github-hint">Create a <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">personal access token</a> with <strong>repo</strong> access. Used only for the upload request — never stored.</p>
+      <input type="password" id="github-token" placeholder="ghp_…" autocomplete="off" />
+    </div>
+
+    <div id="upload-status" class="upload-status" hidden></div>
+
+    <form class="admin-form article-form" id="article-form">
+      <label for="article-title">Article Title</label>
+      <input type="text" id="article-title" required placeholder="e.g. What Are GMOs?" />
+
+      <label for="article-desc">Short Description</label>
+      <input type="text" id="article-desc" required placeholder="One-line summary for the card" />
+
+      <div class="form-row">
+        <div>
+          <label for="article-tag">Tag</label>
+          <select id="article-tag" required></select>
+        </div>
+        <div>
+          <label for="article-field">Field</label>
+          <select id="article-field" required></select>
+        </div>
+      </div>
+
+      <label>Article PDF File</label>
+      <div class="upload-row">
+        <button type="button" class="upload-btn" id="btn-upload">
+          <span class="icon">📄</span>
+          Choose PDF File
+        </button>
+        <span class="upload-hint">Upload a PDF — readers open it in the built-in viewer.</span>
+      </div>
+      <input type="file" id="article-file" accept=".pdf,application/pdf" hidden />
+
+      <button type="submit" class="btn-primary">Add Article to Articles/</button>
+    </form>
+
+    <div class="file-section">
+      <h3>ARTICLES IN Articles/</h3>
+      <div id="file-list" class="file-list">
+        <p class="file-empty">Loading…</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="github.js"></script>
+  <script src="admin.js"></script>
+  <script>
+    if (!requireAuth()) throw new Error('redirecting');
+    document.getElementById('logout-btn').addEventListener('click', logout);
+    setupUploadButton();
+    initPanel();
+  </script>
+</body>
+</html>
