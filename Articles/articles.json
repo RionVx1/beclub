@@ -1,3 +1,13 @@
 {
-  "articles": []
+  "articles": [
+    {
+      "id": "idk",
+      "title": "idk",
+      "desc": "this is ai part ill review it",
+      "tag": "Beginner",
+      "field": "red-biotech",
+      "file": "idk.pdf",
+      "date": "2026-06-14"
+    }
+  ]
 }
