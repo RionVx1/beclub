@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Articles List — BE Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" style="display:flex;align-items:center">
+      <div class="logo">
+        <img src="../pics/club-logo.png" alt="BE Club" class="logo-img" />
+      </div>
+      <span class="logo-sub">Biotechnology Engineering Club</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html#interests">Focus Areas</a></li>
+      <li><a href="../index.html#events">Events</a></li>
+      <li class="nav-mobile-visible"><a href="projects.html">Projects</a></li>
+      <li><a href="../about.html">About</a></li>
+    </ul>
+    <a href="../index.html#join" class="nav-btn">Join Us</a>
+  </nav>
+
+  <div class="page-header">
+    <div class="header-inner">
+      <div>
+        <div class="area-icon-big">🎙️</div>
+      </div>
+    </div>
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a>
+      <span>/</span>
+      <a href="projects.html">Projects</a>
+      <span>/</span>
+      Podcast
+    </div>
+    <h1 class="page-title">podcast<br/>episodes</h1>
+    <p class="page-desc">
+      I need to put something here but it's 2 AM
+    </p>
+  </div>
+
+  <main class="content">
+    <section class="cards-section">
+      <div id="podcast-list" class="cards-grid">
+        <p class="file-empty">Loading episodes…</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Helper: Format date
+    function formatDate(d) {
+      if (!d) return '';
+      try {
+        const dt = new Date(d);
+        return dt.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+      } catch (e) { return d; }
+    }
+
+    // Helper: Extract YouTube ID from URL
+    function getYouTubeId(url) {
+      try {
+        const u = new URL(url);
+        if (u.hostname.includes('youtu.be')) return u.pathname.slice(1);
+        if (u.hostname.includes('youtube.com')) return u.searchParams.get('v');
+      } catch (e) {}
+      return null;
+    }
+
+    // Helper: Get thumbnail for video link
+    async function getThumbnailForLink(url) {
+      const yt = getYouTubeId(url);
+      if (yt) return `https://img.youtube.com/vi/${yt}/hqdefault.jpg`;
+
+      // Try Vimeo oEmbed
+      try {
+        const oembed = `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(url)}`;
+        const r = await fetch(oembed);
+        if (r.ok) {
+          const j = await r.json();
+          if (j.thumbnail_url) return j.thumbnail_url;
+        }
+      } catch (e) {}
+
+      // fallback to site logo
+      return '../pics/club-logo.png';
+    }
+
+    // Helper: Create a card DOM element
+    function createCard(entry, thumbUrl) {
+      const a = document.createElement('a');
+      a.className = 'card';
+      a.href = entry.link || '#';
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+
+      const img = document.createElement('img');
+      img.className = 'card-thumb';
+      img.src = thumbUrl;
+      img.alt = entry.title || 'Episode thumbnail';
+
+      const body = document.createElement('div');
+      body.className = 'card-body';
+
+      const h = document.createElement('h3');
+      h.className = 'card-title';
+      h.textContent = entry.title || '';
+
+      const p = document.createElement('p');
+      p.className = 'card-desc';
+      p.textContent = entry.desc || '';
+
+      const meta = document.createElement('div');
+      meta.className = 'card-meta';
+      meta.textContent = formatDate(entry.date || '');
+
+      body.appendChild(h);
+      body.appendChild(p);
+      body.appendChild(meta);
+
+      a.appendChild(img);
+      a.appendChild(body);
+      return a;
+    }
+
+    // Fetch: Get episodes from JSON
+    async function fetchEpisodes() {
+      try {
+        const res = await fetch('../Articles/episodes.json');
+        if (!res.ok) return [];
+        const data = await res.json();
+        return data.episodes || [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    // Main: Render episodes
+    async function render() {
+      const list = document.getElementById('podcast-list');
+      const episodes = await fetchEpisodes();
+      list.innerHTML = '';
+      if (!episodes.length) {
+        list.innerHTML = '<p class="file-empty">No episodes yet.</p>';
+        return;
+      }
+
+      for (const ep of episodes.sort((a,b)=>((b.date||'').localeCompare(a.date||'')))) {
+        const thumb = await getThumbnailForLink(ep.link || '');
+        const card = createCard(ep, thumb);
+        list.appendChild(card);
+      }
+    }
+
+    // Initialize
+    render();
+  </script>
+</body>
+</html>
+  

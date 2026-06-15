@@ -1,6 +1,7 @@
 const VALID_HASH = '32801f5c6ca59882d004c3b927de38fa22fa1ed71e0f63d66707f000f2587eac';
 const AUTH_KEY = 'beclub_admin_token';
 const MANIFEST_PATH = '../Articles/articles.json';
+const EPISODES_MANIFEST_PATH = '../Articles/episodes.json';
 
 const FIELDS = [
   { value: 'red-biotech', label: 'Red Biotechnology' },
@@ -80,12 +81,88 @@ async function loadManifest() {
   return res.json();
 }
 
+async function loadEpisodesManifest() {
+  const res = await fetch(EPISODES_MANIFEST_PATH);
+  if (!res.ok) return { episodes: [] };
+  return res.json();
+}
+
+async function uploadEpisodesManifest(token, manifestContent, title) {
+  const manifestPath = `${GITHUB_CONFIG.articlesDir}/episodes.json`;
+  await uploadToGithub(token, manifestPath, manifestContent, `Update episodes list: ${title}`);
+}
+
+async function handleEpisodeSubmit(e) {
+  e.preventDefault();
+
+  const token = getGithubToken();
+  if (!token) {
+    showStatus('Enter your GitHub token to upload.', 'error');
+    return;
+  }
+
+  const title = document.getElementById('podcast-title').value.trim();
+  const episode = document.getElementById('podcast-episode').value.trim();
+  const date = document.getElementById('podcast-date').value;
+  const desc = document.getElementById('podcast-desc').value.trim();
+  const link = document.getElementById('podcast-link').value.trim();
+
+  if (!title || !link) {
+    showStatus('Episode title and link are required.', 'error');
+    return;
+  }
+
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  showPodcastStatus(`Saving episode "${title}" to episodes.json…`, 'uploading');
+
+  try {
+    const manifest = await loadEpisodesManifest();
+    const slug = slugify(title);
+
+    const entry = {
+      id: slug,
+      title,
+      episode: episode ? Number(episode) : null,
+      date: date || new Date().toISOString().slice(0, 10),
+      desc,
+      link,
+    };
+
+    const existing = manifest.episodes.findIndex((item) => item.id === slug || item.link === link);
+    if (existing >= 0) {
+      manifest.episodes[existing] = entry;
+    } else {
+      manifest.episodes.push(entry);
+    }
+
+    const manifestJson = JSON.stringify(manifest, null, 2) + '\n';
+    await uploadEpisodesManifest(token, manifestJson, title);
+
+    showPodcastStatus(`Saved! "${title}" was added to episodes.json.`, 'success');
+    e.target.reset();
+    document.getElementById('github-token').value = '';
+  } catch (err) {
+    showPodcastStatus(err.message, 'error');
+  } finally {
+    submitBtn.disabled = false;
+  }
+}
+
 function showStatus(message, type) {
   const el = document.getElementById('upload-status');
   if (!el) return;
   el.hidden = false;
   el.textContent = message;
   el.className = `upload-status ${type}`;
+}
+
+function showPodcastStatus(message, type) {
+  const el = document.getElementById('podcast-status');
+  if (!el) return;
+  el.hidden = false;
+  el.textContent = message;
+  el.className = `upload-status podcast-status ${type}`;
 }
 
 function readFileAsArrayBuffer(file) {
@@ -245,6 +322,10 @@ async function initPanel() {
   });
 
   document.getElementById('article-form').addEventListener('submit', handleArticleSubmit);
+  const podcastForm = document.getElementById('podcast-form');
+  if (podcastForm) {
+    podcastForm.addEventListener('submit', handleEpisodeSubmit);
+  }
 
   const manifest = await loadManifest();
   renderArticleList(manifest.articles);

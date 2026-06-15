@@ -61,6 +61,34 @@
       <button type="submit" class="btn-primary">Add Article to Articles/</button>
     </form>
 
+    <form class="admin-form podcast-form" id="podcast-form">
+      <h2 class="section-heading">Podcast Episode Upload</h2>
+      <p class="section-note">Use this form to prepare a podcast episode upload. The backend integration can be added later.</p>
+
+      <label for="podcast-title">Episode Title</label>
+      <input type="text" id="podcast-title" placeholder="e.g. The Future of Bioinformatics" />
+
+      <div class="form-row">
+        <div>
+          <label for="podcast-episode">Episode #</label>
+          <input type="number" id="podcast-episode" min="1" placeholder="1" />
+        </div>
+        <div>
+          <label for="podcast-date">Release Date</label>
+          <input type="date" id="podcast-date" />
+        </div>
+      </div>
+
+      <label for="podcast-desc">Short Description</label>
+      <textarea id="podcast-desc" placeholder="One-line summary for the episode"></textarea>
+
+      <label for="podcast-link">Episode Link</label>
+      <input type="url" id="podcast-link" placeholder="https://" />
+
+      <div id="podcast-status" class="upload-status podcast-status" hidden></div>
+      <button type="submit" class="btn-primary">Add Podcast Episode to Podcasts/</button>
+    </form>
+
     <div class="file-section">
       <h3>ARTICLES IN Articles/</h3>
       <div id="file-list" class="file-list">

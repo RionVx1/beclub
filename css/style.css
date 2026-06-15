@@ -401,6 +401,64 @@ nav {
   gap: 0.7rem;
   margin-bottom: var(--space-2xl);
 }
+
+/* ============================================================
+   Podcast cards (small addition to match site styles)
+   ============================================================ */
+.cards-section {
+  padding: var(--space-4xl) var(--space-5xl);
+}
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  align-items: stretch;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft);
+}
+.card-thumb {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  background: var(--gray-dark);
+}
+.card-body {
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.card-title {
+  font-family: var(--font-h);
+  font-size: 1rem;
+  color: var(--white);
+}
+.card-desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  flex: 1 1 auto;
+}
+.card-meta {
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: none;
+}
+
+.file-empty {
+  color: var(--muted);
+  padding: 2rem 0;
+}
 .eyebrow-line {
   width: 32px;
   height: 2px;
