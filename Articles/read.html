@@ -84,18 +84,32 @@
     (async function () {
       const params = new URLSearchParams(window.location.search);
       const file = params.get('file');
-      const title = params.get('title') || 'Article';
       const statusEl = document.getElementById('pdf-status');
       const pagesEl = document.getElementById('pdf-pages');
+      const headingEl = document.getElementById('article-heading');
+      const breadcrumbEl = document.getElementById('breadcrumb-title');
 
-      document.getElementById('article-heading').textContent = title.toUpperCase();
-      document.getElementById('breadcrumb-title').textContent = title;
-      document.title = title + ' — BE Club';
+      async function getArticleTitle(fileName) {
+        try {
+          const res = await fetch('../Articles/articles.json');
+          if (!res.ok) return null;
+          const data = await res.json();
+          const article = (data.articles || []).find(a => a.file === fileName);
+          return article ? article.title : null;
+        } catch (e) {
+          return null;
+        }
+      }
 
       if (!file || file.includes('/') || file.includes('..') || !/\.pdf$/i.test(file)) {
         statusEl.textContent = 'Invalid or missing PDF file.';
         return;
       }
+
+      const title = await getArticleTitle(file) || 'Article';
+      headingEl.textContent = title.toUpperCase();
+      breadcrumbEl.textContent = title;
+      document.title = title + ' — BE Club';
 
       pdfjsLib.GlobalWorkerOptions.workerSrc =
         'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';

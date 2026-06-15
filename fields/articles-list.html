@@ -31,13 +31,13 @@
       <span>/</span>
       <a href="projects.html">Projects</a>
       <span>/</span>
-      Articles List
+      Articles 
     </div>
 
     <div class="header-inner">
       <div>
-        <div class="area-icon-big">📄</div>
-        <h1 class="page-title">ARTICLES<br/>LIST</h1>
+        
+        <h1 class="page-title">Articles 🔬<br/></h1>
         <p class="page-desc">
           Written pieces from BE Club members — explainers, lab notes, and field guides
           across red, green, and white biotechnology.
@@ -79,8 +79,7 @@
         }
 
         grid.innerHTML = articles.map(function (a) {
-          var readUrl = '../Articles/read.html?file=' + encodeURIComponent(a.file) +
-            '&title=' + encodeURIComponent(a.title);
+          var readUrl = '../Articles/read.html?file=' + encodeURIComponent(a.file);
           return (
             '<div class="article-card">' +
               '<span class="article-tag">' + a.field + '</span>' +

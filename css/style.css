@@ -11,12 +11,19 @@
    3. Use .section, .sec-label, .sec-title for any content section.
    4. Use .btn-primary / .btn-ghost for buttons.
 
+   REUSABLE COMPONENT CLASSES:
+   • .glass-card — frosted glass background with hover effect
+   • .icon-box — container for icons with border and background
+   • .pill-accent — red-themed tag/badge
+   • .pill-muted — neutral tag/badge
+   • .surface-interactive — interactive surface with hover state
+
    TABLE OF CONTENTS
    ─────────────────
-   1. Variables
+   1. Variables (colors, spacing, transitions, z-index)
    2. Reset & Base
-   3. Shared Components (buttons, tags, typewriter)
-   4. Layout (nav, sections, footer)
+   3. Shared Components (buttons, tags, reusable patterns)
+   4. Layout (nav, sections, footer, cards)
    5. Index Page
    6. About Page
    7. Fields Pages
@@ -97,6 +104,23 @@
   --letter-wide:    0.1em;
   --letter-wider:   0.12em;
   --letter-widest:  0.2em;
+
+  /* Font sizes — common sizes used across components */
+  --text-xs:    0.62rem;
+  --text-sm:    0.72rem;
+  --text-base:  0.85rem;
+  --text-lg:    0.9rem;
+  --text-xl:    1rem;
+  --text-2xl:   1.15rem;
+
+  /* Commonly used sizes */
+  --size-icon-sm:   48px;
+  --size-icon-md:   64px;
+  --size-icon-lg:   72px;
+
+  /* Z-index scale */
+  --z-sticky:   99;
+  --z-modal:    100;
 }
 
 
@@ -145,6 +169,10 @@ img {
 
 /* ============================================================
    3. SHARED COMPONENTS
+   
+   Edit buttons, tags, and typewriter here. Most components have
+   a base class (e.g., .btn-base) and then variant classes
+   (e.g., .nav-btn, .btn-primary, .btn-ghost).
    ============================================================ */
 
 /* ── Buttons ────────────────────────────────────────────────── */
@@ -299,6 +327,89 @@ img {
 
 
 /* ============================================================
+   3B. REUSABLE COMPONENT PATTERNS
+   ============================================================ */
+
+/* Glass card base — used by multiple components */
+.glass-card {
+  background: var(--surface-solid);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  transition: all var(--transition-normal);
+}
+.glass-card:hover {
+  background: var(--surface-hover);
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Icon box base */
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+/* Surface/button hover — for interactive elements */
+.surface-interactive {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  transition: all var(--transition-normal);
+}
+.surface-interactive:hover,
+.surface-interactive:focus-visible {
+  background: var(--surface-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+  outline: none;
+}
+
+/* Accent pill — small tags/badges */
+.pill-accent {
+  font-size: var(--text-xs);
+  letter-spacing: var(--letter-wider);
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid rgba(230, 0, 0, 0.4);
+  border-radius: var(--radius-pill);
+  color: var(--red);
+  background: rgba(230, 0, 0, 0.06);
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Muted pill — neutral badges */
+.pill-muted {
+  font-size: var(--text-xs);
+  letter-spacing: var(--letter-wider);
+  text-transform: uppercase;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  color: var(--muted);
+  background: var(--surface);
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all var(--transition-normal);
+}
+.pill-muted:hover,
+.pill-muted:focus-visible {
+  border-color: rgba(230, 0, 0, 0.45);
+  color: var(--white);
+  background: rgba(230, 0, 0, 0.08);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+
+/* ============================================================
    4. LAYOUT
    ============================================================ */
 
@@ -315,7 +426,7 @@ nav {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   position: sticky;
   top: 0;
-  z-index: 99;
+  z-index: var(--z-sticky);
 }
 
 .logo {
@@ -362,7 +473,7 @@ nav {
   outline: none;
 }
 
-/* ── Sections ───────────────────────────────────────────────── */
+/* ── Sections ───────────────────────────────────────────────– */
 .section {
   padding: var(--space-7xl) var(--space-5xl);
   border-bottom: 1px solid var(--border);
@@ -385,6 +496,7 @@ nav {
   background: var(--red);
 }
 
+/* Section title — edit font size in clamp() for all pages */
 .sec-title {
   font-family: var(--font-h);
   font-size: clamp(2rem, 4vw, 3.5rem);
@@ -403,7 +515,8 @@ nav {
 }
 
 /* ============================================================
-   Podcast cards (small addition to match site styles)
+   Podcast / Article Cards — horizontal layout
+   Edit .card properties for styling changes
    ============================================================ */
 .cards-section {
   padding: var(--space-4xl) var(--space-5xl);
@@ -443,17 +556,17 @@ nav {
 }
 .card-title {
   font-family: var(--font-h);
-  font-size: 1rem;
+  font-size: var(--text-xl);
   color: var(--white);
 }
 .card-desc {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--text-lg);
   flex: 0;
 }
 .card-meta {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   text-transform: none;
   margin-top: auto;
 }
@@ -462,19 +575,21 @@ nav {
   color: var(--muted);
   padding: 2rem 0;
 }
+
 .eyebrow-line {
   width: 32px;
   height: 2px;
   background: var(--red);
 }
+
 .eyebrow-text {
-  font-size: 0.72rem;
+  font-size: var(--text-sm);
   letter-spacing: var(--letter-widest);
   text-transform: uppercase;
   color: var(--muted);
 }
 
-/* Breadcrumb (inner pages) */
+/* ── Breadcrumb (inner pages) ────────────────────────────────── */
 .breadcrumb {
   font-size: 0.68rem;
   letter-spacing: 0.18em;
@@ -499,7 +614,7 @@ nav {
 /* Accent text */
 .accent { color: var(--red); }
 
-/* ── Footer ─────────────────────────────────────────────────── */
+/* ── Footer ──────────────────────────────────────────────────── */
 footer {
   padding: var(--space-2xl) var(--space-5xl);
   display: flex;
@@ -546,6 +661,9 @@ footer {
 
 /* ============================================================
    5. INDEX PAGE
+   
+   Hero, stats, focus areas (cards), events list, join section.
+   Use variables for all colors, sizes, spacing.
    ============================================================ */
 
 /* ── Hero ───────────────────────────────────────────────────── */
@@ -907,6 +1025,9 @@ footer {
 
 /* ============================================================
    6. ABOUT PAGE
+   
+   Page header, mission cards, interests list, social follow
+   cards, contact section. All use .glass-card pattern.
    ============================================================ */
 
 /* ── Page Header ────────────────────────────────────────────── */
@@ -923,10 +1044,12 @@ footer {
 }
 
 .page-title {
-  font-family: var(--font-h);
-  font-size: clamp(4rem, 8vw, 7rem);
-  letter-spacing: 3px;
-  line-height: var(--line-tight);
+  font-family: var(--font-b);
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  text-transform: uppercase;
 }
 
 .page-intro {
@@ -1247,6 +1370,10 @@ footer {
 
 /* ============================================================
    7. FIELDS PAGES
+   
+   Red/Green/White/IT biotech pages. Header, overview section,
+   articles grid, activities list, back nav. Uses .glass-card
+   for consistency. Edit .articles-grid for layout changes.
    ============================================================ */
 
 .header-inner {
@@ -1579,7 +1706,7 @@ footer {
 
 
 /* ============================================================
-   8. MOBILE — GLOBAL OVERRIDES
+   8. MOBILE — GLOBAL OVERRIDES (@ 860px breakpoint)
    ============================================================ */
 @media (max-width: 860px) {
   nav { padding: 0 1.2rem; }
@@ -1606,3 +1733,36 @@ footer {
     padding: var(--space-2xl) 1.2rem;
   }
 }
+
+/* ============================================================
+   EDITING GUIDE
+   ============================================================
+   
+   WHEN EDITING THIS FILE:
+   
+   • Colors — Edit :root CSS variables (--red, --black, --muted, etc.)
+   
+   • Spacing — Use --space-* variables (--space-lg, --space-2xl, etc.)
+     Don't hardcode margins/padding.
+   
+   • Font sizes — Use --text-* variables (--text-sm, --text-lg, etc.)
+     or reference sizes in :root.
+   
+   • Component reuse — Use .glass-card, .pill-accent, .pill-muted,
+     .icon-box, .surface-interactive for common patterns.
+   
+   • Card styles — Edit .card, .glass-card classes
+   
+   • Buttons — Consolidate in section 3 (SHARED COMPONENTS)
+   
+   • Responsive — Edit @media (max-width: 860px) at the end
+   
+   • Z-index — Use --z-sticky, --z-modal variables
+   
+   NEVER hardcode:
+   - Color values (use CSS variables)
+   - Spacing values > 1rem (use --space-* scale)
+   - Common hex colors (define as :root variables)
+   - Z-index values (use the z-index scale)
+   
+   ============================================================ */
