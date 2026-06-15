@@ -7,57 +7,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../css/style.css" />
   <style>
-    .pdf-toolbar {
+    .pdf-section {
+      padding: var(--space-3xl) var(--space-lg);
+      border-bottom: none;
+    }
+    .pdf-pages {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
       gap: 1rem;
-      padding: 1rem;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      margin-bottom: 1.5rem;
+      width: 100%;
     }
-    .pdf-toolbar button {
-      font-family: var(--font-b);
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      background: var(--dark);
-      color: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-pill);
-      padding: 0.5rem 1.2rem;
-      cursor: pointer;
-    }
-    .pdf-toolbar button:hover:not(:disabled) {
-      border-color: var(--red);
-      color: var(--red);
-    }
-    .pdf-toolbar button:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-    .pdf-page-info {
-      color: var(--muted);
-      font-size: 0.85rem;
-      min-width: 7rem;
-      text-align: center;
-    }
-    .pdf-viewport {
-      display: flex;
-      justify-content: center;
-      overflow-x: auto;
-      padding: 1rem;
-      background: var(--dark);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-    }
-    .pdf-viewport canvas {
+    .pdf-page {
+      display: block;
+      width: 100%;
       max-width: 100%;
       height: auto;
-      box-shadow: var(--shadow-soft);
     }
     .pdf-status {
       color: var(--muted);
@@ -99,16 +64,9 @@
     </div>
   </div>
 
-  <section class="section">
-    <div class="pdf-toolbar" id="pdf-toolbar" hidden>
-      <button type="button" id="pdf-prev">← Prev</button>
-      <span class="pdf-page-info" id="pdf-page-info">Page 1 / 1</span>
-      <button type="button" id="pdf-next">Next →</button>
-    </div>
-    <div class="pdf-viewport" id="pdf-viewport" hidden>
-      <canvas id="pdf-canvas"></canvas>
-    </div>
+  <section class="section pdf-section">
     <p class="pdf-status" id="pdf-status">Loading PDF…</p>
+    <div class="pdf-pages" id="pdf-pages"></div>
   </section>
 
   <div class="back-bar">
@@ -128,12 +86,7 @@
       const file = params.get('file');
       const title = params.get('title') || 'Article';
       const statusEl = document.getElementById('pdf-status');
-      const toolbar = document.getElementById('pdf-toolbar');
-      const viewport = document.getElementById('pdf-viewport');
-      const canvas = document.getElementById('pdf-canvas');
-      const pageInfo = document.getElementById('pdf-page-info');
-      const prevBtn = document.getElementById('pdf-prev');
-      const nextBtn = document.getElementById('pdf-next');
+      const pagesEl = document.getElementById('pdf-pages');
 
       document.getElementById('article-heading').textContent = title.toUpperCase();
       document.getElementById('breadcrumb-title').textContent = title;
@@ -147,38 +100,32 @@
       pdfjsLib.GlobalWorkerOptions.workerSrc =
         'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-      let pdfDoc = null;
-      let pageNum = 1;
-
-      function updateButtons() {
-        prevBtn.disabled = pageNum <= 1;
-        nextBtn.disabled = pageNum >= pdfDoc.numPages;
-      }
-
-      async function renderPage(num) {
+      async function renderPage(pdfDoc, num, containerWidth) {
         const page = await pdfDoc.getPage(num);
-        const scale = Math.min(1.5, (viewport.clientWidth - 32) / page.getViewport({ scale: 1 }).width);
-        const vp = page.getViewport({ scale: Math.max(scale, 0.8) });
+        const unscaled = page.getViewport({ scale: 1 });
+        const scale = containerWidth / unscaled.width;
+        const vp = page.getViewport({ scale });
+
+        const canvas = document.createElement('canvas');
+        canvas.className = 'pdf-page';
         canvas.height = vp.height;
         canvas.width = vp.width;
-        await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
-        pageInfo.textContent = 'Page ' + num + ' / ' + pdfDoc.numPages;
-        updateButtons();
+        pagesEl.appendChild(canvas);
+
+        await page.render({
+          canvasContext: canvas.getContext('2d'),
+          viewport: vp
+        }).promise;
       }
 
-      prevBtn.addEventListener('click', function () {
-        if (pageNum > 1) renderPage(--pageNum);
-      });
-      nextBtn.addEventListener('click', function () {
-        if (pageNum < pdfDoc.numPages) renderPage(++pageNum);
-      });
-
       try {
-        pdfDoc = await pdfjsLib.getDocument(encodeURI(file)).promise;
-        statusEl.hidden = true;
-        toolbar.hidden = false;
-        viewport.hidden = false;
-        await renderPage(1);
+        const pdfDoc = await pdfjsLib.getDocument(encodeURI(file)).promise;
+        statusEl.remove();
+
+        const containerWidth = pagesEl.clientWidth || document.documentElement.clientWidth;
+        for (let num = 1; num <= pdfDoc.numPages; num++) {
+          await renderPage(pdfDoc, num, containerWidth);
+        }
       } catch (e) {
         statusEl.textContent = 'Could not load PDF. It may still be deploying on GitHub Pages.';
       }
