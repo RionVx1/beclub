@@ -410,13 +410,13 @@ nav {
 }
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1rem;
   align-items: stretch;
 }
 .card {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   background: var(--card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
@@ -428,16 +428,18 @@ nav {
   box-shadow: var(--shadow-soft);
 }
 .card-thumb {
-  width: 100%;
-  height: 140px;
-  object-fit: cover;
+  width: 180px;
+  height: 100%;
+  min-width: 180px;
+  object-fit: contain;
   background: var(--gray-dark);
 }
 .card-body {
-  padding: 0.85rem 1rem;
+  padding: 1rem 1.2rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  flex: 1;
 }
 .card-title {
   font-family: var(--font-h);
@@ -447,12 +449,13 @@ nav {
 .card-desc {
   color: var(--muted);
   font-size: 0.9rem;
-  flex: 1 1 auto;
+  flex: 0;
 }
 .card-meta {
   color: var(--muted);
   font-size: 0.8rem;
   text-transform: none;
+  margin-top: auto;
 }
 
 .file-empty {
