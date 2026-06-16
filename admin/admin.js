@@ -1,4 +1,6 @@
-const VALID_HASH = '32801f5c6ca59882d004c3b927de38fa22fa1ed71e0f63d66707f000f2587eac';
+const USER_HASH = '32801f5c6ca59882d004c3b927de38fa22fa1ed71e0f63d66707f000f2587eac';
+const PASS_HASH = '32801f5c6ca59882d004c3b927de38fa22fa1ed71e0f63d66707f000f2587eac';
+const AUTH_TOKEN_VALUE = '32801f5c6ca59882d004c3b927de38fa22fa1ed71e0f63d66707f000f2587eac';
 const AUTH_KEY = 'beclub_admin_token';
 const MANIFEST_PATH = '../Articles/articles.json';
 const EPISODES_MANIFEST_PATH = '../Articles/episodes.json';
@@ -33,7 +35,7 @@ function clearToken() {
 }
 
 function isLoggedIn() {
-  return getToken() === VALID_HASH;
+  return getToken() === AUTH_TOKEN_VALUE;
 }
 
 function requireAuth() {
@@ -53,8 +55,8 @@ async function handleLogin(e) {
   const userHash = await sha256(user);
   const passHash = await sha256(pass);
 
-  if (userHash === VALID_HASH && passHash === VALID_HASH) {
-    setToken(VALID_HASH);
+  if (userHash === USER_HASH && passHash === PASS_HASH) {
+    setToken(AUTH_TOKEN_VALUE);
     window.location.href = 'panel.html';
     return;
   }

@@ -12,11 +12,9 @@
    4. Use .btn-primary / .btn-ghost for buttons.
 
    REUSABLE COMPONENT CLASSES:
-   • .glass-card — frosted glass background with hover effect
-   • .icon-box — container for icons with border and background
-   • .pill-accent — red-themed tag/badge
-   • .pill-muted — neutral tag/badge
-   • .surface-interactive — interactive surface with hover state
+   • shared card surfaces — frosted glass-style panels used by many blocks
+   • buttons — use .nav-btn, .btn-primary, and .btn-ghost styles
+   • tags — use .tag, .ev-tag, and .interest-tag variants
 
    TABLE OF CONTENTS
    ─────────────────
@@ -170,14 +168,12 @@ img {
 /* ============================================================
    3. SHARED COMPONENTS
    
-   Edit buttons, tags, and typewriter here. Most components have
-   a base class (e.g., .btn-base) and then variant classes
-   (e.g., .nav-btn, .btn-primary, .btn-ghost).
+   Edit buttons, tags, and typewriter here. Most components use
+   variant classes (e.g., .nav-btn, .btn-primary, .btn-ghost).
    ============================================================ */
 
 /* ── Buttons ────────────────────────────────────────────────── */
 /* Shared base — also used by .nav-btn, .btn-primary, .btn-ghost */
-.btn-base,
 .nav-btn,
 .btn-primary,
 .btn-ghost {
@@ -192,7 +188,6 @@ img {
   -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
-.btn-base:focus-visible,
 .nav-btn:focus-visible,
 .btn-primary:focus-visible,
 .btn-ghost:focus-visible {
@@ -249,7 +244,6 @@ img {
 
 /* ── Tags ───────────────────────────────────────────────────── */
 /* Shared base — also used by .tag, .ev-tag, .interest-tag */
-.tag-base,
 .tag,
 .ev-tag,
 .interest-tag {
@@ -264,7 +258,6 @@ img {
   -webkit-backdrop-filter: blur(8px);
 }
 
-.tag-base:focus-visible,
 .ev-tag:focus-visible,
 .interest-tag:focus-visible {
   outline: 2px solid var(--red);
@@ -330,8 +323,16 @@ img {
    3B. REUSABLE COMPONENT PATTERNS
    ============================================================ */
 
-/* Glass card base — used by multiple components */
-.glass-card {
+/* Shared card surface pattern */
+.area,
+.event,
+.mission-card,
+.interest-item,
+.follow-card,
+.contact-box,
+.key-point,
+.article-card,
+.activity-item {
   background: var(--surface-solid);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
@@ -339,74 +340,8 @@ img {
   -webkit-backdrop-filter: blur(var(--glass-blur));
   transition: all var(--transition-normal);
 }
-.glass-card:hover {
-  background: var(--surface-hover);
-  border-color: rgba(255, 255, 255, 0.16);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-soft);
-}
 
-/* Icon box base */
-.icon-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-}
 
-/* Surface/button hover — for interactive elements */
-.surface-interactive {
-  background: var(--surface);
-  border: 1px solid var(--border-subtle);
-  transition: all var(--transition-normal);
-}
-.surface-interactive:hover,
-.surface-interactive:focus-visible {
-  background: var(--surface-hover);
-  border-color: rgba(255, 255, 255, 0.2);
-  outline: none;
-}
-
-/* Accent pill — small tags/badges */
-.pill-accent {
-  font-size: var(--text-xs);
-  letter-spacing: var(--letter-wider);
-  text-transform: uppercase;
-  padding: 0.25rem 0.75rem;
-  border: 1px solid rgba(230, 0, 0, 0.4);
-  border-radius: var(--radius-pill);
-  color: var(--red);
-  background: rgba(230, 0, 0, 0.06);
-  white-space: nowrap;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-/* Muted pill — neutral badges */
-.pill-muted {
-  font-size: var(--text-xs);
-  letter-spacing: var(--letter-wider);
-  text-transform: uppercase;
-  padding: 0.35rem 0.9rem;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-pill);
-  color: var(--muted);
-  background: var(--surface);
-  white-space: nowrap;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: all var(--transition-normal);
-}
-.pill-muted:hover,
-.pill-muted:focus-visible {
-  border-color: rgba(230, 0, 0, 0.45);
-  color: var(--white);
-  background: rgba(230, 0, 0, 0.08);
-  outline: none;
-  transform: translateY(-1px);
-}
 
 
 /* ============================================================
@@ -792,34 +727,32 @@ footer {
 }
 
 .area {
-  background: var(--surface-solid);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
+  background: rgba(20, 20, 24, 0.4);
   padding: var(--space-4xl);
   display: flex;
   flex-direction: column;
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  transition: all var(--transition-normal);
 }
 .area:hover {
-  background: var(--surface-hover);
+  background: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.18);
   transform: translateY(-4px);
   box-shadow: var(--shadow-soft), var(--shadow-glow);
 }
 
-.area-icon {
-  width: 48px;
-  height: 48px;
-  display: flex;
+.area > div:first-child,
+.mission-card > div:first-child {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  margin-bottom: var(--space-lg);
-  background: var(--surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
+  align-self: flex-start;
+  font-size: 1.75rem;
+  margin-bottom: 0.85rem;
+  width: auto;
+  height: auto;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
 }
 
 .area-title {
@@ -838,6 +771,9 @@ footer {
 
 .area-cat {
   display: inline-flex;
+  align-self: flex-start;
+  width: auto;
+  max-width: max-content;
   margin-top: var(--space-lg);
   font-size: 0.62rem;
   letter-spacing: var(--letter-wider);
@@ -860,17 +796,11 @@ footer {
 }
 
 .event {
-  background: var(--surface-solid);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
   display: grid;
   grid-template-columns: 90px 1fr auto;
   align-items: center;
   gap: var(--space-3xl);
   padding: var(--space-2xl) var(--space-3xl);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  transition: all var(--transition-normal);
 }
 .event:hover {
   background: var(--surface-hover);
@@ -1069,13 +999,7 @@ footer {
 }
 
 .mission-card {
-  background: var(--surface-solid);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
   padding: var(--space-4xl);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  transition: all var(--transition-normal);
 }
 .mission-card:hover {
   background: var(--surface-hover);
@@ -1084,18 +1008,6 @@ footer {
   box-shadow: var(--shadow-soft);
 }
 
-.mission-icon {
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  margin-bottom: var(--space-xl);
-  background: var(--surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-}
 
 .mission-card h3 {
   font-family: var(--font-h);
@@ -1119,17 +1031,11 @@ footer {
 }
 
 .interest-item {
-  background: var(--surface-solid);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
   display: grid;
   grid-template-columns: 60px 1fr auto;
   align-items: center;
   gap: var(--space-3xl);
   padding: 1.8rem 2.5rem;
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  transition: all var(--transition-normal);
 }
 .interest-item:hover {
   background: var(--surface-hover);
@@ -1179,16 +1085,10 @@ footer {
 }
 
 .follow-card {
-  background: var(--surface-solid);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
   padding: var(--space-4xl);
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  transition: all var(--transition-normal);
 }
 .follow-card:hover {
   background: var(--surface-hover);
@@ -1253,16 +1153,11 @@ footer {
 
 /* ── Contact ────────────────────────────────────────────────── */
 .contact-box {
-  background: var(--surface-solid);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
   padding: var(--space-5xl);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-5xl);
   align-items: center;
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
   box-shadow: var(--shadow-soft);
 }
 
@@ -1365,6 +1260,13 @@ footer {
     grid-template-columns: 1fr;
     padding: 2rem;
   }
+
+  .areas .area,
+  .mission-card,
+  .contact-box {
+    background: rgba(20, 20, 24, 0.55);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
 }
 
 
@@ -1454,13 +1356,7 @@ footer {
 .overview-main p + p { margin-top: var(--space-lg); }
 
 .key-point {
-  background: var(--surface-solid);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
   padding: var(--space-3xl);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  transition: all var(--transition-normal);
 }
 .key-point:hover {
   background: var(--surface-hover);
@@ -1489,16 +1385,10 @@ footer {
 }
 
 .article-card {
-  background: var(--surface-solid);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
   padding: var(--space-3xl);
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  transition: all var(--transition-normal);
 }
 .article-card:hover {
   background: var(--surface-hover);
@@ -1582,17 +1472,11 @@ footer {
 }
 
 .activity-item {
-  background: var(--surface-solid);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
   padding: 1.8rem var(--space-3xl);
   display: grid;
   grid-template-columns: 40px 1fr auto;
   gap: var(--space-2xl);
   align-items: center;
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  transition: all var(--transition-normal);
 }
 .activity-item:hover {
   background: var(--surface-hover);
