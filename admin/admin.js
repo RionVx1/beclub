@@ -4,6 +4,7 @@ const AUTH_TOKEN_VALUE = '32801f5c6ca59882d004c3b927de38fa22fa1ed71e0f63d66707f0
 const AUTH_KEY = 'beclub_admin_token';
 const MANIFEST_PATH = '../Articles/articles.json';
 const EPISODES_MANIFEST_PATH = '../Articles/episodes.json';
+const EVENTS_MANIFEST_PATH = '../Articles/events.json';
 
 const FIELDS = [
   { value: 'red-biotech', label: 'Red Biotechnology' },
@@ -89,9 +90,20 @@ async function loadEpisodesManifest() {
   return res.json();
 }
 
+async function loadEventsManifest() {
+  const res = await fetch(EVENTS_MANIFEST_PATH);
+  if (!res.ok) return { events: [] };
+  return res.json();
+}
+
 async function uploadEpisodesManifest(token, manifestContent, title) {
   const manifestPath = `${GITHUB_CONFIG.articlesDir}/episodes.json`;
   await uploadToGithub(token, manifestPath, manifestContent, `Update episodes list: ${title}`);
+}
+
+async function uploadEventsManifest(token, manifestContent, title) {
+  const manifestPath = `${GITHUB_CONFIG.articlesDir}/events.json`;
+  await uploadToGithub(token, manifestPath, manifestContent, `Update events list: ${title}`);
 }
 
 async function handleEpisodeSubmit(e) {
@@ -151,12 +163,212 @@ async function handleEpisodeSubmit(e) {
   }
 }
 
+function showEventStatus(message, type) {
+  const el = document.getElementById('event-status');
+  if (!el) return;
+  el.hidden = false;
+  el.textContent = message;
+  el.className = `upload-status event-status ${type}`;
+}
+
+async function handleEventSubmit(e) {
+  e.preventDefault();
+
+  const token = getGithubToken();
+  if (!token) {
+    showEventStatus('Enter your GitHub token to upload.', 'error');
+    return;
+  }
+
+  const title = document.getElementById('event-title').value.trim();
+  const date = document.getElementById('event-date').value;
+  const desc = document.getElementById('event-desc').value.trim();
+
+  if (!title || !date || !desc) {
+    showEventStatus('Event name, date, and description are required.', 'error');
+    return;
+  }
+
+  const eventDate = new Date(date);
+  if (Number.isNaN(eventDate.getTime())) {
+    showEventStatus('Invalid event date.', 'error');
+    return;
+  }
+
+  const day = String(eventDate.getDate()).padStart(2, '0');
+  const monthYear = `${[
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ][eventDate.getMonth()]} ${eventDate.getFullYear()}`;
+
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  submitBtn.disabled = true;
+  showEventStatus(`Saving event "${title}" to events.json…`, 'uploading');
+
+  try {
+    const manifest = await loadEventsManifest();
+    const slug = slugify(title);
+
+    const entry = {
+      id: slug,
+      title,
+      date,
+      day,
+      monthYear,
+      description: desc,
+    };
+
+    const existing = manifest.events.findIndex((item) => item.id === slug);
+    if (existing >= 0) {
+      manifest.events[existing] = entry;
+    } else {
+      manifest.events.push(entry);
+    }
+
+    const manifestJson = JSON.stringify(manifest, null, 2) + '\n';
+    await uploadEventsManifest(token, manifestJson, title);
+
+    showEventStatus(`Saved! "${title}" was added to events.json.`, 'success');
+    e.target.reset();
+    document.getElementById('github-token').value = '';
+  } catch (err) {
+    showEventStatus(err.message, 'error');
+  } finally {
+    submitBtn.disabled = false;
+  }
+}
+
 function showStatus(message, type) {
   const el = document.getElementById('upload-status');
   if (!el) return;
   el.hidden = false;
   el.textContent = message;
   el.className = `upload-status ${type}`;
+}
+
+function renderEpisodeList(episodes) {
+  const listEl = document.getElementById('episode-list');
+  if (!listEl) return;
+
+  if (!episodes.length) {
+    listEl.innerHTML = '<p class="file-empty">No episodes in Articles/ yet.</p>';
+    return;
+  }
+
+  listEl.innerHTML = episodes
+    .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+    .map(
+      (item) => `
+      <div class="file-item">
+        <div class="file-info">
+          <span class="file-name">${item.title}</span>
+          <span class="file-meta">Episode ${item.episode || '—'} · ${item.date}</span>
+          <span class="file-meta">${item.desc || ''}</span>
+        </div>
+        <div class="file-actions">
+          ${item.link ? `<a href="${item.link}" class="file-link" target="_blank">Open</a>` : ''}
+          <button class="file-remove" data-id="${item.id}" data-type="episode">Remove</button>
+        </div>
+      </div>`
+    )
+    .join('');
+
+  listEl.querySelectorAll('.file-remove').forEach((btn) => {
+    btn.addEventListener('click', () => removeEpisode(btn.dataset.id));
+  });
+}
+
+function renderEventList(events) {
+  const listEl = document.getElementById('event-list');
+  if (!listEl) return;
+
+  if (!events.length) {
+    listEl.innerHTML = '<p class="file-empty">No events in Articles/ yet.</p>';
+    return;
+  }
+
+  listEl.innerHTML = events
+    .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+    .map(
+      (item) => `
+      <div class="file-item">
+        <div class="file-info">
+          <span class="file-name">${item.title}</span>
+          <span class="file-meta">${item.date}</span>
+          <span class="file-meta">${item.description || ''}</span>
+        </div>
+        <div class="file-actions">
+          <button class="file-remove" data-id="${item.id}" data-type="event">Remove</button>
+        </div>
+      </div>`
+    )
+    .join('');
+
+  listEl.querySelectorAll('.file-remove').forEach((btn) => {
+    btn.addEventListener('click', () => removeEvent(btn.dataset.id));
+  });
+}
+
+async function removeEpisode(id) {
+  const token = getGithubToken();
+  if (!token) {
+    showPodcastStatus('Enter your GitHub token to upload.', 'error');
+    return;
+  }
+
+  const manifest = await loadEpisodesManifest();
+  const episode = manifest.episodes.find((item) => item.id === id);
+  if (!episode) return;
+
+  if (!confirm(`Remove episode "${episode.title}" from episodes.json?`)) return;
+
+  showPodcastStatus('Removing episode…', 'uploading');
+  try {
+    manifest.episodes = manifest.episodes.filter((item) => item.id !== id);
+    const manifestJson = JSON.stringify(manifest, null, 2) + '\n';
+    await uploadEpisodesManifest(token, manifestJson, episode.title);
+    showPodcastStatus(`Removed "${episode.title}".`, 'success');
+    document.getElementById('github-token').value = '';
+    renderEpisodeList(manifest.episodes);
+  } catch (err) {
+    showPodcastStatus(err.message, 'error');
+  }
+}
+
+async function removeEvent(id) {
+  const token = getGithubToken();
+  if (!token) {
+    showEventStatus('Enter your GitHub token to upload.', 'error');
+    return;
+  }
+
+  const manifest = await loadEventsManifest();
+  const eventItem = manifest.events.find((item) => item.id === id);
+  if (!eventItem) return;
+
+  if (!confirm(`Remove event "${eventItem.title}" from events.json?`)) return;
+
+  showEventStatus('Removing event…', 'uploading');
+  try {
+    manifest.events = manifest.events.filter((item) => item.id !== id);
+    const manifestJson = JSON.stringify(manifest, null, 2) + '\n';
+    await uploadEventsManifest(token, manifestJson, eventItem.title);
+    showEventStatus(`Removed "${eventItem.title}".`, 'success');
+    document.getElementById('github-token').value = '';
+    renderEventList(manifest.events);
+  } catch (err) {
+    showEventStatus(err.message, 'error');
+  }
 }
 
 function showPodcastStatus(message, type) {
@@ -329,8 +541,20 @@ async function initPanel() {
     podcastForm.addEventListener('submit', handleEpisodeSubmit);
   }
 
-  const manifest = await loadManifest();
+  const eventForm = document.getElementById('event-form');
+  if (eventForm) {
+    eventForm.addEventListener('submit', handleEventSubmit);
+  }
+
+  const [manifest, episodesManifest, eventsManifest] = await Promise.all([
+    loadManifest(),
+    loadEpisodesManifest(),
+    loadEventsManifest(),
+  ]);
+
   renderArticleList(manifest.articles);
+  renderEpisodeList(episodesManifest.episodes);
+  renderEventList(eventsManifest.events);
 }
 
 function setupUploadButton() {

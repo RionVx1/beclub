@@ -89,9 +89,40 @@
       <button type="submit" class="btn-primary">Add Podcast Episode to Podcasts/</button>
     </form>
 
+    <form class="admin-form event-form" id="event-form">
+      <h2 class="section-heading">Event Upload</h2>
+      <p class="section-note">Add a new event entry with the event name, short description, and event date.</p>
+
+      <label for="event-title">Event Name</label>
+      <input type="text" id="event-title" placeholder="e.g. Biotech Career Night" required />
+
+      <label for="event-date">Event Date</label>
+      <input type="date" id="event-date" required />
+
+      <label for="event-desc">Short Description</label>
+      <textarea id="event-desc" placeholder="One-line summary for the event" required></textarea>
+
+      <div id="event-status" class="upload-status event-status" hidden></div>
+      <button type="submit" class="btn-primary">Add Event to Events/</button>
+    </form>
+
     <div class="file-section">
       <h3>ARTICLES IN Articles/</h3>
       <div id="file-list" class="file-list">
+        <p class="file-empty">Loading…</p>
+      </div>
+    </div>
+
+    <div class="file-section">
+      <h3>PODCAST EPISODES IN Articles/</h3>
+      <div id="episode-list" class="file-list">
+        <p class="file-empty">Loading…</p>
+      </div>
+    </div>
+
+    <div class="file-section">
+      <h3>EVENTS IN Articles/</h3>
+      <div id="event-list" class="file-list">
         <p class="file-empty">Loading…</p>
       </div>
     </div>

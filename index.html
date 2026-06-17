@@ -203,60 +203,10 @@
   <!-- EVENTS -->
   <section class="section" id="events">
     <div class="sec-label">Calendar</div>
-    <h2 class="sec-title">UPCOMING EVENTS</h2>
+    <h2 class="sec-title">EVENTS</h2>
 
-    <div class="event-list">
-      
-      <div class="event">
-        <div class="event-date-box">
-          <div class="event-day">20</div>
-          <div class="event-mon">April 2026</div>
-        </div>
-        <div>
-          <div class="event-name">Degital marketing workshop</div>
-          <div class="event-info">sell techniques for biotech startups</div>
-        </div>
-        <span class="ev-tag ev-bio">enterprise</span>
-      </div>
-
-      <!-- <div class="event">
-        <div class="event-date-box">
-          <div class="event-day">02</div>
-          <div class="event-mon">Jun 2025</div>
-        </div>
-        <div>
-          <div class="event-name">Hackathon: Code for Biology</div>
-          <div class="event-info">48-hour sprint · Best visualization, algorithm & impact prizes</div>
-        </div>
-        <span class="ev-tag ev-both">Combined</span>
-      </div>
-       -->
-<!--       
-      <div class="event">
-        <div class="event-date-box">
-          <div class="event-day">14</div>
-          <div class="event-mon">Jun 2025</div>
-        </div>
-        <div>
-          <div class="event-name">AI & the Future of Medicine</div>
-          <div class="event-info">Guest lecture panel · Drug discovery & diagnostics</div>
-        </div>
-        <span class="ev-tag ev-it">IT</span>
-      </div> -->
-
-
-      <!-- <div class="event">
-        <div class="event-date-box">
-          <div class="event-day">28</div>
-          <div class="event-mon">Jun 2025</div>
-        </div>
-        <div>
-          <div class="event-name">End-of-Year Science Fair</div>
-          <div class="event-info">Member presentations · Projects, apps & lab findings</div>
-        </div>
-        <span class="ev-tag ev-both">Combined</span>
-      </div>
-       -->
+    <div class="event-list" id="event-list">
+      <p class="file-empty">Loading events…</p>
     </div>
   </section>
 
@@ -316,7 +266,7 @@
         </div>
         <div>
           <div class="info-label">LinkedIn</div>
-          <a href="#" class="info-val" target="_blank">LinkedIn</a>
+          <a href="#" class="info-vfile:///home/ron/be/beclub/index.htmlal" target="_blank">LinkedIn</a>
         </div>
       </div>
     </div>
@@ -334,5 +284,45 @@
   </footer>
 
   <script src="js/typewriter.js"></script>
+  <script>
+    async function loadEvents() {
+      try {
+        const res = await fetch('Articles/events.json');
+        if (!res.ok) throw new Error('Could not load events');
+        const data = await res.json();
+        const events = Array.isArray(data.events) ? data.events : [];
+        const list = document.getElementById('event-list');
+        if (!list) return;
+
+        if (!events.length) {
+          list.innerHTML = '<p class="file-empty">No events yet.</p>';
+          return;
+        }
+
+        list.innerHTML = events
+          .sort((a, b) => (a.date || '').localeCompare(b.date || ''))
+          .map((event) => `
+            <div class="event">
+              <div class="event-date-box">
+                <div class="event-day">${event.day || ''}</div>
+                <div class="event-mon">${event.monthYear || ''}</div>
+              </div>
+              <div>
+                <div class="event-name">${event.title || ''}</div>
+                <div class="event-info">${event.description || ''}</div>
+              </div>
+            </div>
+          `)
+          .join('');
+      } catch (err) {
+        const list = document.getElementById('event-list');
+        if (list) {
+          list.innerHTML = `<p class="file-empty">${err.message}</p>`;
+        }
+      }
+    }
+
+    loadEvents();
+  </script>
 </body>
 </html>
