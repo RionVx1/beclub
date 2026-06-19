@@ -64,7 +64,7 @@
 
   /* Fonts */
   --font-h:     'Bebas Neue', sans-serif;
-  --font-b:     'Inter', sans-serif;
+  --font-b:     'Bold', sans-serif;
 
   /* Spacing */
   --space-xs:   0.25rem;
@@ -148,6 +148,228 @@ body {
   line-height: var(--line-normal);
   min-height: 100vh;
 }
+
+body[data-theme='light'] {
+  background-color: #f4f4f3;
+  background-image:
+    radial-gradient(circle at top right, rgba(230, 0, 0, 0.18), transparent 28%),
+    radial-gradient(circle at bottom left, rgba(230, 0, 0, 0.14), transparent 32%),
+    linear-gradient(135deg, rgba(255, 240, 240, 0.7) 0%, rgba(244, 244, 243, 0.98) 60%);
+  background-attachment: fixed;
+  color: #111;
+}
+
+body[data-theme='light'] nav,
+body[data-theme='light'] footer,
+body[data-theme='light'] .section,
+body[data-theme='light'] .join-right,
+body[data-theme='light'] .overview-main,
+body[data-theme='light'] .mission-card,
+body[data-theme='light'] .area,
+body[data-theme='light'] .follow-card,
+body[data-theme='light'] .contact-box,
+body[data-theme='light'] .article-card,
+body[data-theme='light'] .event,
+body[data-theme='light'] .back-bar,
+body[data-theme='light'] .card,
+body[data-theme='light'] .key-point,
+body[data-theme='light'] .interest-item,
+body[data-theme='light'] .join-right {
+  background: rgba(255,255,255,0.58);
+  border-color: rgba(0,0,0,0.08);
+  color: #111;
+}
+
+body[data-theme='light'] .area {
+  background: rgba(255,255,255,0.48);
+}
+
+body[data-theme='light'] .section {
+  background: transparent;
+}
+
+body[data-theme='light'] .interest-item {
+  background: rgba(255,255,255,0.55);
+}
+
+body[data-theme='light'] .article-card,
+body[data-theme='light'] .event,
+body[data-theme='light'] .join-right,
+body[data-theme='light'] .contact-box,
+body[data-theme='light'] .follow-card,
+body[data-theme='light'] .overview-main,
+body[data-theme='light'] .mission-card,
+body[data-theme='light'] .card,
+body[data-theme='light'] .key-point {
+  background: rgba(255,255,255,0.62);
+}
+
+body[data-theme='light'] .area:hover,
+body[data-theme='light'] .article-card:hover,
+body[data-theme='light'] .event:hover,
+body[data-theme='light'] .follow-card:hover,
+body[data-theme='light'] .contact-box:hover,
+body[data-theme='light'] .overview-main:hover,
+body[data-theme='light'] .mission-card:hover,
+body[data-theme='light'] .card:hover,
+body[data-theme='light'] .key-point:hover,
+body[data-theme='light'] .interest-item:hover {
+  background: rgba(255,255,255,0.7);
+}
+
+body[data-theme='light'] .logo-sub,
+body[data-theme='light'] .nav-links a,
+body[data-theme='light'] .sec-label,
+body[data-theme='light'] .sec-title,
+body[data-theme='light'] .page-title,
+body[data-theme='light'] .article-title,
+body[data-theme='light'] .event-name,
+body[data-theme='light'] .event-day,
+body[data-theme='light'] .follow-platform,
+body[data-theme='light'] .info-val,
+body[data-theme='light'] .article-link,
+body[data-theme='light'] .back-link,
+body[data-theme='light'] .card-title,
+body[data-theme='light'] .interest-name,
+body[data-theme='light'] .area-title,
+body[data-theme='light'] .mission-card h3,
+body[data-theme='light'] .contact-left h3,
+body[data-theme='light'] .join-right h3,
+body[data-theme='light'] .contact-label,
+body[data-theme='light'] .follow-stat,
+body[data-theme='light'] .key-point h4 {
+  color: #111;
+}
+
+body[data-theme='light'] .page-intro strong {
+  color: #c01a3f;
+  font-weight: 600;
+}
+
+/* Ensure project page action links keep the brand red in light mode */
+body[data-theme='light'] .article-link {
+  color: var(--red);
+}
+
+/* Make area pills show brand red text on hover/focus in light mode */
+body[data-theme='light'] .area-pill:hover,
+body[data-theme='light'] .area-pill:focus-visible {
+  color: var(--red);
+  background: rgba(230, 0, 0, 0.06);
+  border-color: rgba(230, 0, 0, 0.12);
+}
+
+body[data-theme='light'] .card-body {
+  background: transparent;
+}
+
+body[data-theme='light'] .card-thumb {
+  background: #e8e8e8;
+}
+
+body[data-theme='light'] .tag,
+body[data-theme='light'] .interest-tag,
+body[data-theme='light'] .ev-tag,
+body[data-theme='light'] .article-tag,
+body[data-theme='light'] .follow-btn,
+body[data-theme='light'] .back-link,
+body[data-theme='light'] .theme-toggle,
+body[data-theme='light'] .area-cat,
+body[data-theme='light'] .area-cat-badge {
+  background: rgba(0,0,0,0.05);
+  color: #111;
+  border-color: rgba(0,0,0,0.08);
+}
+
+body[data-theme='light'] .area-cat,
+body[data-theme='light'] .area-cat-badge {
+  border-color: rgba(230, 0, 0, 0.25);
+  color: #c01a3f;
+}
+
+body[data-theme='light'] a {
+  color: #9b111e;
+}
+
+body[data-theme='light'] .btn-primary,
+body[data-theme='light'] .nav-btn {
+  background: rgba(230,0,0,0.95);
+  color: #fff;
+}
+
+body[data-theme='light'] .btn-ghost,
+body[data-theme='light'] .article-preview {
+  background: rgba(255,255,255,0.92);
+}
+
+body[data-theme='light'] .article-desc,
+body[data-theme='light'] .event-info,
+body[data-theme='light'] .info-label,
+body[data-theme='light'] .follow-handle,
+body[data-theme='light'] .card-desc,
+body[data-theme='light'] .card-meta,
+body[data-theme='light'] .page-desc,
+body[data-theme='light'] .area-desc,
+body[data-theme='light'] .interest-desc,
+body[data-theme='light'] .mission-card p,
+body[data-theme='light'] .contact-left p,
+body[data-theme='light'] .key-point p,
+body[data-theme='light'] .overview-main p {
+  color: #444;
+}
+
+body[data-theme='light'] .interest-icon,
+body[data-theme='light'] .contact-icon,
+body[data-theme='light'] .project-card-icon {
+  background: rgba(230, 0, 0, 0.08);
+  border-color: rgba(230, 0, 0, 0.2);
+}
+
+body[data-theme='light'] .article-preview {
+  background: #f0f0f0;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme='light'] .file-empty,
+body[data-theme='light'] .article-preview-fallback {
+  color: #888;
+}
+
+body[data-theme='light'] nav {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+body[data-theme='light'] footer {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+body[data-theme='light'] .back-bar {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+body[data-theme='light'] .back-link {
+  color: #111;
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+body[data-theme='light'] .back-link:hover {
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(230, 0, 0, 0.3);
+  color: #9b111e;
+}
+
+body[data-theme='light'] .follow-btn:hover {
+  background: rgba(230, 0, 0, 0.2);
+  color: #c01a3f;
+  border-color: rgba(230, 0, 0, 0.4);
+}
+
+/* Scrollbar light mode */
+body[data-theme='light'] ::-webkit-scrollbar-track { background: #f4f4f3; }
+body[data-theme='light'] ::-webkit-scrollbar-thumb { background: rgba(230, 0, 0, 0.5); }
 
 a {
   text-decoration: none;
@@ -332,7 +554,9 @@ img {
 .contact-box,
 .key-point,
 .article-card,
-.activity-item {
+.card,
+.activity-item,
+.back-bar {
   background: var(--surface-solid);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
@@ -408,11 +632,26 @@ nav {
   outline: none;
 }
 
-/* ── Sections ───────────────────────────────────────────────– */
-.section {
-  padding: var(--space-7xl) var(--space-5xl);
-  border-bottom: 1px solid var(--border);
-}
+  .theme-toggle {
+    margin-left: 1rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: var(--letter-wide);
+    text-transform: uppercase;
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+  }
+  .theme-toggle:hover,
+  .theme-toggle:focus-visible {
+    background: rgba(255, 255, 255, 0.15);
+    outline: none;
+    transform: translateY(-1px);
+  }
 
 .sec-label {
   font-size: 0.68rem;
@@ -461,6 +700,44 @@ nav {
   grid-template-columns: 1fr;
   gap: 1rem;
   align-items: stretch;
+}
+/* Make cards inside cards-section match article-card layout (vertical, fixed width) */
+.cards-section .cards-grid {
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 320px));
+}
+
+.cards-section .card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: var(--space-3xl);
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  overflow: visible;
+}
+
+.cards-section .card:hover {
+  background: var(--surface-hover);
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+.cards-section .card-thumb {
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.cards-section .card-body {
+  padding: 0;
 }
 .card {
   display: flex;
@@ -817,7 +1094,7 @@ footer {
   padding: 0.5rem 0.75rem;
 }
 
-.event-day {
+.article-tag {
   font-family: var(--font-h);
   font-size: 2.2rem;
   letter-spacing: 1px;
@@ -1380,8 +1657,10 @@ footer {
 /* Articles */
 .articles-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 320px));
   gap: 1rem;
+  align-items: start;
 }
 
 .article-card {
@@ -1389,13 +1668,25 @@ footer {
   padding: var(--space-3xl);
   display: flex;
   flex-direction: column;
+
   gap: 0.8rem;
+  width: 100%;
+  max-width: 320px;
+  min-width: 0;
+  margin: 0 auto;
 }
 .article-card:hover {
   background: var(--surface-hover);
   border-color: rgba(255, 255, 255, 0.16);
   transform: translateY(-3px);
   box-shadow: var(--shadow-soft);
+}
+
+.article-preview-fallback {
+  color: var(--muted);
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.8rem;
 }
 
 .project-card-icon {

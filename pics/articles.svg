@@ -1,7 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-  <circle cx="32" cy="32" r="30" stroke="#333333" stroke-width="1"/>
-  <path d="M20 18h20l8 8v28H20V18z" stroke="#E60000" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M40 18v8h8" stroke="#E60000" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M26 30h20M26 38h20M26 46h12" stroke="#f5f5f5" stroke-width="2" stroke-linecap="round"/>
-  <path d="M44 46l6 6" stroke="#888888" stroke-width="1.5" stroke-linecap="round"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" aria-hidden="true">
+  <title>Articles</title>
+  <g fill="none" stroke="#E60000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="12" y="10" width="40" height="44" rx="4"/>
+    <path d="M20 18h24"/>
+    <path d="M20 26h24"/>
+    <path d="M20 34h16"/>
+  </g>
 </svg>
