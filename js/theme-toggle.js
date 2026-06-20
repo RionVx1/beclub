@@ -14,9 +14,9 @@ function updateThemeButton(theme) {
   const button = document.querySelector('.theme-toggle');
   if (!button) return;
   if (theme === 'light') {
-    button.innerHTML = '☀';
-  } else {
     button.innerHTML = '🌙';
+  } else {
+    button.innerHTML = '🔆';
   }
 }
 
@@ -26,21 +26,10 @@ function toggleTheme() {
 }
 
 function initThemeToggle() {
-  const nav = document.querySelector('nav');
-  if (!nav) return;
+  const button = document.querySelector('.theme-toggle');
+  if (!button) return;
 
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.className = 'theme-toggle';
   button.addEventListener('click', toggleTheme);
-
-  const joinButton = nav.querySelector('.nav-btn');
-  if (joinButton) {
-    joinButton.insertAdjacentElement('afterend', button);
-  } else {
-    nav.append(button);
-  }
-
   updateThemeButton(document.body.dataset.theme);
 }
 
