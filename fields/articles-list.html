@@ -114,6 +114,8 @@
                     canvas.style.width = "100%";
                     canvas.style.height = "auto";
 
+                    const halfHeight = Math.round(scaledViewport.height / 2);
+
                     const ctx = canvas.getContext("2d");
                     await page.render({
                         canvasContext: ctx,
@@ -127,22 +129,28 @@
                         img.className = "article-preview-thumb";
                         img.src = dataUrl;
                         img.alt = "Article preview";
-                        img.style.width = "100%";
-                        img.style.height = "auto";
 
+                        // Ensure the preview container shows only the top half of the page
                         const preview = canvas.parentElement;
                         preview.innerHTML = "";
-                        preview.appendChild(img);
-                        preview.style.height = "auto";
+                        // fix the preview height to the top 50% of the rendered page
+                        preview.style.height = halfHeight + "px";
                         preview.style.overflow = "hidden";
+
+                        // Make image scale to width, keep it anchored at the top
+                        img.style.width = "100%";
+                        img.style.height = "auto";
+                        img.style.display = "block";
+                        // objectFit/objectPosition are defensive; anchor image to top
+                        img.style.objectFit = "cover";
+                        img.style.objectPosition = "top";
+
+                        preview.appendChild(img);
 
                         // free canvas memory by letting it be garbage collected
                     } catch (e) {
                         // If conversion fails, keep the canvas but crop for compactness
                         const preview = canvas.parentElement;
-                        const halfHeight = Math.round(
-                            scaledViewport.height / 2,
-                        );
                         preview.style.height = halfHeight + "px";
                         preview.style.overflow = "hidden";
                     }
