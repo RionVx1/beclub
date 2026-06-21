@@ -991,11 +991,32 @@ footer {
 
 .hero-title {
     font-family: var(--font-h);
-    font-size: clamp(2.25rem, 7vw, 6.5rem); /* smaller minimum for mobile */
-    letter-spacing: 0.06em;
+    /* smoother scale: slightly smaller minimum and gentler vw so titles look good
+       on narrow Android screens while remaining large on desktop */
+    font-size: clamp(3rem, 6vw, 6.5rem);
+    letter-spacing: 0.05em;
     line-height: 1.02;
     margin-bottom: var(--space-4xl);
     padding-right: 0.5rem; /* avoid cramped edge on narrow screens */
+}
+
+/* Tweak for very small phones to keep heading readable and avoid wrapping */
+@media (max-width: 420px) {
+    .hero-title {
+        font-size: 1.9rem; /* ~30px */
+        letter-spacing: 0.035em;
+        margin-bottom: var(--space-3xl);
+    }
+}
+
+/* Slightly larger hero title for Android / narrow phones (up to 480px) */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 3rem; /* ~48px for stronger presence on phones */
+        letter-spacing: 0.02em;
+        line-height: 1.02;
+        margin-bottom: var(--space-3xl);
+    }
 }
 
 .hero-desc {
