@@ -1,140 +1,222 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Panel — BE Club</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="admin.css" />
-</head>
-<body class="admin-body">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Panel — BE Club</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <script src="../js/theme-init.js"></script>
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="admin.css" />
+    </head>
+    <body class="admin-body">
+        <div class="admin-card wide">
+            <div class="panel-header">
+                <div class="admin-logo">
+                    <img src="../pics/club-logo.png" alt="BE Club" />
+                    <span>BE Club Admin</span>
+                </div>
+                <button class="btn-logout" id="logout-btn">Log Out</button>
+            </div>
 
-  <div class="admin-card wide">
-    <div class="panel-header">
-      <div class="admin-logo">
-        <img src="../pics/club-logo.png" alt="BE Club" />
-        <span>BE Club Admin</span>
-      </div>
-      <button class="btn-logout" id="logout-btn">Log Out</button>
-    </div>
+            <h1 class="admin-title">ADMIN PANEL</h1>
+            <p class="admin-subtitle">
+                Upload articles directly to <code>Articles/</code> on GitHub
+                Pages via the GitHub API.
+            </p>
 
-    <h1 class="admin-title">ADMIN PANEL</h1>
-    <p class="admin-subtitle">Upload articles directly to <code>Articles/</code> on GitHub Pages via the GitHub API.</p>
+            <div class="github-box">
+                <label for="github-token">GitHub Token</label>
+                <p class="github-hint">
+                    Create a
+                    <a
+                        href="https://github.com/settings/tokens"
+                        target="_blank"
+                        rel="noopener"
+                        >personal access token</a
+                    >
+                    with <strong>repo</strong> access. Used only for the upload
+                    request — never stored.
+                </p>
+                <input
+                    type="password"
+                    id="github-token"
+                    placeholder="ghp_…"
+                    autocomplete="off"
+                />
+            </div>
 
-    <div class="github-box">
-      <label for="github-token">GitHub Token</label>
-      <p class="github-hint">Create a <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">personal access token</a> with <strong>repo</strong> access. Used only for the upload request — never stored.</p>
-      <input type="password" id="github-token" placeholder="ghp_…" autocomplete="off" />
-    </div>
+            <div id="upload-status" class="upload-status" hidden></div>
 
-    <div id="upload-status" class="upload-status" hidden></div>
+            <form class="admin-form article-form" id="article-form">
+                <label for="article-title">Article Title</label>
+                <input
+                    type="text"
+                    id="article-title"
+                    required
+                    placeholder="e.g. What Are GMOs?"
+                />
 
-    <form class="admin-form article-form" id="article-form">
-      <label for="article-title">Article Title</label>
-      <input type="text" id="article-title" required placeholder="e.g. What Are GMOs?" />
+                <label for="article-desc">Short Description</label>
+                <input
+                    type="text"
+                    id="article-desc"
+                    required
+                    placeholder="One-line summary for the card"
+                />
 
-      <label for="article-desc">Short Description</label>
-      <input type="text" id="article-desc" required placeholder="One-line summary for the card" />
+                <div class="form-row">
+                    <div>
+                        <label for="article-tag">Tag</label>
+                        <select id="article-tag" required></select>
+                    </div>
+                    <div>
+                        <label for="article-field">Field</label>
+                        <select id="article-field" required></select>
+                    </div>
+                </div>
 
-      <div class="form-row">
-        <div>
-          <label for="article-tag">Tag</label>
-          <select id="article-tag" required></select>
+                <label>Article PDF File</label>
+                <div class="upload-row">
+                    <button type="button" class="upload-btn" id="btn-upload">
+                        <span class="icon">📄</span>
+                        Choose PDF File
+                    </button>
+                    <span class="upload-hint"
+                        >Upload a PDF — readers open it in the built-in
+                        viewer.</span
+                    >
+                </div>
+                <input
+                    type="file"
+                    id="article-file"
+                    accept=".pdf,application/pdf"
+                    hidden
+                />
+
+                <button type="submit" class="btn-primary">
+                    Add Article to Articles/
+                </button>
+            </form>
+
+            <form class="admin-form podcast-form" id="podcast-form">
+                <h2 class="section-heading">Podcast Episode Upload</h2>
+                <p class="section-note">
+                    Use this form to prepare a podcast episode upload. The
+                    backend integration can be added later.
+                </p>
+
+                <label for="podcast-title">Episode Title</label>
+                <input
+                    type="text"
+                    id="podcast-title"
+                    placeholder="e.g. The Future of Bioinformatics"
+                />
+
+                <div class="form-row">
+                    <div>
+                        <label for="podcast-episode">Episode #</label>
+                        <input
+                            type="number"
+                            id="podcast-episode"
+                            min="1"
+                            placeholder="1"
+                        />
+                    </div>
+                    <div>
+                        <label for="podcast-date">Release Date</label>
+                        <input type="date" id="podcast-date" />
+                    </div>
+                </div>
+
+                <label for="podcast-desc">Short Description</label>
+                <textarea
+                    id="podcast-desc"
+                    placeholder="One-line summary for the episode"
+                ></textarea>
+
+                <label for="podcast-link">Episode Link</label>
+                <input type="url" id="podcast-link" placeholder="https://" />
+
+                <div
+                    id="podcast-status"
+                    class="upload-status podcast-status"
+                    hidden
+                ></div>
+                <button type="submit" class="btn-primary">
+                    Add Podcast Episode to Podcasts/
+                </button>
+            </form>
+
+            <form class="admin-form event-form" id="event-form">
+                <h2 class="section-heading">Event Upload</h2>
+                <p class="section-note">
+                    Add a new event entry with the event name, short
+                    description, and event date.
+                </p>
+
+                <label for="event-title">Event Name</label>
+                <input
+                    type="text"
+                    id="event-title"
+                    placeholder="e.g. Biotech Career Night"
+                    required
+                />
+
+                <label for="event-date">Event Date</label>
+                <input type="date" id="event-date" required />
+
+                <label for="event-desc">Short Description</label>
+                <textarea
+                    id="event-desc"
+                    placeholder="One-line summary for the event"
+                    required
+                ></textarea>
+
+                <div
+                    id="event-status"
+                    class="upload-status event-status"
+                    hidden
+                ></div>
+                <button type="submit" class="btn-primary">
+                    Add Event to Events/
+                </button>
+            </form>
+
+            <div class="file-section">
+                <h3>ARTICLES IN Articles/</h3>
+                <div id="file-list" class="file-list">
+                    <p class="file-empty">Loading…</p>
+                </div>
+            </div>
+
+            <div class="file-section">
+                <h3>PODCAST EPISODES IN Articles/</h3>
+                <div id="episode-list" class="file-list">
+                    <p class="file-empty">Loading…</p>
+                </div>
+            </div>
+
+            <div class="file-section">
+                <h3>EVENTS IN Articles/</h3>
+                <div id="event-list" class="file-list">
+                    <p class="file-empty">Loading…</p>
+                </div>
+            </div>
         </div>
-        <div>
-          <label for="article-field">Field</label>
-          <select id="article-field" required></select>
-        </div>
-      </div>
 
-      <label>Article PDF File</label>
-      <div class="upload-row">
-        <button type="button" class="upload-btn" id="btn-upload">
-          <span class="icon">📄</span>
-          Choose PDF File
-        </button>
-        <span class="upload-hint">Upload a PDF — readers open it in the built-in viewer.</span>
-      </div>
-      <input type="file" id="article-file" accept=".pdf,application/pdf" hidden />
-
-      <button type="submit" class="btn-primary">Add Article to Articles/</button>
-    </form>
-
-    <form class="admin-form podcast-form" id="podcast-form">
-      <h2 class="section-heading">Podcast Episode Upload</h2>
-      <p class="section-note">Use this form to prepare a podcast episode upload. The backend integration can be added later.</p>
-
-      <label for="podcast-title">Episode Title</label>
-      <input type="text" id="podcast-title" placeholder="e.g. The Future of Bioinformatics" />
-
-      <div class="form-row">
-        <div>
-          <label for="podcast-episode">Episode #</label>
-          <input type="number" id="podcast-episode" min="1" placeholder="1" />
-        </div>
-        <div>
-          <label for="podcast-date">Release Date</label>
-          <input type="date" id="podcast-date" />
-        </div>
-      </div>
-
-      <label for="podcast-desc">Short Description</label>
-      <textarea id="podcast-desc" placeholder="One-line summary for the episode"></textarea>
-
-      <label for="podcast-link">Episode Link</label>
-      <input type="url" id="podcast-link" placeholder="https://" />
-
-      <div id="podcast-status" class="upload-status podcast-status" hidden></div>
-      <button type="submit" class="btn-primary">Add Podcast Episode to Podcasts/</button>
-    </form>
-
-    <form class="admin-form event-form" id="event-form">
-      <h2 class="section-heading">Event Upload</h2>
-      <p class="section-note">Add a new event entry with the event name, short description, and event date.</p>
-
-      <label for="event-title">Event Name</label>
-      <input type="text" id="event-title" placeholder="e.g. Biotech Career Night" required />
-
-      <label for="event-date">Event Date</label>
-      <input type="date" id="event-date" required />
-
-      <label for="event-desc">Short Description</label>
-      <textarea id="event-desc" placeholder="One-line summary for the event" required></textarea>
-
-      <div id="event-status" class="upload-status event-status" hidden></div>
-      <button type="submit" class="btn-primary">Add Event to Events/</button>
-    </form>
-
-    <div class="file-section">
-      <h3>ARTICLES IN Articles/</h3>
-      <div id="file-list" class="file-list">
-        <p class="file-empty">Loading…</p>
-      </div>
-    </div>
-
-    <div class="file-section">
-      <h3>PODCAST EPISODES IN Articles/</h3>
-      <div id="episode-list" class="file-list">
-        <p class="file-empty">Loading…</p>
-      </div>
-    </div>
-
-    <div class="file-section">
-      <h3>EVENTS IN Articles/</h3>
-      <div id="event-list" class="file-list">
-        <p class="file-empty">Loading…</p>
-      </div>
-    </div>
-  </div>
-
-  <script src="github.js"></script>
-  <script src="admin.js"></script>
-  <script>
-    if (!requireAuth()) throw new Error('redirecting');
-    document.getElementById('logout-btn').addEventListener('click', logout);
-    setupUploadButton();
-    initPanel();
-  </script>
-</body>
+        <script src="github.js"></script>
+        <script src="admin.js"></script>
+        <script>
+            if (!requireAuth()) throw new Error("redirecting");
+            document
+                .getElementById("logout-btn")
+                .addEventListener("click", logout);
+            setupUploadButton();
+            initPanel();
+        </script>
+    </body>
 </html>

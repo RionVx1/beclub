@@ -31,6 +31,16 @@
 /* ============================================================
    1. VARIABLES
    ============================================================ */
+
+/* Theme transition helper class: applied briefly during theme changes */
+.theme-transition,
+.theme-transition * {
+    transition:
+        background-color 320ms ease,
+        color 320ms ease,
+        border-color 320ms ease,
+        box-shadow 320ms ease;
+}
 :root {
     /* Colors */
     --red: #e60000;
@@ -696,14 +706,15 @@ nav {
 }
 
 .sec-label {
-    font-size: 0.68rem;
+    /* match spacing/token values used by .eyebrow-text (copied, not referenced) */
+    font-size: var(--text-sm);
     letter-spacing: var(--letter-widest);
     text-transform: uppercase;
     color: var(--red);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-2xl); /* copied from .hero-eyebrow spacing */
     display: flex;
     align-items: center;
-    gap: var(--space-md);
+    gap: 0.7rem; /* copied from .hero-eyebrow gap */
 }
 .sec-label::before {
     content: "";
@@ -718,11 +729,30 @@ nav {
     font-size: clamp(2rem, 4vw, 3.5rem);
     letter-spacing: 0.06em;
     color: var(--white);
-    margin-top: var(--space-lg);
-    margin-bottom: var(--space-5xl);
+    margin-top: 0; /* keep title immediately after label */
+    margin-bottom: var(--space-4xl); /* maintain space after title */
     line-height: 1.06;
 }
 
+/* Explicitly match eyebrow spacing for Events and Interests sections (copied values) */
+#events .sec-label,
+#interests {
+    font-size: var(--text-sm);
+    letter-spacing: var(--letter-widest);
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: var(--space-2xl);
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+#events .sec-title,
+#interests + .sec-title {
+    margin-top: 0;
+    margin-bottom: var(--space-4xl);
+    line-height: 1.06;
+}
 /* Eyebrow (above hero title) */
 .hero-eyebrow {
     display: flex;

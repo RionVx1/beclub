@@ -1,71 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BE Club — Biotechnology Engineering Club</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>BE Club — Biotechnology Engineering Club</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <script src="js/theme-init.js"></script>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <!-- NAV -->
+        <nav>
+            <div style="display: flex; align-items: center">
+                <div class="logo">
+                    <img
+                        src="pics/club-logo.png"
+                        alt="BE Club"
+                        class="logo-img"
+                    />
+                </div>
+                <span class="logo-sub">Biotechnology Engineering Club</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#interests">Interests</a></li>
+                <li><a href="#events">Events</a></li>
+                <li class="nav-mobile-visible">
+                    <a href="fields/projects.html">Projects</a>
+                </li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+            <button
+                type="button"
+                class="theme-toggle"
+                aria-label="Toggle theme"
+            ></button>
+            <a href="#join" class="nav-btn">Join Us</a>
+        </nav>
 
-  <!-- NAV -->
-  <nav>
-    <div style="display:flex;align-items:center">
-      <div class="logo">
-        <img src="pics/club-logo.png" alt="BE Club" class="logo-img" />
-      </div>
-      <span class="logo-sub">Biotechnology Engineering Club</span>
-    </div>
-    <ul class="nav-links">
-      <li><a href="#interests">Interests</a></li>
-      <li><a href="#events">Events</a></li>
-      <li class="nav-mobile-visible"><a href="fields/projects.html">Projects</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-    <button type="button" class="theme-toggle" aria-label="Toggle theme"></button>
-    <a href="#join" class="nav-btn">Join Us</a>
-  </nav>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-left">
+                <div class="hero-eyebrow">
+                    <div class="eyebrow-line"></div>
+                    <span class="eyebrow-text">Scientific Student Club</span>
+                </div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <div class="hero-eyebrow">
-        <div class="eyebrow-line"></div>
-        <span class="eyebrow-text">Scientific Student Club</span>
-      </div>
+                <h1 class="hero-title typewriter">
+                    <span class="accent">BE</span><br />
+                    Smart
+                </h1>
 
-      <h1 class="hero-title typewriter">
-        <span class="accent">BE</span><br>
-        Smart
-      </h1>
+                <p class="hero-desc">
+                    BE Club unites students passionate about Biotechnology and
+                    Information Technology — building skills, running
+                    experiments, and writing the future.
+                </p>
 
-      <p class="hero-desc">
-        BE Club unites students passionate about Biotechnology and Information Technology — building skills, running experiments, and writing the future.
-      </p>
+                <div class="hero-actions">
+                    <a href="#join" class="btn-primary">Join the Club</a>
+                    <a href="about.html" class="btn-ghost">About Us →</a>
+                </div>
+            </div>
 
-      <div class="hero-actions">
-        <a href="#join" class="btn-primary">Join the Club</a>
-        <a href="about.html" class="btn-ghost">About Us →</a>
-      </div>
-    </div>
+            <div class="hero-right">
+                <div class="logo-block">
+                    <div class="logo-big">
+                        <span class="b">B</span><span class="e">E</span>
+                    </div>
+                    <div class="logo-tagline">Biotech · Engineering · Club</div>
+                </div>
+                <div class="hero-tags">
+                    <span class="tag red">Biotechnology</span>
+                    <span class="tag red">IT</span>
 
-    <div class="hero-right">
-      <div class="logo-block">
-        <div class="logo-big"><span class="b">B</span><span class="e">E</span></div>
-        <div class="logo-tagline">Biotech · Engineering · Club</div>
-      </div>
-      <div class="hero-tags">
-        <span class="tag red">Biotechnology</span>
-        <span class="tag red">IT</span>
-        
-        <span class="tag">AI</span>
-        <span class="tag">Bioinformatics</span>
-        <span class="tag">Lab Skills</span>
-      </div>
-    </div>
-  </section>
-<!-- 
+                    <span class="tag">AI</span>
+                    <span class="tag">Bioinformatics</span>
+                    <span class="tag">Lab Skills</span>
+                </div>
+            </div>
+        </section>
+        <!--
   STATS
   <div class="stats">
     <div class="stat">
@@ -80,14 +97,13 @@
       <div class="stat-n">12</div>
       <div class="stat-l">Events / Year</div>
     </div>
-          
+
 
   </div> -->
 
-  <!-- FOCUS AREAS -->
+        <!-- FOCUS AREAS -->
 
-
-<!--   
+        <!--
   <section class="section" id="areas">
     <div class="sec-label">What We Do</div>
     <h2 class="sec-title">OUR FOCUS AREAS</h2>
@@ -133,36 +149,37 @@
   </section>
  -->
 
+        <section class="section">
+            <div class="sec-label" id="interests">What Drives Us</div>
+            <h2 class="sec-title">OUR INTERESTS</h2>
 
+            <div class="interests-list">
+                <a href="fields/biotechnology.html" class="interest-item">
+                    <div class="interest-icon">🧬</div>
+                    <div>
+                        <div class="interest-name">Biotechnology</div>
+                        <div class="interest-desc">
+                            Red, green, and white biotech — from medicine and
+                            agriculture to industrial fermentation
+                        </div>
+                    </div>
+                    <span class="interest-tag">Biotech</span>
+                </a>
 
+                <a href="fields/it.html" class="interest-item">
+                    <div class="interest-icon">💻</div>
+                    <div>
+                        <div class="interest-name">Information Technology</div>
+                        <div class="interest-desc">
+                            Machine learning, software development, and
+                            bioinformatics at the intersection of code and
+                            science
+                        </div>
+                    </div>
+                    <span class="interest-tag it">IT</span>
+                </a>
 
-
-
-  <section class="section">
-    <div class="sec-label" id="interests">What Drives Us</div>
-    <h2 class="sec-title">OUR INTERESTS</h2>
-
-    <div class="interests-list">
-      <a href="fields/biotechnology.html" class="interest-item">
-        <div class="interest-icon">🧬</div>
-        <div>
-          <div class="interest-name">Biotechnology</div>
-          <div class="interest-desc">Red, green, and white biotech — from medicine and agriculture to industrial fermentation</div>
-        </div>
-        <span class="interest-tag">Biotech</span>
-      </a>
-
-      <a href="fields/it.html" class="interest-item">
-        <div class="interest-icon">💻</div>
-        <div>
-          <div class="interest-name">Information Technology</div>
-          <div class="interest-desc">Machine learning, software development, and bioinformatics at the intersection of code and science</div>
-        </div>
-        <span class="interest-tag it">IT</span>
-      </a>
-
-
-<!--         
+                <!--
       <div class="interest-item">
       <a href="fields/white-biotech.html" class="interest-item">
         <div class="interest-num">03</div>
@@ -174,8 +191,7 @@
       </a>
       </div> -->
 
-
-<!-- 
+                <!--
       <div class="interest-item">
         <div class="interest-num">04</div>
         <div>
@@ -186,7 +202,7 @@
       </div>
      -->
 
-<!--       
+                <!--
       <div class="interest-item">
         <div class="interest-num">06</div>
         <div>
@@ -196,135 +212,189 @@
         <span class="interest-tag">IT × Biotech</span>
       </div>
  -->
+            </div>
+        </section>
 
-    </div>
-  </section>
+        <!-- EVENTS -->
+        <section class="section" id="events">
+            <div class="sec-label">Calendar</div>
+            <h2 class="sec-title">EVENTS</h2>
 
+            <div class="event-list" id="event-list">
+                <p class="file-empty">Loading events…</p>
+            </div>
+        </section>
 
-  <!-- EVENTS -->
-  <section class="section" id="events">
-    <div class="sec-label">Calendar</div>
-    <h2 class="sec-title">EVENTS</h2>
+        <!-- JOIN -->
+        <section class="join" id="join">
+            <div>
+                <div class="sec-label">Membership</div>
+                <h2 class="join-title">
+                    READY TO<br />
+                    <span class="accent">BE</span> PART<br />
+                    OF IT?
+                </h2>
+                <p class="join-desc">
+                    Whether you love biology, coding, or just have endless
+                    curiosity — BE Club has a place for you. No prior expertise
+                    required.
+                </p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap">
+                    <button
+                        class="btn-primary"
+                        onclick="
+                            document.getElementById('reg-msg').style.display =
+                                'block'
+                        "
+                    >
+                        Apply Now
+                    </button>
+                    <p
+                        id="reg-msg"
+                        style="
+                            display: none;
+                            margin-top: 1rem;
+                            font-size: 0.8rem;
+                            color: #888;
+                            border-left: 2px solid #cc0000;
+                            padding-left: 0.8rem;
+                        "
+                    >
+                        Registration is currently closed. An announcement will
+                        be made when applications open.
+                    </p>
+                    <a href="about.html" class="btn-ghost">Learn More</a>
+                </div>
+            </div>
 
-    <div class="event-list" id="event-list">
-      <p class="file-empty">Loading events…</p>
-    </div>
-  </section>
+            <div class="join-right">
+                <h3>CONTACT INFO</h3>
+                <div class="info-row">
+                    <div class="info-icon">
+                        <img src="pics/email.png" alt="Email" />
+                    </div>
+                    <div>
+                        <div class="info-label">Email</div>
+                        <a
+                            href="mailto:beclub@enbiotech.edu.dz"
+                            class="info-val"
+                            target="_blank"
+                            >beclub@enbiotech.edu.dz</a
+                        >
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">
+                        <img src="pics/instagram.png" alt="Instagram" />
+                    </div>
+                    <div>
+                        <div class="info-label">Instagram</div>
+                        <a
+                            href="https://www.instagram.com/b.e.club?igsh=bnYweGVzejdhMmF0"
+                            class="info-val"
+                            target="_blank"
+                            >@b.e.club</a
+                        >
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">
+                        <img src="pics/facebook.png" alt="Facebook" />
+                    </div>
+                    <div>
+                        <div class="info-label">Facebook</div>
+                        <a
+                            href="https://www.facebook.com/BiotechnologyEngineeringClub"
+                            class="info-val"
+                            target="_blank"
+                            >Biotechnology Engineering Club</a
+                        >
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-icon">
+                        <img src="pics/linkedin.png" alt="LinkedIn" />
+                    </div>
+                    <div>
+                        <div class="info-label">LinkedIn</div>
+                        <a
+                            href="https://www.linkedin.com/in/biotechnology-engineering-club-be-club-5019722b2"
+                            class="info-val"
+                            target="_blank"
+                            >LinkedIn</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--  -->
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-logo"><span class="b">B</span>E CLUB</div>
+            <div>© 2026 BE Club — Biotechnology Engineering Club</div>
+            <div class="social-links">
+                <a
+                    href="https://www.instagram.com/b.e.club?igsh=bnYweGVzejdhMmF0"
+                    >Instagram</a
+                >
+                <a href="https://www.facebook.com/BiotechnologyEngineeringClub"
+                    >Facebook</a
+                >
+                <a
+                    href="https://www.linkedin.com/in/biotechnology-engineering-club-be-club-5019722b2"
+                    >LinkedIn</a
+                >
+            </div>
+        </footer>
 
-  <!-- JOIN -->
-  <section class="join" id="join">
-    <div>
-      <div class="sec-label">Membership</div>
-      <h2 class="join-title">
-        READY TO<br/>
-        <span class="accent">BE</span> PART<br/>
-        OF IT?
-      </h2>
-      <p class="join-desc">
-        Whether you love biology, coding, or just have endless curiosity — BE Club has a place for you. No prior expertise required.
-      </p>
-      <div style="display:flex;gap:1rem;flex-wrap:wrap">
-        <button class="btn-primary" onclick="document.getElementById('reg-msg').style.display='block'">Apply Now</button>
-        <p id="reg-msg" style="display:none;margin-top:1rem;font-size:.8rem;color:#888;border-left:2px solid #CC0000;padding-left:.8rem;">
-          Registration is currently closed. An announcement will be made when applications open.
-        </p>
-        <a href="about.html" class="btn-ghost">Learn More</a>
-      </div>
-    </div>
+        <script src="js/typewriter.js"></script>
+        <script src="js/theme-toggle.js"></script>
+        <script>
+            async function loadEvents() {
+                try {
+                    const res = await fetch("Articles/events.json");
+                    if (!res.ok) throw new Error("Could not load events");
+                    const data = await res.json();
+                    const events = Array.isArray(data.events)
+                        ? data.events
+                        : [];
+                    const list = document.getElementById("event-list");
+                    if (!list) return;
 
-    <div class="join-right">
-      <h3>CONTACT INFO</h3>
-      <div class="info-row">
-        <div class="info-icon">
-          <img src="pics/email.png" alt="Email" />
-        </div>
-        <div>
-          <div class="info-label">Email</div>
-          <a href ="mailto:beclub@enbiotech.edu.dz" class="info-val" target="_blank">beclub@enbiotech.edu.dz</a>
-        </div>
-      </div>
-      <div class="info-row">
-        <div class="info-icon">
-          <img src="pics/instagram.png" alt="Instagram" />
-        </div>
-        <div>
-          <div class="info-label">Instagram</div>
-          <a href ="https://www.instagram.com/b.e.club?igsh=bnYweGVzejdhMmF0" class="info-val" target="_blank">@b.e.club</a>
-        </div>
-      </div>
-      <div class="info-row">
-        <div class="info-icon">
-          <img src="pics/facebook.png" alt="Facebook" />
-        </div>
-        <div>
-          <div class="info-label">Facebook</div>
-          <a href ="https://www.facebook.com/BiotechnologyEngineeringClub" class="info-val" target="_blank">Biotechnology Engineering Club</a>
-        </div>
-      </div>
-      <div class="info-row">
-        <div class="info-icon">
-          <img src="pics/linkedin.png" alt="LinkedIn" />
-        </div>
-        <div>
-          <div class="info-label">LinkedIn</div>
-          <a href="https://www.linkedin.com/in/biotechnology-engineering-club-be-club-5019722b2" class="info-val" target="_blank">LinkedIn</a>
-        </div>
-      </div>
-    </div>
-  </section>
-<!--  -->
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-logo"><span class="b">B</span>E CLUB</div>
-    <div>© 2026 BE Club — Biotechnology Engineering Club</div>
-    <div class="social-links">
-      <a href="https://www.instagram.com/b.e.club?igsh=bnYweGVzejdhMmF0">Instagram</a>
-      <a href="https://www.facebook.com/BiotechnologyEngineeringClub">Facebook</a>
-      <a href="https://www.linkedin.com/in/biotechnology-engineering-club-be-club-5019722b2">LinkedIn</a>
-    </div>
-  </footer>
+                    if (!events.length) {
+                        list.innerHTML =
+                            '<p class="file-empty">No events yet.</p>';
+                        return;
+                    }
 
-  <script src="js/typewriter.js"></script>
-  <script src="js/theme-toggle.js"></script>
-  <script>
-    async function loadEvents() {
-      try {
-        const res = await fetch('Articles/events.json');
-        if (!res.ok) throw new Error('Could not load events');
-        const data = await res.json();
-        const events = Array.isArray(data.events) ? data.events : [];
-        const list = document.getElementById('event-list');
-        if (!list) return;
-
-        if (!events.length) {
-          list.innerHTML = '<p class="file-empty">No events yet.</p>';
-          return;
-        }
-
-        list.innerHTML = events
-          .sort((a, b) => (a.date || '').localeCompare(b.date || ''))
-          .map((event) => `
+                    list.innerHTML = events
+                        .sort((a, b) =>
+                            (a.date || "").localeCompare(b.date || ""),
+                        )
+                        .map(
+                            (event) => `
             <div class="event">
               <div class="event-date-box">
-                <div class="event-day">${event.day || ''}</div>
-                <div class="event-mon">${event.monthYear || ''}</div>
+                <div class="event-day">${event.day || ""}</div>
+                <div class="event-mon">${event.monthYear || ""}</div>
               </div>
               <div>
-                <div class="event-name">${event.title || ''}</div>
-                <div class="event-info">${event.description || ''}</div>
+                <div class="event-name">${event.title || ""}</div>
+                <div class="event-info">${event.description || ""}</div>
               </div>
             </div>
-          `)
-          .join('');
-      } catch (err) {
-        const list = document.getElementById('event-list');
-        if (list) {
-          list.innerHTML = `<p class="file-empty">${err.message}</p>`;
-        }
-      }
-    }
+          `,
+                        )
+                        .join("");
+                } catch (err) {
+                    const list = document.getElementById("event-list");
+                    if (list) {
+                        list.innerHTML = `<p class="file-empty">${err.message}</p>`;
+                    }
+                }
+            }
 
-    loadEvents();
-  </script>
-</body>
+            loadEvents();
+        </script>
+    </body>
 </html>

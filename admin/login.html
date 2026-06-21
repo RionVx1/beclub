@@ -1,41 +1,60 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Login — BE Club</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="admin.css" />
-</head>
-<body class="admin-body">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Login — BE Club</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <script src="../js/theme-init.js"></script>
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="admin.css" />
+    </head>
+    <body class="admin-body">
+        <div class="admin-card">
+            <div class="admin-logo">
+                <img src="../pics/club-logo.png" alt="BE Club" />
+                <span>BE Club Admin</span>
+            </div>
 
-  <div class="admin-card">
-    <div class="admin-logo">
-      <img src="../pics/club-logo.png" alt="BE Club" />
-      <span>BE Club Admin</span>
-    </div>
+            <h1 class="admin-title">SIGN IN</h1>
+            <p class="admin-subtitle">
+                Enter your credentials to access the admin panel.
+            </p>
 
-    <h1 class="admin-title">SIGN IN</h1>
-    <p class="admin-subtitle">Enter your credentials to access the admin panel.</p>
+            <p id="login-error" class="login-error" hidden></p>
 
-    <p id="login-error" class="login-error" hidden></p>
+            <form class="admin-form" id="login-form">
+                <label for="username">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    autocomplete="username"
+                    required
+                />
 
-    <form class="admin-form" id="login-form">
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" autocomplete="username" required />
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    autocomplete="current-password"
+                    required
+                />
 
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" autocomplete="current-password" required />
+                <button type="submit" class="btn-primary">Log In</button>
+            </form>
+        </div>
 
-      <button type="submit" class="btn-primary">Log In</button>
-    </form>
-  </div>
-
-  <script src="admin.js"></script>
-  <script>
-    if (isLoggedIn()) window.location.href = 'panel.html';
-    document.getElementById('login-form').addEventListener('submit', handleLogin);
-  </script>
-</body>
+        <script src="admin.js"></script>
+        <script>
+            if (isLoggedIn()) window.location.href = "panel.html";
+            document
+                .getElementById("login-form")
+                .addEventListener("submit", handleLogin);
+        </script>
+    </body>
 </html>

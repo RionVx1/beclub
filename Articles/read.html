@@ -1,150 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Read Article — BE Club</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css" />
-  <style>
-    .pdf-section {
-      padding: var(--space-3xl) var(--space-lg);
-      border-bottom: none;
-    }
-    .pdf-pages {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      width: 100%;
-    }
-    .pdf-page {
-      display: block;
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-    }
-    .pdf-status {
-      color: var(--muted);
-      text-align: center;
-      padding: 2rem;
-    }
-  </style>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Read Article — BE Club</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <script src="../js/theme-init.js"></script>
+        <link rel="stylesheet" href="../css/style.css" />
+        <style>
+            .pdf-section {
+                padding: var(--space-3xl) var(--space-lg);
+                border-bottom: none;
+            }
+            .pdf-pages {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                width: 100%;
+            }
+            .pdf-page {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+            }
+            .pdf-status {
+                color: var(--muted);
+                text-align: center;
+                padding: 2rem;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <a href="../index.html" style="display: flex; align-items: center">
+                <div class="logo">
+                    <img
+                        src="../pics/club-logo.png"
+                        alt="BE Club"
+                        class="logo-img"
+                    />
+                </div>
+                <span class="logo-sub">Biotechnology Engineering Club</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html#interests">Focus Areas</a></li>
+                <li><a href="../index.html#events">Events</a></li>
+                <li class="nav-mobile-visible">
+                    <a href="../fields/projects.html">Projects</a>
+                </li>
+                <li><a href="../about.html">About</a></li>
+            </ul>
+            <button
+                type="button"
+                class="theme-toggle"
+                aria-label="Toggle theme"
+            ></button>
+            <a href="../index.html#join" class="nav-btn">Join Us</a>
+        </nav>
 
-  <nav>
-    <a href="../index.html" style="display:flex;align-items:center">
-      <div class="logo">
-        <img src="../pics/club-logo.png" alt="BE Club" class="logo-img" />
-      </div>
-      <span class="logo-sub">Biotechnology Engineering Club</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="../index.html#interests">Focus Areas</a></li>
-      <li><a href="../index.html#events">Events</a></li>
-      <li class="nav-mobile-visible"><a href="../fields/projects.html">Projects</a></li>
-      <li><a href="../about.html">About</a></li>
-    </ul>
-    <button type="button" class="theme-toggle" aria-label="Toggle theme"></button>
-    <a href="../index.html#join" class="nav-btn">Join Us</a>
-  </nav>
+        <div class="page-header">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <a href="../fields/articles-list.html">Articles</a>
+                <span>/</span>
+                <span id="breadcrumb-title">Reading</span>
+            </div>
+            <div class="header-inner">
+                <div>
+                    <h1 class="page-title" id="article-heading">ARTICLE</h1>
+                </div>
+            </div>
+        </div>
 
-  <div class="page-header">
-    <div class="breadcrumb">
-      <a href="../index.html">Home</a>
-      <span>/</span>
-      <a href="../fields/articles-list.html">Articles</a>
-      <span>/</span>
-      <span id="breadcrumb-title">Reading</span>
-    </div>
-    <div class="header-inner">
-      <div>
-        <h1 class="page-title" id="article-heading">ARTICLE</h1>
-      </div>
-    </div>
-  </div>
+        <section class="section pdf-section">
+            <p class="pdf-status" id="pdf-status">Loading PDF…</p>
+            <div class="pdf-pages" id="pdf-pages"></div>
+        </section>
 
-  <section class="section pdf-section">
-    <p class="pdf-status" id="pdf-status">Loading PDF…</p>
-    <div class="pdf-pages" id="pdf-pages"></div>
-  </section>
+        <div class="back-bar">
+            <a href="../fields/articles-list.html" class="back-link"
+                >← Back to Articles</a
+            >
+        </div>
 
-  <div class="back-bar">
-    <a href="../fields/articles-list.html" class="back-link">← Back to Articles</a>
-  </div>
+        <footer>
+            <div class="footer-logo"><span class="b">B</span>E CLUB</div>
+            <div>© 2026 BE Club — Biotechnology Engineering Club</div>
+            <a
+                href="../index.html"
+                style="
+                    color: var(--red);
+                    font-size: 0.7rem;
+                    letter-spacing: 0.1em;
+                    text-transform: uppercase;
+                "
+                >← Home</a
+            >
+        </footer>
 
-  <footer>
-    <div class="footer-logo"><span class="b">B</span>E CLUB</div>
-    <div>© 2026 BE Club — Biotechnology Engineering Club</div>
-    <a href="../index.html" style="color:var(--red);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase">← Home</a>
-  </footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+        <script>
+            (async function () {
+                const params = new URLSearchParams(window.location.search);
+                const file = params.get("file");
+                const statusEl = document.getElementById("pdf-status");
+                const pagesEl = document.getElementById("pdf-pages");
+                const headingEl = document.getElementById("article-heading");
+                const breadcrumbEl =
+                    document.getElementById("breadcrumb-title");
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script>
-    (async function () {
-      const params = new URLSearchParams(window.location.search);
-      const file = params.get('file');
-      const statusEl = document.getElementById('pdf-status');
-      const pagesEl = document.getElementById('pdf-pages');
-      const headingEl = document.getElementById('article-heading');
-      const breadcrumbEl = document.getElementById('breadcrumb-title');
+                async function getArticleTitle(fileName) {
+                    try {
+                        const res = await fetch("../Articles/articles.json");
+                        if (!res.ok) return null;
+                        const data = await res.json();
+                        const article = (data.articles || []).find(
+                            (a) => a.file === fileName,
+                        );
+                        return article ? article.title : null;
+                    } catch (e) {
+                        return null;
+                    }
+                }
 
-      async function getArticleTitle(fileName) {
-        try {
-          const res = await fetch('../Articles/articles.json');
-          if (!res.ok) return null;
-          const data = await res.json();
-          const article = (data.articles || []).find(a => a.file === fileName);
-          return article ? article.title : null;
-        } catch (e) {
-          return null;
-        }
-      }
+                if (
+                    !file ||
+                    file.includes("/") ||
+                    file.includes("..") ||
+                    !/\.pdf$/i.test(file)
+                ) {
+                    statusEl.textContent = "Invalid or missing PDF file.";
+                    return;
+                }
 
-      if (!file || file.includes('/') || file.includes('..') || !/\.pdf$/i.test(file)) {
-        statusEl.textContent = 'Invalid or missing PDF file.';
-        return;
-      }
+                const title = (await getArticleTitle(file)) || "Article";
+                headingEl.textContent = title.toUpperCase();
+                breadcrumbEl.textContent = title;
+                document.title = title + " — BE Club";
 
-      const title = await getArticleTitle(file) || 'Article';
-      headingEl.textContent = title.toUpperCase();
-      breadcrumbEl.textContent = title;
-      document.title = title + ' — BE Club';
+                pdfjsLib.GlobalWorkerOptions.workerSrc =
+                    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
-      pdfjsLib.GlobalWorkerOptions.workerSrc =
-        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+                async function renderPage(pdfDoc, num, containerWidth) {
+                    const page = await pdfDoc.getPage(num);
+                    const unscaled = page.getViewport({ scale: 1 });
+                    const scale = containerWidth / unscaled.width;
+                    const vp = page.getViewport({ scale });
 
-      async function renderPage(pdfDoc, num, containerWidth) {
-        const page = await pdfDoc.getPage(num);
-        const unscaled = page.getViewport({ scale: 1 });
-        const scale = containerWidth / unscaled.width;
-        const vp = page.getViewport({ scale });
+                    const canvas = document.createElement("canvas");
+                    canvas.className = "pdf-page";
+                    canvas.height = vp.height;
+                    canvas.width = vp.width;
+                    pagesEl.appendChild(canvas);
 
-        const canvas = document.createElement('canvas');
-        canvas.className = 'pdf-page';
-        canvas.height = vp.height;
-        canvas.width = vp.width;
-        pagesEl.appendChild(canvas);
+                    await page.render({
+                        canvasContext: canvas.getContext("2d"),
+                        viewport: vp,
+                    }).promise;
+                }
 
-        await page.render({
-          canvasContext: canvas.getContext('2d'),
-          viewport: vp
-        }).promise;
-      }
+                try {
+                    const pdfDoc = await pdfjsLib.getDocument(encodeURI(file))
+                        .promise;
+                    statusEl.remove();
 
-      try {
-        const pdfDoc = await pdfjsLib.getDocument(encodeURI(file)).promise;
-        statusEl.remove();
-
-        const containerWidth = pagesEl.clientWidth || document.documentElement.clientWidth;
-        for (let num = 1; num <= pdfDoc.numPages; num++) {
-          await renderPage(pdfDoc, num, containerWidth);
-        }
-      } catch (e) {
-        statusEl.textContent = 'Could not load PDF. It may still be deploying on GitHub Pages.';
-      }
-    })();
-  </script>
-</body>
+                    const containerWidth =
+                        pagesEl.clientWidth ||
+                        document.documentElement.clientWidth;
+                    for (let num = 1; num <= pdfDoc.numPages; num++) {
+                        await renderPage(pdfDoc, num, containerWidth);
+                    }
+                } catch (e) {
+                    statusEl.textContent =
+                        "Could not load PDF. It may still be deploying on GitHub Pages.";
+                }
+            })();
+        </script>
+    </body>
 </html>

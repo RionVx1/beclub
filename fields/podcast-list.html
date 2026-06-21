@@ -1,176 +1,208 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Articles List — BE Club</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../css/style.css" />
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Articles List — BE Club</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <script src="../js/theme-init.js"></script>
+        <link rel="stylesheet" href="../css/style.css" />
+    </head>
+    <body>
+        <nav>
+            <a href="../index.html" style="display: flex; align-items: center">
+                <div class="logo">
+                    <img
+                        src="../pics/club-logo.png"
+                        alt="BE Club"
+                        class="logo-img"
+                    />
+                </div>
+                <span class="logo-sub">Biotechnology Engineering Club</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html#interests">Focus Areas</a></li>
+                <li><a href="../index.html#events">Events</a></li>
+                <li class="nav-mobile-visible">
+                    <a href="projects.html">Projects</a>
+                </li>
+                <li><a href="../about.html">About</a></li>
+            </ul>
+            <button
+                type="button"
+                class="theme-toggle"
+                aria-label="Toggle theme"
+            ></button>
+            <a href="../index.html#join" class="nav-btn">Join Us</a>
+        </nav>
 
-  <nav>
-    <a href="../index.html" style="display:flex;align-items:center">
-      <div class="logo">
-        <img src="../pics/club-logo.png" alt="BE Club" class="logo-img" />
-      </div>
-      <span class="logo-sub">Biotechnology Engineering Club</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="../index.html#interests">Focus Areas</a></li>
-      <li><a href="../index.html#events">Events</a></li>
-      <li class="nav-mobile-visible"><a href="projects.html">Projects</a></li>
-      <li><a href="../about.html">About</a></li>
-    </ul>
-    <button type="button" class="theme-toggle" aria-label="Toggle theme"></button>
-    <a href="../index.html#join" class="nav-btn">Join Us</a>
-  </nav>
+        <div class="page-header">
+            <div class="header-inner"></div>
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <a href="projects.html">Projects</a>
+                <span>/</span>
+                Podcast
+            </div>
+            <h1 class="page-title">podcast🎙️<br /></h1>
+            <p class="page-desc">
+                Conversations with leaders and practitioners at the intersection
+                of biotechnology and technology — thoughtful interviews
+                exploring research, innovation, and the human stories behind the
+                science.
+            </p>
+        </div>
 
-  <div class="page-header">
-    <div class="header-inner">
+        <main class="content">
+            <section class="cards-section">
+                <div id="podcast-list" class="cards-grid">
+                    <p class="file-empty">Loading episodes…</p>
+                </div>
+            </section>
+        </main>
 
-    </div>
-    <div class="breadcrumb">
-      <a href="../index.html">Home</a>
-      <span>/</span>
-      <a href="projects.html">Projects</a>
-      <span>/</span>
-      Podcast
-    </div>
-    <h1 class="page-title">podcast🎙️<br/></h1>
-    <p class="page-desc">
-      Conversations with leaders and practitioners at the intersection of biotechnology and technology — thoughtful interviews exploring research, innovation, and the human stories behind the science.
-    </p>
-  </div>
+        <div class="back-bar">
+            <a href="projects.html" class="back-link">← Back to Projects</a>
+        </div>
 
-  <main class="content">
-    <section class="cards-section">
-      <div id="podcast-list" class="cards-grid">
-        <p class="file-empty">Loading episodes…</p>
-      </div>
-    </section>
-  </main>
+        <footer>
+            <div class="footer-logo"><span class="b">B</span>E CLUB</div>
+            <div>© 2026 BE Club — Biotechnology Engineering Club</div>
+            <a
+                href="../index.html"
+                style="
+                    color: var(--red);
+                    font-size: 0.7rem;
+                    letter-spacing: 0.1em;
+                    text-transform: uppercase;
+                "
+                >← Home</a
+            >
+        </footer>
 
+        <script>
+            // Helper: Format date
+            function formatDate(d) {
+                if (!d) return "";
+                try {
+                    const dt = new Date(d);
+                    return dt.toLocaleDateString(undefined, {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                    });
+                } catch (e) {
+                    return d;
+                }
+            }
 
-  <div class="back-bar">
-    <a href="projects.html" class="back-link">← Back to Projects</a>
-  </div>
+            // Helper: Extract YouTube ID from URL
+            function getYouTubeId(url) {
+                try {
+                    const u = new URL(url);
+                    if (u.hostname.includes("youtu.be"))
+                        return u.pathname.slice(1);
+                    if (u.hostname.includes("youtube.com"))
+                        return u.searchParams.get("v");
+                } catch (e) {}
+                return null;
+            }
 
-  <footer>
-    <div class="footer-logo"><span class="b">B</span>E CLUB</div>
-    <div>© 2026 BE Club — Biotechnology Engineering Club</div>
-    <a href="../index.html" style="color:var(--red);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase">← Home</a>
-  </footer>
-  
-  <script>
-    // Helper: Format date
-    function formatDate(d) {
-      if (!d) return '';
-      try {
-        const dt = new Date(d);
-        return dt.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
-      } catch (e) { return d; }
-    }
+            // Helper: Get thumbnail for video link
+            async function getThumbnailForLink(url) {
+                const yt = getYouTubeId(url);
+                if (yt) return `https://img.youtube.com/vi/${yt}/hqdefault.jpg`;
 
-    // Helper: Extract YouTube ID from URL
-    function getYouTubeId(url) {
-      try {
-        const u = new URL(url);
-        if (u.hostname.includes('youtu.be')) return u.pathname.slice(1);
-        if (u.hostname.includes('youtube.com')) return u.searchParams.get('v');
-      } catch (e) {}
-      return null;
-    }
+                // Try Vimeo oEmbed
+                try {
+                    const oembed = `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(url)}`;
+                    const r = await fetch(oembed);
+                    if (r.ok) {
+                        const j = await r.json();
+                        if (j.thumbnail_url) return j.thumbnail_url;
+                    }
+                } catch (e) {}
 
-    // Helper: Get thumbnail for video link
-    async function getThumbnailForLink(url) {
-      const yt = getYouTubeId(url);
-      if (yt) return `https://img.youtube.com/vi/${yt}/hqdefault.jpg`;
+                // fallback to site logo
+                return "../pics/club-logo.png";
+            }
 
-      // Try Vimeo oEmbed
-      try {
-        const oembed = `https://vimeo.com/api/oembed.json?url=${encodeURIComponent(url)}`;
-        const r = await fetch(oembed);
-        if (r.ok) {
-          const j = await r.json();
-          if (j.thumbnail_url) return j.thumbnail_url;
-        }
-      } catch (e) {}
+            // Helper: Create a card DOM element
+            function createCard(entry, thumbUrl) {
+                const a = document.createElement("a");
+                a.className = "card";
+                a.href = entry.link || "#";
+                a.target = "_blank";
+                a.rel = "noopener noreferrer";
 
-      // fallback to site logo
-      return '../pics/club-logo.png';
-    }
+                const img = document.createElement("img");
+                img.className = "card-thumb";
+                img.src = thumbUrl;
+                img.alt = entry.title || "Episode thumbnail";
 
-    // Helper: Create a card DOM element
-    function createCard(entry, thumbUrl) {
-      const a = document.createElement('a');
-      a.className = 'card';
-      a.href = entry.link || '#';
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
+                const body = document.createElement("div");
+                body.className = "card-body";
 
-      const img = document.createElement('img');
-      img.className = 'card-thumb';
-      img.src = thumbUrl;
-      img.alt = entry.title || 'Episode thumbnail';
+                const h = document.createElement("h3");
+                h.className = "card-title";
+                h.textContent = entry.title || "";
 
-      const body = document.createElement('div');
-      body.className = 'card-body';
+                const p = document.createElement("p");
+                p.className = "card-desc";
+                p.textContent = entry.desc || "";
 
-      const h = document.createElement('h3');
-      h.className = 'card-title';
-      h.textContent = entry.title || '';
+                const meta = document.createElement("div");
+                meta.className = "card-meta";
+                meta.textContent = formatDate(entry.date || "");
 
-      const p = document.createElement('p');
-      p.className = 'card-desc';
-      p.textContent = entry.desc || '';
+                body.appendChild(h);
+                body.appendChild(p);
+                body.appendChild(meta);
 
-      const meta = document.createElement('div');
-      meta.className = 'card-meta';
-      meta.textContent = formatDate(entry.date || '');
+                a.appendChild(img);
+                a.appendChild(body);
+                return a;
+            }
 
-      body.appendChild(h);
-      body.appendChild(p);
-      body.appendChild(meta);
+            // Fetch: Get episodes from JSON
+            async function fetchEpisodes() {
+                try {
+                    const res = await fetch("../Articles/episodes.json");
+                    if (!res.ok) return [];
+                    const data = await res.json();
+                    return data.episodes || [];
+                } catch (e) {
+                    return [];
+                }
+            }
 
-      a.appendChild(img);
-      a.appendChild(body);
-      return a;
-    }
+            // Main: Render episodes
+            async function render() {
+                const list = document.getElementById("podcast-list");
+                const episodes = await fetchEpisodes();
+                list.innerHTML = "";
+                if (!episodes.length) {
+                    list.innerHTML =
+                        '<p class="file-empty">No episodes yet.</p>';
+                    return;
+                }
 
-    // Fetch: Get episodes from JSON
-    async function fetchEpisodes() {
-      try {
-        const res = await fetch('../Articles/episodes.json');
-        if (!res.ok) return [];
-        const data = await res.json();
-        return data.episodes || [];
-      } catch (e) {
-        return [];
-      }
-    }
+                for (const ep of episodes.sort((a, b) =>
+                    (b.date || "").localeCompare(a.date || ""),
+                )) {
+                    const thumb = await getThumbnailForLink(ep.link || "");
+                    const card = createCard(ep, thumb);
+                    list.appendChild(card);
+                }
+            }
 
-    // Main: Render episodes
-    async function render() {
-      const list = document.getElementById('podcast-list');
-      const episodes = await fetchEpisodes();
-      list.innerHTML = '';
-      if (!episodes.length) {
-        list.innerHTML = '<p class="file-empty">No episodes yet.</p>';
-        return;
-      }
-
-      for (const ep of episodes.sort((a,b)=>((b.date||'').localeCompare(a.date||'')))) {
-        const thumb = await getThumbnailForLink(ep.link || '');
-        const card = createCard(ep, thumb);
-        list.appendChild(card);
-      }
-    }
-
-    // Initialize
-    render();
-  </script>
-  <script src="../js/theme-toggle.js"></script>
-</body>
+            // Initialize
+            render();
+        </script>
+        <script src="../js/theme-toggle.js"></script>
+    </body>
 </html>
-  
