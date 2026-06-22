@@ -105,4 +105,34 @@ function initTheme() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", initTheme);
+function initScrollReveal() {
+  const targets = document.querySelectorAll(
+    ".section, .hero-left, .hero-right, .overview-main, .key-point, .article-card, .event, .mission-card, .follow-card, .contact-box, .card, .join"
+  );
+  
+  targets.forEach((el) => {
+    el.classList.add("reveal");
+  });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.05,
+      rootMargin: "0px 0px -40px 0px",
+    }
+  );
+
+  targets.forEach((el) => observer.observe(el));
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
+  initScrollReveal();
+});

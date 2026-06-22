@@ -28,6 +28,8 @@
    8. Mobile Overrides
    ============================================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 /* ============================================================
    1. VARIABLES
    ============================================================ */
@@ -43,26 +45,26 @@
 }
 :root {
     /* Colors */
-    --red: #e60000;
-    --red-dim: #990000;
-    --red-glow: rgba(230, 0, 0, 0.15);
-    --black: #0a0a0a;
-    --dark: #121212;
-    --card: #222222;
-    --border: #333333;
-    --white: #f5f5f5;
-    --muted: #888888;
-    --gray-dark: #2a2a2a;
-    --gray-md: #555555;
+    --red: #ef4444;
+    --red-dim: #991b1b;
+    --red-glow: rgba(239, 68, 68, 0.12);
+    --black: #08090c;
+    --dark: #0f1115;
+    --card: #161920;
+    --border: rgba(255, 255, 255, 0.06);
+    --white: #f8fafc;
+    --muted: #94a3b8;
+    --gray-dark: #1e222b;
+    --gray-md: #64748b;
 
     /* Glass / surface */
-    --surface: rgba(255, 255, 255, 0.04);
-    --surface-hover: rgba(255, 255, 255, 0.08);
-    --surface-solid: rgba(20, 20, 24, 0.75);
-    --border-subtle: rgba(255, 255, 255, 0.12);
-    --border-faint: rgba(255, 255, 255, 0.06);
-    --glass-blur: 12px;
-    --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.28);
+    --surface: rgba(255, 255, 255, 0.03);
+    --surface-hover: rgba(255, 255, 255, 0.06);
+    --surface-solid: rgba(15, 17, 21, 0.85);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-faint: rgba(255, 255, 255, 0.04);
+    --glass-blur: 16px;
+    --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.35);
     --shadow-glow: 0 4px 20px var(--red-glow);
 
     /* Radii */
@@ -72,12 +74,19 @@
     --radius-sm: 8px;
 
     /* Fonts */
-    --font-h: "Bebas Neue", sans-serif;
+    --font-h: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, sans-serif;
     --font-b:
         "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
         Arial, sans-serif;
+    
+    /* Typography Font Weights */
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-extrabold: 800;
 
-    /* Spacing */
+    /* Spacing Rhythm (4px/8px modular grid) */
     --space-xs: 0.25rem;
     --space-sm: 0.5rem;
     --space-md: 0.6rem;
@@ -90,37 +99,57 @@
     --space-6xl: 4rem;
     --space-7xl: 5rem;
     --space-8xl: 6rem;
+    
+    --space-1: 0.25rem;   /* 4px */
+    --space-2: 0.5rem;    /* 8px */
+    --space-3: 0.75rem;   /* 12px */
+    --space-4: 1rem;      /* 16px */
+    --space-5: 1.25rem;   /* 20px */
+    --space-6: 1.5rem;    /* 24px */
+    --space-8: 2rem;      /* 32px */
+    --space-10: 2.5rem;   /* 40px */
+    --space-12: 3rem;     /* 48px */
+    --space-16: 4rem;     /* 64px */
+    --space-20: 5rem;     /* 80px */
+    --space-24: 6rem;     /* 96px */
+    --space-32: 8rem;     /* 128px */
 
     /* Transitions */
     --transition-quick: 0.15s ease-in-out;
-    --transition-normal: 0.2s ease-in-out;
-    --transition-slow: 0.3s ease-in-out;
+    --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-slow: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 
     /* Icon sizes */
     --icon-sm: 36px;
     --icon-md: 40px;
 
     /* Line heights */
-    --line-tight: 1;
-    --line-snug: 1.05;
+    --line-tight: 1.1;
+    --line-snug: 1.25;
     --line-normal: 1.6;
-    --line-relaxed: 1.8;
+    --line-relaxed: 1.75;
     --line-loose: 1.9;
 
     /* Letter spacing */
-    --letter-tight: -0.5px;
-    --letter-normal: 0;
-    --letter-wide: 0.1em;
-    --letter-wider: 0.12em;
-    --letter-widest: 0.2em;
+    --letter-tight: -0.025em;
+    --letter-normal: -0.01em;
+    --letter-wide: 0.05em;
+    --letter-wider: 0.08em;
+    --letter-widest: 0.15em;
 
-    /* Font sizes — common sizes used across components (adjusted for legibility) */
-    --text-xs: 0.75rem; /* ~12px */
-    --text-sm: 0.875rem; /* ~14px */
-    --text-base: 1rem; /* 16px */
-    --text-lg: 1.125rem; /* 18px */
-    --text-xl: 1.25rem; /* 20px */
-    --text-2xl: 1.5rem; /* 24px */
+    /* Font sizes (Typographical Scale) */
+    --text-xs: 0.75rem;    /* 12px */
+    --text-sm: 0.875rem;   /* 14px */
+    --text-base: 1rem;     /* 16px */
+    --text-lg: 1.125rem;   /* 18px */
+    --text-xl: 1.25rem;    /* 20px */
+    --text-2xl: 1.5rem;    /* 24px */
+    --text-3xl: 1.875rem;  /* 30px */
+    --text-4xl: 2.25rem;   /* 36px */
+    --text-5xl: 3rem;      /* 48px */
+    --text-6xl: 3.75rem;   /* 60px */
+    --text-7xl: 4.5rem;    /* 72px */
+    --text-8xl: 6rem;      /* 96px */
 
     /* Commonly used sizes */
     --size-icon-sm: 48px;
@@ -705,16 +734,25 @@ nav {
     transform: scale(1.1);
 }
 
-.sec-label {
-    /* match spacing/token values used by .eyebrow-text (copied, not referenced) */
+.section {
+    padding: clamp(var(--space-12), 8vw, var(--space-24)) var(--space-12);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+
+.sec-label,
+#events .sec-label,
+#interests {
+    font-family: var(--font-b);
     font-size: var(--text-sm);
+    font-weight: var(--fw-semibold);
     letter-spacing: var(--letter-widest);
     text-transform: uppercase;
     color: var(--red);
-    margin-bottom: var(--space-2xl); /* copied from .hero-eyebrow spacing */
+    margin-bottom: var(--space-4);
     display: flex;
     align-items: center;
-    gap: 0.7rem; /* copied from .hero-eyebrow gap */
+    gap: var(--space-3);
 }
 .sec-label::before {
     content: "";
@@ -724,41 +762,24 @@ nav {
 }
 
 /* Section title — edit font size in clamp() for all pages */
-.sec-title {
-    font-family: var(--font-h);
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    letter-spacing: 0.06em;
-    color: var(--white);
-    margin-top: 0; /* keep title immediately after label */
-    margin-bottom: var(--space-4xl); /* maintain space after title */
-    line-height: 1.06;
-}
-
-/* Explicitly match eyebrow spacing for Events and Interests sections (copied values) */
-#events .sec-label,
-#interests {
-    font-size: var(--text-sm);
-    letter-spacing: var(--letter-widest);
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: var(--space-2xl);
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-}
-
+.sec-title,
 #events .sec-title,
 #interests + .sec-title {
-    margin-top: 0;
-    margin-bottom: var(--space-4xl);
-    line-height: 1.06;
+    font-family: var(--font-h);
+    font-size: clamp(var(--text-3xl), 4vw, var(--text-5xl));
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--letter-tight);
+    color: var(--white);
+    margin-top: 0; /* keep title immediately after label */
+    margin-bottom: var(--space-8); /* maintain space after title */
+    line-height: var(--line-tight);
 }
 /* Eyebrow (above hero title) */
 .hero-eyebrow {
     display: flex;
     align-items: center;
-    gap: 0.7rem;
-    margin-bottom: var(--space-2xl);
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
 }
 
 /* ============================================================
@@ -963,8 +984,8 @@ footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: var(--space-6xl);
-    padding: var(--space-8xl) var(--space-5xl);
+    gap: var(--space-12);
+    padding: clamp(var(--space-12), 10vw, var(--space-24)) var(--space-12);
     border-bottom: 1px solid var(--border);
     min-height: 85vh;
     position: relative;
@@ -991,45 +1012,45 @@ footer {
 
 .hero-title {
     font-family: var(--font-h);
-    /* smoother scale: slightly smaller minimum and gentler vw so titles look good
-       on narrow Android screens while remaining large on desktop */
-    font-size: clamp(3rem, 6vw, 6.5rem);
-    letter-spacing: 0.05em;
-    line-height: 1.02;
-    margin-bottom: var(--space-4xl);
+    font-size: clamp(var(--text-4xl), 6vw, var(--text-7xl));
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--letter-tight);
+    line-height: var(--line-tight);
+    margin-bottom: var(--space-6);
     padding-right: 0.5rem; /* avoid cramped edge on narrow screens */
 }
 
 /* Tweak for very small phones to keep heading readable and avoid wrapping */
 @media (max-width: 420px) {
     .hero-title {
-        font-size: 1.9rem; /* ~30px */
-        letter-spacing: 0.035em;
-        margin-bottom: var(--space-3xl);
+        font-size: var(--text-3xl);
+        letter-spacing: var(--letter-tight);
+        margin-bottom: var(--space-4);
     }
 }
 
 /* Slightly larger hero title for Android / narrow phones (up to 480px) */
 @media (max-width: 480px) {
     .hero-title {
-        font-size: 3rem; /* ~48px for stronger presence on phones */
-        letter-spacing: 0.02em;
-        line-height: 1.02;
-        margin-bottom: var(--space-3xl);
+        font-size: var(--text-4xl);
+        letter-spacing: var(--letter-tight);
+        line-height: var(--line-tight);
+        margin-bottom: var(--space-4);
     }
 }
 
 .hero-desc {
-    font-size: 1rem;
+    font-family: var(--font-b);
+    font-size: var(--text-base);
     color: var(--muted);
     line-height: var(--line-relaxed);
     max-width: 540px;
-    margin-bottom: var(--space-4xl);
+    margin-bottom: var(--space-8);
 }
 
 .hero-actions {
     display: flex;
-    gap: var(--space-lg);
+    gap: var(--space-4);
     flex-wrap: wrap;
 }
 
@@ -1237,27 +1258,29 @@ footer {
 
 /* ── Join ───────────────────────────────────────────────────── */
 .join {
-    padding: var(--space-8xl) var(--space-5xl);
+    padding: clamp(var(--space-12), 10vw, var(--space-24)) var(--space-12);
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 4rem;
+    gap: var(--space-12);
     border-bottom: 1px solid var(--border);
 }
 
 .join-title {
     font-family: var(--font-h);
-    font-size: clamp(2.25rem, 5vw, 4.5rem);
-    letter-spacing: 0.06em;
-    line-height: var(--line-snug);
-    margin-bottom: var(--space-2xl);
+    font-size: clamp(var(--text-3xl), 5vw, var(--text-6xl));
+    font-weight: var(--fw-extrabold);
+    letter-spacing: var(--letter-tight);
+    line-height: var(--line-tight);
+    margin-bottom: var(--space-6);
 }
 
 .join-desc {
-    font-size: 0.85rem;
+    font-family: var(--font-b);
+    font-size: var(--text-base);
     color: var(--muted);
     line-height: var(--line-relaxed);
-    margin-bottom: var(--space-3xl);
+    margin-bottom: var(--space-8);
 }
 
 .join-right {
@@ -2127,6 +2150,27 @@ footer {
         align-items: flex-start;
         padding: var(--space-2xl) 1.2rem;
     }
+}
+
+/* ── Reveal on Scroll ───────────────────────────────────────── */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ============================================================
