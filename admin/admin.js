@@ -176,7 +176,7 @@ async function handleEpisodeSubmit(e) {
       "success",
     );
     e.target.reset();
-    document.getElementById("github-token").value = "";
+    // keep github-token so admin can perform further actions without re-entering
   } catch (err) {
     showPodcastStatus(err.message, "error");
   } finally {
@@ -263,7 +263,7 @@ async function handleEventSubmit(e) {
 
     showEventStatus(`Saved! "${title}" was added to events.json.`, "success");
     e.target.reset();
-    document.getElementById("github-token").value = "";
+    // keep github-token so admin can perform further actions without re-entering
   } catch (err) {
     showEventStatus(err.message, "error");
   } finally {
@@ -362,11 +362,17 @@ async function removeEpisode(id) {
     const manifestJson = JSON.stringify(manifest, null, 2) + "\n";
     await uploadEpisodesManifest(token, manifestJson, episode.title);
     showPodcastStatus(`Removed "${episode.title}".`, "success");
-    document.getElementById("github-token").value = "";
+    // keep the token in place so admin can continue to remove or add without re-entering
     renderEpisodeList(manifest.episodes);
   } catch (err) {
     showPodcastStatus(err.message, "error");
   }
+  listEl.querySelectorAll(".file-remove").forEach((btn) => {
+    // store the item title on the button to show a tidy confirm message
+    btn.dataset.title =
+      btn.closest(".file-item")?.querySelector(".file-name")?.textContent || "";
+    btn.addEventListener("click", () => removeEvent(btn.dataset.id));
+  });
 }
 
 async function removeEvent(id) {
@@ -380,18 +386,34 @@ async function removeEvent(id) {
   const eventItem = manifest.events.find((item) => item.id === id);
   if (!eventItem) return;
 
+  // Find the button(s) for this id so we can disable while working
+  const buttons = Array.from(
+    document.querySelectorAll(
+      `.file-remove[data-id="${id}"][data-type="event"]`,
+    ),
+  );
+
   if (!confirm(`Remove event "${eventItem.title}" from events.json?`)) return;
 
+  // Disable any matching buttons
+  buttons.forEach((b) => {
+    b.disabled = true;
+  });
   showEventStatus("Removing event…", "uploading");
   try {
     manifest.events = manifest.events.filter((item) => item.id !== id);
     const manifestJson = JSON.stringify(manifest, null, 2) + "\n";
     await uploadEventsManifest(token, manifestJson, eventItem.title);
     showEventStatus(`Removed "${eventItem.title}".`, "success");
-    document.getElementById("github-token").value = "";
+    // don't clear token here; keep for convenience
     renderEventList(manifest.events);
   } catch (err) {
     showEventStatus(err.message, "error");
+  } finally {
+    // re-enable buttons
+    buttons.forEach((b) => {
+      b.disabled = false;
+    });
   }
 }
 
@@ -495,7 +517,7 @@ async function handleArticleSubmit(e) {
       "success",
     );
     e.target.reset();
-    document.getElementById("github-token").value = "";
+    // keep github-token for convenience
     renderArticleList(manifest.articles);
   } catch (err) {
     showStatus(err.message, "error");
@@ -529,7 +551,7 @@ async function removeArticle(id) {
       article.title,
     );
     showStatus(`Removed "${article.title}".`, "success");
-    document.getElementById("github-token").value = "";
+    // keep token available for further actions
     renderArticleList(manifest.articles);
   } catch (err) {
     showStatus(err.message, "error");
