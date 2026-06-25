@@ -3,6 +3,7 @@ const GITHUB_CONFIG = {
   repo: "beclub",
   branch: "main",
   articlesDir: "Articles",
+  previewDir: "preview",
 };
 
 function toBase64Text(text) {
@@ -94,10 +95,16 @@ async function deleteFromGithub(token, filePath, message) {
   );
 }
 
+function previewFilenameFromPdf(pdfFileName) {
+  return pdfFileName.replace(/\.pdf$/i, ".svg");
+}
+
 async function uploadArticle(
   token,
   articlePath,
   fileContent,
+  previewPath,
+  previewContent,
   manifestContent,
   title,
 ) {
@@ -107,6 +114,12 @@ async function uploadArticle(
     articlePath,
     fileContent,
     `Add article: ${title}`,
+  );
+  await uploadToGithub(
+    token,
+    previewPath,
+    previewContent,
+    `Add article preview: ${title}`,
   );
   await uploadToGithub(
     token,
@@ -124,6 +137,8 @@ async function removeArticleFromGithub(
 ) {
   const manifestPath = `${GITHUB_CONFIG.articlesDir}/articles.json`;
   const articlePath = `${GITHUB_CONFIG.articlesDir}/${articleFile}`;
+  const previewPath = `${GITHUB_CONFIG.previewDir}/${previewFilenameFromPdf(articleFile)}`;
+
   await uploadToGithub(
     token,
     manifestPath,
@@ -131,4 +146,9 @@ async function removeArticleFromGithub(
     `Remove article from list: ${title}`,
   );
   await deleteFromGithub(token, articlePath, `Delete article: ${title}`);
+  await deleteFromGithub(
+    token,
+    previewPath,
+    `Delete article preview: ${title}`,
+  );
 }

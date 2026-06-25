@@ -279,6 +279,104 @@ function showStatus(message, type) {
   el.className = `upload-status ${type}`;
 }
 
+function showPreviewBackfillStatus(message, type) {
+  const el = document.getElementById("preview-backfill-status");
+  if (!el) return;
+  el.hidden = false;
+  el.textContent = message;
+  el.className = `upload-status ${type}`;
+}
+
+function isSafePdfFilename(fileName) {
+  return (
+    typeof fileName === "string" &&
+    /\.pdf$/i.test(fileName) &&
+    !fileName.includes("/") &&
+    !fileName.includes("\\") &&
+    !fileName.includes("..")
+  );
+}
+
+async function fetchArticlePdfBuffer(fileName) {
+  if (!isSafePdfFilename(fileName)) {
+    throw new Error(`Invalid PDF file name: ${fileName}`);
+  }
+
+  const res = await fetch(`../Articles/${encodeURIComponent(fileName)}`);
+  if (!res.ok) {
+    throw new Error(`Could not fetch PDF (${res.status})`);
+  }
+  return res.arrayBuffer();
+}
+
+async function handleBackfillPreviews() {
+  const token = getGithubToken();
+  if (!token) {
+    showPreviewBackfillStatus("Enter your GitHub token first.", "error");
+    return;
+  }
+
+  const btn = document.getElementById("backfill-previews-btn");
+  if (btn) btn.disabled = true;
+
+  try {
+    const manifest = await loadManifest();
+    const articles = (manifest.articles || []).filter(
+      (a) => a && isSafePdfFilename(a.file),
+    );
+
+    if (!articles.length) {
+      showPreviewBackfillStatus("No valid PDF articles found.", "error");
+      return;
+    }
+
+    let created = 0;
+    let skipped = 0;
+    let failed = 0;
+
+    for (let i = 0; i < articles.length; i += 1) {
+      const article = articles[i];
+      const previewPath = `${GITHUB_CONFIG.previewDir}/${previewFilenameFromPdf(article.file)}`;
+
+      showPreviewBackfillStatus(
+        `Checking ${i + 1}/${articles.length}: ${article.file}`,
+        "uploading",
+      );
+
+      const sha = await getFileSha(token, previewPath);
+      if (sha) {
+        skipped += 1;
+        continue;
+      }
+
+      try {
+        showPreviewBackfillStatus(
+          `Generating preview ${i + 1}/${articles.length}: ${article.file}`,
+          "uploading",
+        );
+        const pdfBuffer = await fetchArticlePdfBuffer(article.file);
+        const svgContent = await generatePreviewSvgFromPdfBuffer(pdfBuffer);
+        await uploadToGithub(
+          token,
+          previewPath,
+          svgContent,
+          `Backfill article preview: ${article.title || article.file}`,
+        );
+        created += 1;
+      } catch (err) {
+        failed += 1;
+      }
+    }
+
+    const summary = `Backfill complete. Created: ${created}, skipped existing: ${skipped}, failed: ${failed}.`;
+    showPreviewBackfillStatus(summary, failed ? "error" : "success");
+  } catch (err) {
+    showPreviewBackfillStatus(err.message, "error");
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
 function renderEpisodeList(episodes) {
   const listEl = document.getElementById("episode-list");
   if (!listEl) return;
@@ -434,6 +532,55 @@ function readFileAsArrayBuffer(file) {
   });
 }
 
+function previewFilenameFromPdf(pdfFileName) {
+  return pdfFileName.replace(/\.pdf$/i, ".svg");
+}
+
+function escapeSvgAttribute(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+async function generatePreviewSvgFromPdfBuffer(pdfBuffer) {
+  if (typeof pdfjsLib === "undefined") {
+    throw new Error("PDF preview engine is not loaded in admin panel.");
+  }
+
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+  const loadingTask = pdfjsLib.getDocument({ data: new Uint8Array(pdfBuffer) });
+  const pdf = await loadingTask.promise;
+  const page = await pdf.getPage(1);
+  const baseViewport = page.getViewport({ scale: 1 });
+  const targetWidth = Math.min(baseViewport.width, 480);
+  const scale = targetWidth / baseViewport.width;
+  const viewport = page.getViewport({ scale });
+
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.round(viewport.width);
+  canvas.height = Math.round(viewport.height);
+
+  const ctx = canvas.getContext("2d", { alpha: false });
+  await page.render({
+    canvasContext: ctx,
+    viewport,
+  }).promise;
+
+  const imageDataUrl = canvas.toDataURL("image/webp", 0.75);
+  const safeImageDataUrl = escapeSvgAttribute(imageDataUrl);
+
+  return (
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}" viewBox="0 0 ${canvas.width} ${canvas.height}">` +
+    `<image href="${safeImageDataUrl}" x="0" y="0" width="${canvas.width}" height="${canvas.height}" preserveAspectRatio="xMinYMin meet"/>` +
+    "</svg>\n"
+  );
+}
+
 function getGithubToken() {
   const input = document.getElementById("github-token");
   return input ? input.value.trim() : "";
@@ -488,6 +635,9 @@ async function handleArticleSubmit(e) {
       ? file.name
       : `${slug}.pdf`;
 
+    showStatus("Generating SVG preview from page 1…", "uploading");
+    const previewSvgContent = await generatePreviewSvgFromPdfBuffer(content);
+
     const entry = {
       id: slug,
       title,
@@ -509,11 +659,20 @@ async function handleArticleSubmit(e) {
 
     const manifestJson = JSON.stringify(manifest, null, 2) + "\n";
     const articlePath = `${GITHUB_CONFIG.articlesDir}/${filename}`;
+    const previewPath = `${GITHUB_CONFIG.previewDir}/${previewFilenameFromPdf(filename)}`;
 
-    await uploadArticle(token, articlePath, content, manifestJson, title);
+    await uploadArticle(
+      token,
+      articlePath,
+      content,
+      previewPath,
+      previewSvgContent,
+      manifestJson,
+      title,
+    );
 
     showStatus(
-      `Published! "${title}" is in Articles/ and articles.json was updated.`,
+      `Published! "${title}" PDF, preview SVG, and articles.json were updated.`,
       "success",
     );
     e.target.reset();
@@ -616,6 +775,11 @@ async function initPanel() {
   const eventForm = document.getElementById("event-form");
   if (eventForm) {
     eventForm.addEventListener("submit", handleEventSubmit);
+  }
+
+  const backfillBtn = document.getElementById("backfill-previews-btn");
+  if (backfillBtn) {
+    backfillBtn.addEventListener("click", handleBackfillPreviews);
   }
 
   const [manifest, episodesManifest, eventsManifest] = await Promise.all([

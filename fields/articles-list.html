@@ -50,7 +50,8 @@
 
             <div class="header-inner">
                 <div>
-                    <h1 class="page-title">Articles 🔬<br /></h1>
+                    <div class="area-icon-big">🔬</div>
+                    <h1 class="page-title">Articles</h1>
                     <p class="page-desc">
                         Written pieces from BE Club members — explainers, lab
                         notes, and field guides across red, green, and white
@@ -85,93 +86,22 @@
             >
         </footer>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
         <script>
-            pdfjsLib.GlobalWorkerOptions.workerSrc =
-                "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-
-            async function renderPdfPreview(canvas) {
-                const file = canvas.dataset.file;
-                if (!file) return;
-
-                try {
-                    const loadingTask = pdfjsLib.getDocument(file);
-                    const pdf = await loadingTask.promise;
-                    const page = await pdf.getPage(1);
-                    const containerWidth =
-                        canvas.parentElement.clientWidth || 280;
-                    const viewport = page.getViewport({ scale: 1 });
-                    // reduce render resolution for thumbnail to save CPU/network
-                    const targetWidth = Math.min(containerWidth, 480);
-                    const baseScale = targetWidth / viewport.width;
-                    const qualityScale = 0.6; // render at lower quality scale
-                    const scaledViewport = page.getViewport({
-                        scale: baseScale * qualityScale,
-                    });
-
-                    canvas.width = Math.round(scaledViewport.width);
-                    canvas.height = Math.round(scaledViewport.height);
-                    canvas.style.width = "100%";
-                    canvas.style.height = "auto";
-
-                    const halfHeight = Math.round(scaledViewport.height / 2);
-
-                    const ctx = canvas.getContext("2d");
-                    await page.render({
-                        canvasContext: ctx,
-                        viewport: scaledViewport,
-                    }).promise;
-
-                    // Convert canvas to lightweight WebP image (lower quality) and replace canvas
-                    try {
-                        const dataUrl = canvas.toDataURL("image/webp", 0.6);
-                        const img = document.createElement("img");
-                        img.className = "article-preview-thumb";
-                        img.src = dataUrl;
-                        img.alt = "Article preview";
-
-                        // Ensure the preview container shows only the top half of the page
-                        const preview = canvas.parentElement;
-                        preview.innerHTML = "";
-                        // fix the preview height to the top 50% of the rendered page
-                        preview.style.height = halfHeight + "px";
-                        preview.style.overflow = "hidden";
-
-                        // Make image scale to width, keep it anchored at the top
-                        img.style.width = "100%";
-                        img.style.height = "auto";
-                        img.style.display = "block";
-                        // objectFit/objectPosition are defensive; anchor image to top
-                        img.style.objectFit = "cover";
-                        img.style.objectPosition = "top";
-
-                        preview.appendChild(img);
-
-                        // free canvas memory by letting it be garbage collected
-                    } catch (e) {
-                        // If conversion fails, keep the canvas but crop for compactness
-                        const preview = canvas.parentElement;
-                        preview.style.height = halfHeight + "px";
-                        preview.style.overflow = "hidden";
-                    }
-                } catch (err) {
-                    // Show placeholder only on error
-                    canvas.parentElement.innerHTML =
-                        '<div class="article-preview-placeholder" aria-hidden="true">' +
-                        '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-                        '<path d="M6 2h9a2 2 0 0 1 2 2v15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> ' +
-                        '<path d="M6 2v18a2 2 0 0 0 2 2h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> ' +
-                        '<path d="M6 7h9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/> ' +
-                        '</svg>' +
-                        '</div>';
-                }
+            function previewFileFromPdf(pdfFileName) {
+                return pdfFileName.replace(/\.pdf$/i, ".svg");
             }
 
-            async function renderAllPreviews() {
-                const canvases = document.querySelectorAll(
-                    ".article-preview-canvas",
-                );
-                await Promise.all(Array.from(canvases).map(renderPdfPreview));
+            function renderPreviewPlaceholder(imgEl) {
+                const preview = imgEl.closest(".article-preview");
+                if (!preview) return;
+                preview.innerHTML =
+                    '<div class="article-preview-placeholder" aria-hidden="true">' +
+                    '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+                    '<path d="M6 2h9a2 2 0 0 1 2 2v15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> ' +
+                    '<path d="M6 2v18a2 2 0 0 0 2 2h9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> ' +
+                    '<path d="M6 7h9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/> ' +
+                    "</svg>" +
+                    "</div>";
             }
 
             (async function () {
@@ -195,14 +125,16 @@
                             var readUrl =
                                 "../Articles/read.html?file=" +
                                 encodeURIComponent(a.file);
-                            var pdfPath =
-                                "../Articles/" + encodeURIComponent(a.file);
+                            var previewPath =
+                                "../preview/" +
+                                encodeURIComponent(previewFileFromPdf(a.file));
                             return (
                                 '<div class="article-card">' +
                                 '<div class="article-preview">' +
-                                '<canvas class="article-preview-canvas" data-file="' +
-                                pdfPath +
-                                '"></canvas></div>' +
+                                '<img class="article-preview-thumb" src="' +
+                                previewPath +
+                                '" alt="Article preview" loading="lazy" />' +
+                                "</div>" +
                                 '<span class="article-tag">' +
                                 a.field +
                                 "</span>" +
@@ -220,38 +152,13 @@
                         })
                         .join("");
 
-                    // Lazy-load PDF previews with IntersectionObserver for performance
-                    try {
-                        if ("IntersectionObserver" in window) {
-                            const io = new IntersectionObserver(
-                                (entries, obs) => {
-                                    entries.forEach((entry) => {
-                                        if (entry.isIntersecting) {
-                                            renderPdfPreview(
-                                                entry.target,
-                                            ).catch(() => {});
-                                            obs.unobserve(entry.target);
-                                        }
-                                    });
-                                },
-                                { rootMargin: "200px 0px", threshold: 0.05 },
-                            );
-
-                            document
-                                .querySelectorAll(".article-preview-canvas")
-                                .forEach((c) => io.observe(c));
-                        } else {
-                            // Fallback for older browsers
-                            await renderAllPreviews();
-                        }
-                    } catch (err) {
-                        // If lazy-init fails, try the synchronous render
-                        try {
-                            await renderAllPreviews();
-                        } catch (e) {
-                            /* ignore */
-                        }
-                    }
+                    document
+                        .querySelectorAll(".article-preview-thumb")
+                        .forEach(function (img) {
+                            img.addEventListener("error", function () {
+                                renderPreviewPlaceholder(img);
+                            });
+                        });
                 } catch (e) {
                     grid.innerHTML =
                         '<p style="color:var(--muted)">Could not load articles.</p>';

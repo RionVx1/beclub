@@ -51,171 +51,309 @@
 
             <div id="upload-status" class="upload-status" hidden></div>
 
-            <form class="admin-form article-form" id="article-form">
-                <label for="article-title">Article Title</label>
-                <input
-                    type="text"
-                    id="article-title"
-                    required
-                    placeholder="e.g. What Are GMOs?"
-                />
-
-                <label for="article-desc">Short Description</label>
-                <input
-                    type="text"
-                    id="article-desc"
-                    required
-                    placeholder="One-line summary for the card"
-                />
-
-                <div class="form-row">
-                    <div>
-                        <label for="article-tag">Tag</label>
-                        <select id="article-tag" required></select>
-                    </div>
-                    <div>
-                        <label for="article-field">Field</label>
-                        <select id="article-field" required></select>
-                    </div>
-                </div>
-
-                <label>Article PDF File</label>
-                <div class="upload-row">
-                    <button type="button" class="upload-btn" id="btn-upload">
-                        <span class="icon">📄</span>
-                        Choose PDF File
-                    </button>
-                    <span class="upload-hint"
-                        >Upload a PDF — readers open it in the built-in
-                        viewer.</span
-                    >
-                </div>
-                <input
-                    type="file"
-                    id="article-file"
-                    accept=".pdf,application/pdf"
-                    hidden
-                />
-
-                <button type="submit" class="btn-primary">
-                    Add Article to Articles/
+            <div class="action-nav" role="tablist" aria-label="Admin actions">
+                <button
+                    type="button"
+                    class="action-btn is-active"
+                    data-action="articles"
+                    role="tab"
+                    aria-selected="true"
+                >
+                    Articles
                 </button>
-            </form>
+                <button
+                    type="button"
+                    class="action-btn"
+                    data-action="podcasts"
+                    role="tab"
+                    aria-selected="false"
+                >
+                    Podcasts
+                </button>
+                <button
+                    type="button"
+                    class="action-btn"
+                    data-action="events"
+                    role="tab"
+                    aria-selected="false"
+                >
+                    Events
+                </button>
+                <button
+                    type="button"
+                    class="action-btn"
+                    data-action="previews"
+                    role="tab"
+                    aria-selected="false"
+                >
+                    Previews
+                </button>
+            </div>
 
-            <form class="admin-form podcast-form" id="podcast-form">
-                <h2 class="section-heading">Podcast Episode Upload</h2>
-                <p class="section-note">
-                    Use this form to prepare a podcast episode upload. The
-                    backend integration can be added later.
-                </p>
+            <div class="action-panels">
+                <section
+                    class="action-panel is-active"
+                    data-panel="articles"
+                    role="tabpanel"
+                >
+                    <form class="admin-form article-form" id="article-form">
+                        <h2 class="section-heading">Article Upload</h2>
+                        <p class="section-note">
+                            Upload a new PDF article and update
+                            <code>articles.json</code>.
+                        </p>
 
-                <label for="podcast-title">Episode Title</label>
-                <input
-                    type="text"
-                    id="podcast-title"
-                    placeholder="e.g. The Future of Bioinformatics"
-                />
-
-                <div class="form-row">
-                    <div>
-                        <label for="podcast-episode">Episode #</label>
+                        <label for="article-title">Article Title</label>
                         <input
-                            type="number"
-                            id="podcast-episode"
-                            min="1"
-                            placeholder="1"
+                            type="text"
+                            id="article-title"
+                            required
+                            placeholder="e.g. What Are GMOs?"
                         />
+
+                        <label for="article-desc">Short Description</label>
+                        <input
+                            type="text"
+                            id="article-desc"
+                            required
+                            placeholder="One-line summary for the card"
+                        />
+
+                        <div class="form-row">
+                            <div>
+                                <label for="article-tag">Tag</label>
+                                <select id="article-tag" required></select>
+                            </div>
+                            <div>
+                                <label for="article-field">Field</label>
+                                <select id="article-field" required></select>
+                            </div>
+                        </div>
+
+                        <label>Article PDF File</label>
+                        <div class="upload-row">
+                            <button
+                                type="button"
+                                class="upload-btn"
+                                id="btn-upload"
+                            >
+                                <span class="icon">📄</span>
+                                Choose PDF File
+                            </button>
+                            <span class="upload-hint"
+                                >Upload a PDF — readers open it in the built-in
+                                viewer.</span
+                            >
+                        </div>
+                        <input
+                            type="file"
+                            id="article-file"
+                            accept=".pdf,application/pdf"
+                            hidden
+                        />
+
+                        <button type="submit" class="btn-primary">
+                            Add Article to Articles/
+                        </button>
+                    </form>
+
+                    <div class="file-section">
+                        <h3>ARTICLES IN Articles/</h3>
+                        <div id="file-list" class="file-list">
+                            <p class="file-empty">Loading…</p>
+                        </div>
                     </div>
-                    <div>
-                        <label for="podcast-date">Release Date</label>
-                        <input type="date" id="podcast-date" />
+                </section>
+
+                <section
+                    class="action-panel"
+                    data-panel="podcasts"
+                    role="tabpanel"
+                    hidden
+                >
+                    <form class="admin-form podcast-form" id="podcast-form">
+                        <h2 class="section-heading">Podcast Episode Upload</h2>
+                        <p class="section-note">
+                            Use this form to prepare a podcast episode upload.
+                        </p>
+
+                        <label for="podcast-title">Episode Title</label>
+                        <input
+                            type="text"
+                            id="podcast-title"
+                            placeholder="e.g. The Future of Bioinformatics"
+                        />
+
+                        <div class="form-row">
+                            <div>
+                                <label for="podcast-episode">Episode #</label>
+                                <input
+                                    type="number"
+                                    id="podcast-episode"
+                                    min="1"
+                                    placeholder="1"
+                                />
+                            </div>
+                            <div>
+                                <label for="podcast-date">Release Date</label>
+                                <input type="date" id="podcast-date" />
+                            </div>
+                        </div>
+
+                        <label for="podcast-desc">Short Description</label>
+                        <textarea
+                            id="podcast-desc"
+                            placeholder="One-line summary for the episode"
+                        ></textarea>
+
+                        <label for="podcast-link">Episode Link</label>
+                        <input
+                            type="url"
+                            id="podcast-link"
+                            placeholder="https://"
+                        />
+
+                        <div
+                            id="podcast-status"
+                            class="upload-status podcast-status"
+                            hidden
+                        ></div>
+                        <button type="submit" class="btn-primary">
+                            Add Podcast Episode to Podcasts/
+                        </button>
+                    </form>
+
+                    <div class="file-section">
+                        <h3>PODCAST EPISODES IN Articles/</h3>
+                        <div id="episode-list" class="file-list">
+                            <p class="file-empty">Loading…</p>
+                        </div>
                     </div>
-                </div>
+                </section>
 
-                <label for="podcast-desc">Short Description</label>
-                <textarea
-                    id="podcast-desc"
-                    placeholder="One-line summary for the episode"
-                ></textarea>
-
-                <label for="podcast-link">Episode Link</label>
-                <input type="url" id="podcast-link" placeholder="https://" />
-
-                <div
-                    id="podcast-status"
-                    class="upload-status podcast-status"
+                <section
+                    class="action-panel"
+                    data-panel="events"
+                    role="tabpanel"
                     hidden
-                ></div>
-                <button type="submit" class="btn-primary">
-                    Add Podcast Episode to Podcasts/
-                </button>
-            </form>
+                >
+                    <form class="admin-form event-form" id="event-form">
+                        <h2 class="section-heading">Event Upload</h2>
+                        <p class="section-note">
+                            Add a new event entry with the event name, short
+                            description, and event date.
+                        </p>
 
-            <form class="admin-form event-form" id="event-form">
-                <h2 class="section-heading">Event Upload</h2>
-                <p class="section-note">
-                    Add a new event entry with the event name, short
-                    description, and event date.
-                </p>
+                        <label for="event-title">Event Name</label>
+                        <input
+                            type="text"
+                            id="event-title"
+                            placeholder="e.g. Biotech Career Night"
+                            required
+                        />
 
-                <label for="event-title">Event Name</label>
-                <input
-                    type="text"
-                    id="event-title"
-                    placeholder="e.g. Biotech Career Night"
-                    required
-                />
+                        <label for="event-date">Event Date</label>
+                        <input type="date" id="event-date" required />
 
-                <label for="event-date">Event Date</label>
-                <input type="date" id="event-date" required />
+                        <label for="event-desc">Short Description</label>
+                        <textarea
+                            id="event-desc"
+                            placeholder="One-line summary for the event"
+                            required
+                        ></textarea>
 
-                <label for="event-desc">Short Description</label>
-                <textarea
-                    id="event-desc"
-                    placeholder="One-line summary for the event"
-                    required
-                ></textarea>
+                        <div
+                            id="event-status"
+                            class="upload-status event-status"
+                            hidden
+                        ></div>
+                        <button type="submit" class="btn-primary">
+                            Add Event to Events/
+                        </button>
+                    </form>
 
-                <div
-                    id="event-status"
-                    class="upload-status event-status"
+                    <div class="file-section">
+                        <h3>EVENTS IN Articles/</h3>
+                        <div id="event-list" class="file-list">
+                            <p class="file-empty">Loading…</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section
+                    class="action-panel"
+                    data-panel="previews"
+                    role="tabpanel"
                     hidden
-                ></div>
-                <button type="submit" class="btn-primary">
-                    Add Event to Events/
-                </button>
-            </form>
-
-            <div class="file-section">
-                <h3>ARTICLES IN Articles/</h3>
-                <div id="file-list" class="file-list">
-                    <p class="file-empty">Loading…</p>
-                </div>
-            </div>
-
-            <div class="file-section">
-                <h3>PODCAST EPISODES IN Articles/</h3>
-                <div id="episode-list" class="file-list">
-                    <p class="file-empty">Loading…</p>
-                </div>
-            </div>
-
-            <div class="file-section">
-                <h3>EVENTS IN Articles/</h3>
-                <div id="event-list" class="file-list">
-                    <p class="file-empty">Loading…</p>
-                </div>
+                >
+                    <div class="file-section preview-tools">
+                        <h3>PREVIEW BACKFILL</h3>
+                        <p class="section-note">
+                            Generate missing SVG previews for existing PDFs in
+                            <code>Articles/articles.json</code>. Existing
+                            previews in <code>preview/</code> are skipped.
+                        </p>
+                        <button
+                            type="button"
+                            class="btn-primary"
+                            id="backfill-previews-btn"
+                        >
+                            Generate Missing Previews
+                        </button>
+                        <div
+                            id="preview-backfill-status"
+                            class="upload-status"
+                            hidden
+                        ></div>
+                    </div>
+                </section>
             </div>
         </div>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
         <script src="github.js"></script>
         <script src="admin.js"></script>
         <script>
+            function initActionView() {
+                const buttons = Array.from(
+                    document.querySelectorAll(".action-btn"),
+                );
+                const panels = Array.from(
+                    document.querySelectorAll(".action-panel"),
+                );
+
+                function setActive(action) {
+                    buttons.forEach((btn) => {
+                        const isActive = btn.dataset.action === action;
+                        btn.classList.toggle("is-active", isActive);
+                        btn.setAttribute(
+                            "aria-selected",
+                            isActive ? "true" : "false",
+                        );
+                    });
+
+                    panels.forEach((panel) => {
+                        const isActive = panel.dataset.panel === action;
+                        panel.classList.toggle("is-active", isActive);
+                        panel.hidden = !isActive;
+                    });
+                }
+
+                buttons.forEach((btn) => {
+                    btn.addEventListener("click", () => {
+                        setActive(btn.dataset.action);
+                    });
+                });
+
+                setActive("articles");
+            }
+
             if (!requireAuth()) throw new Error("redirecting");
             document
                 .getElementById("logout-btn")
                 .addEventListener("click", logout);
             setupUploadButton();
+            initActionView();
             initPanel();
         </script>
     </body>
