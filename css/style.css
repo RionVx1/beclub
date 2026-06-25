@@ -370,10 +370,10 @@ body[data-theme="light"] .hero {
     background-image:
         linear-gradient(
             to right,
-            rgba(255, 255, 255, 1) 0%,
-            rgba(255, 255, 255, 0.95) 32%,
-            rgba(255, 255, 255, 0.7) 60%,
-            rgba(255, 255, 255, 0.42) 100%
+            rgba(255, 255, 255, 0.78) 0%,
+            rgba(255, 255, 255, 0.56) 30%,
+            rgba(255, 255, 255, 0.22) 58%,
+            rgba(255, 255, 255, 0.02) 100%
         ),
         url("../pics/hero-bg.jpg");
 }
@@ -1401,9 +1401,9 @@ footer {
         background-image:
             linear-gradient(
                 to bottom,
-                rgba(255, 255, 255, 0.97) 0%,
-                rgba(255, 255, 255, 0.82) 50%,
-                rgba(255, 255, 255, 0.97) 100%
+                rgba(255, 255, 255, 0.74) 0%,
+                rgba(255, 255, 255, 0.18) 50%,
+                rgba(255, 255, 255, 0.78) 100%
             ),
             url("../pics/hero-bg.jpg");
     }
@@ -1517,9 +1517,16 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--surface);
+    background: #000;
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.interest-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .interest-name {
@@ -1758,9 +1765,16 @@ footer {
     justify-content: center;
     font-size: 2rem;
     margin-bottom: var(--space-lg);
-    background: var(--surface);
+    background: #000;
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.area-icon-big img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .header-inner .page-title {
