@@ -125,7 +125,10 @@
     border-radius: var(--radius-pill);
     padding: 0.5rem 1.2rem;
     cursor: pointer;
-    transition: all var(--transition-quick);
+    transition:
+        border-color var(--transition-quick),
+        color var(--transition-quick),
+        background-color var(--transition-quick);
 }
 
 .btn-logout:hover {
@@ -156,7 +159,11 @@
     text-transform: uppercase;
     letter-spacing: 0.06em;
     cursor: pointer;
-    transition: all var(--transition-normal);
+    transition:
+        background-color var(--transition-normal),
+        border-color var(--transition-normal),
+        color var(--transition-normal),
+        transform var(--transition-normal);
 }
 
 .upload-btn:hover {
@@ -210,7 +217,10 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: all var(--transition-quick);
+    transition:
+        background-color var(--transition-quick),
+        border-color var(--transition-quick),
+        color var(--transition-quick);
 }
 
 .action-btn:hover {

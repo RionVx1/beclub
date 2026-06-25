@@ -4,12 +4,14 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>BE Club — Biotechnology Engineering Club</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
             href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
             rel="stylesheet"
         />
         <script src="js/theme-init.js"></script>
-        <link rel="stylesheet" href="css/style.css?v=12" />
+        <link rel="stylesheet" href="css/style.css?v=14" />
     </head>
     <body>
         <!-- NAV -->
@@ -17,10 +19,10 @@
             <div style="display: flex; align-items: center">
                 <div class="logo">
                     <img
-                        src="pics/club-logo.png"
+                        src="pics/club-logo.webp"
                         alt="BE Club"
                         class="logo-img"
-                    />
+                    width="320" height="320" decoding="async" fetchpriority="high">
                 </div>
                 <span class="logo-sub">Biotechnology Engineering Club</span>
             </div>
@@ -139,7 +141,7 @@
             <div class="interests-list">
                 <a href="fields/biotechnology.html" class="interest-item">
                     <div class="interest-icon">
-                        <img src="pics/bio-icon.svg" alt="Biotechnology" />
+                        <img src="pics/bio-icon.svg" alt="Biotechnology" width="96" height="96" loading="lazy" decoding="async">
                     </div>
                     <div>
                         <div class="interest-name">Biotechnology</div>
@@ -156,7 +158,7 @@
                         <img
                             src="pics/tech-icon.svg"
                             alt="Information Technology"
-                        />
+                        width="96" height="96" loading="lazy" decoding="async">
                     </div>
                     <div>
                         <div class="interest-name">Information Technology</div>
@@ -261,7 +263,7 @@
                 <h3>CONTACT INFO</h3>
                 <div class="info-row">
                     <div class="info-icon">
-                        <img src="pics/email.png" alt="Email" />
+                        <img src="pics/email.webp" alt="Email" width="512" height="370" loading="lazy" decoding="async">
                     </div>
                     <div>
                         <div class="info-label">Email</div>
@@ -275,7 +277,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-icon">
-                        <img src="pics/instagram.png" alt="Instagram" />
+                        <img src="pics/instagram.webp" alt="Instagram" width="225" height="225" loading="lazy" decoding="async">
                     </div>
                     <div>
                         <div class="info-label">Instagram</div>
@@ -289,7 +291,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-icon">
-                        <img src="pics/facebook.png" alt="Facebook" />
+                        <img src="pics/facebook.webp" alt="Facebook" width="512" height="512" loading="lazy" decoding="async">
                     </div>
                     <div>
                         <div class="info-label">Facebook</div>
@@ -303,7 +305,7 @@
                 </div>
                 <div class="info-row">
                     <div class="info-icon">
-                        <img src="pics/linkedin.png" alt="LinkedIn" />
+                        <img src="pics/linkedin.webp" alt="LinkedIn" width="512" height="512" loading="lazy" decoding="async">
                     </div>
                     <div>
                         <div class="info-label">LinkedIn</div>
@@ -338,7 +340,7 @@
         </footer>
 
         <script src="js/typewriter.js"></script>
-        <script src="js/theme-toggle.js"></script>
+        <script src="js/theme-toggle.js?v=3"></script>
         <script>
             async function loadEvents() {
                 try {

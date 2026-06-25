@@ -107,12 +107,19 @@ function initTheme() {
 
 function initScrollReveal() {
   const targets = document.querySelectorAll(
-    ".section, .hero-left, .hero-right, .overview-main, .key-point, .article-card, .event, .mission-card, .follow-card, .contact-box, .card, .join"
+    ".section, .hero-left, .hero-right, .overview-main, .key-point, .article-card, .event, .mission-card, .follow-card, .contact-box, .card, .join",
   );
-  
+
+  const shouldSkipReveal =
+    window.matchMedia("(max-width: 860px)").matches ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   targets.forEach((el) => {
     el.classList.add("reveal");
+    if (shouldSkipReveal) el.classList.add("active");
   });
+
+  if (shouldSkipReveal) return;
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -126,7 +133,7 @@ function initScrollReveal() {
     {
       threshold: 0.05,
       rootMargin: "0px 0px -40px 0px",
-    }
+    },
   );
 
   targets.forEach((el) => observer.observe(el));
