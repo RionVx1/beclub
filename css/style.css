@@ -72,6 +72,328 @@
     --nav-bg: rgba(8, 9, 12, 0.75);
     --footer-bg: rgba(10, 10, 10, 0.6);
 
+    /* CSS-generated biotech wallpaper: dark circuit grid, molecule nodes, red glows */
+    --wall-bg: #080203;
+    --wall-grid: rgba(239, 68, 68, 0.055);
+    --wall-grid-soft: rgba(239, 68, 68, 0.028);
+    --wall-line: rgba(239, 68, 68, 0.105);
+    --wall-node: rgba(239, 68, 68, 0.42);
+    --wall-node-hot: rgba(255, 28, 42, 0.78);
+    --wall-ring: rgba(239, 68, 68, 0.22);
+    --wall-glow: rgba(239, 68, 68, 0.16);
+    --site-wallpaper:
+        radial-gradient(
+            circle at 12% 8%,
+            var(--wall-node-hot) 0 1.5px,
+            var(--wall-glow) 2px 5px,
+            transparent 10px
+        ),
+        radial-gradient(
+            circle at 31% 14%,
+            var(--wall-node) 0 1.5px,
+            transparent 5px
+        ),
+        radial-gradient(
+            circle at 48% 10%,
+            var(--wall-node-hot) 0 1.5px,
+            transparent 7px
+        ),
+        radial-gradient(
+            circle at 72% 18%,
+            var(--wall-node) 0 1.5px,
+            transparent 6px
+        ),
+        radial-gradient(
+            circle at 91% 12%,
+            var(--wall-node-hot) 0 1.5px,
+            var(--wall-glow) 2px 6px,
+            transparent 12px
+        ),
+        radial-gradient(
+            circle at 18% 43%,
+            var(--wall-node-hot) 0 1.5px,
+            var(--wall-glow) 2px 6px,
+            transparent 12px
+        ),
+        radial-gradient(
+            circle at 38% 54%,
+            var(--wall-node) 0 1.5px,
+            transparent 6px
+        ),
+        radial-gradient(
+            circle at 58% 39%,
+            var(--wall-node-hot) 0 1.5px,
+            transparent 8px
+        ),
+        radial-gradient(
+            circle at 82% 47%,
+            var(--wall-node-hot) 0 1.5px,
+            var(--wall-glow) 2px 6px,
+            transparent 12px
+        ),
+        radial-gradient(
+            circle at 7% 78%,
+            var(--wall-node) 0 1.5px,
+            transparent 6px
+        ),
+        radial-gradient(
+            circle at 27% 84%,
+            var(--wall-node-hot) 0 1.5px,
+            var(--wall-glow) 2px 6px,
+            transparent 12px
+        ),
+        radial-gradient(
+            circle at 53% 77%,
+            var(--wall-node-hot) 0 1.5px,
+            transparent 8px
+        ),
+        radial-gradient(
+            circle at 74% 86%,
+            var(--wall-node) 0 1.5px,
+            transparent 6px
+        ),
+        radial-gradient(
+            circle at 94% 72%,
+            var(--wall-node-hot) 0 1.5px,
+            var(--wall-glow) 2px 6px,
+            transparent 12px
+        ),
+        radial-gradient(
+            circle at 8% 60%,
+            transparent 0 8px,
+            var(--wall-ring) 8.5px 9.5px,
+            transparent 10px
+        ),
+        radial-gradient(
+            circle at 24% 24%,
+            transparent 0 10px,
+            var(--wall-ring) 10.5px 11.5px,
+            transparent 12px
+        ),
+        radial-gradient(
+            circle at 46% 39%,
+            transparent 0 7px,
+            var(--wall-ring) 7.5px 8.5px,
+            transparent 9px
+        ),
+        radial-gradient(
+            circle at 63% 64%,
+            transparent 0 11px,
+            var(--wall-ring) 11.5px 12.5px,
+            transparent 13px
+        ),
+        radial-gradient(
+            circle at 86% 58%,
+            transparent 0 9px,
+            var(--wall-ring) 9.5px 10.5px,
+            transparent 11px
+        ),
+        linear-gradient(
+            90deg,
+            transparent 0 8%,
+            var(--wall-line) 8.05% 8.12%,
+            transparent 8.2% 23%,
+            var(--wall-line) 23.05% 23.12%,
+            transparent 23.2% 38%,
+            var(--wall-line) 38.05% 38.12%,
+            transparent 38.2% 58%,
+            var(--wall-line) 58.05% 58.12%,
+            transparent 58.2% 74%,
+            var(--wall-line) 74.05% 74.12%,
+            transparent 74.2% 91%,
+            var(--wall-line) 91.05% 91.12%,
+            transparent 91.2%
+        ),
+        linear-gradient(
+            0deg,
+            transparent 0 12%,
+            var(--wall-line) 12.05% 12.12%,
+            transparent 12.2% 31%,
+            var(--wall-line) 31.05% 31.12%,
+            transparent 31.2% 46%,
+            var(--wall-line) 46.05% 46.12%,
+            transparent 46.2% 65%,
+            var(--wall-line) 65.05% 65.12%,
+            transparent 65.2% 84%,
+            var(--wall-line) 84.05% 84.12%,
+            transparent 84.2%
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0 74px,
+            var(--wall-grid-soft) 74px 75px,
+            transparent 75px 150px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0 82px,
+            var(--wall-grid-soft) 82px 83px,
+            transparent 83px 166px
+        ),
+        radial-gradient(ellipse at 50% 35%, var(--wall-glow), transparent 58%),
+        linear-gradient(var(--wall-bg), var(--wall-bg));
+
+    /* CSS-generated hero scene: DNA helix, lab glass glow, molecular particles */
+    --hero-bg: #020204;
+    --hero-red-soft: rgba(239, 68, 68, 0.16);
+    --hero-red-mid: rgba(239, 68, 68, 0.34);
+    --hero-red-hot: rgba(255, 34, 48, 0.78);
+    --hero-glass: rgba(255, 235, 230, 0.28);
+    --hero-spark: rgba(255, 238, 234, 0.82);
+    --hero-scene:
+        radial-gradient(
+            ellipse 7% 20% at 78% 13%,
+            transparent 44%,
+            var(--hero-glass) 45%,
+            var(--hero-red-mid) 47%,
+            transparent 50%
+        ),
+        radial-gradient(
+            ellipse 8% 23% at 75% 35%,
+            transparent 43%,
+            var(--hero-glass) 45%,
+            var(--hero-red-hot) 47%,
+            transparent 50%
+        ),
+        radial-gradient(
+            ellipse 8% 24% at 76% 58%,
+            transparent 43%,
+            var(--hero-glass) 45%,
+            var(--hero-red-mid) 47%,
+            transparent 50%
+        ),
+        radial-gradient(
+            ellipse 6% 18% at 72% 76%,
+            transparent 43%,
+            var(--hero-glass) 45%,
+            var(--hero-red-hot) 47%,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 79% 10%,
+            var(--hero-spark) 0 1px,
+            var(--hero-red-hot) 1.5px 4px,
+            transparent 10px
+        ),
+        radial-gradient(
+            circle at 72% 25%,
+            var(--hero-red-hot) 0 1.5px,
+            transparent 8px
+        ),
+        radial-gradient(
+            circle at 80% 39%,
+            var(--hero-spark) 0 1px,
+            var(--hero-red-hot) 1.5px 5px,
+            transparent 12px
+        ),
+        radial-gradient(
+            circle at 70% 54%,
+            var(--hero-red-hot) 0 1.5px,
+            transparent 8px
+        ),
+        radial-gradient(
+            circle at 78% 68%,
+            var(--hero-spark) 0 1px,
+            var(--hero-red-hot) 1.5px 5px,
+            transparent 12px
+        ),
+        radial-gradient(
+            circle at 70% 82%,
+            var(--hero-red-hot) 0 1.5px,
+            transparent 8px
+        ),
+        repeating-linear-gradient(
+            105deg,
+            transparent 0 28px,
+            rgba(255, 190, 180, 0.08) 29px 31px,
+            transparent 32px 62px
+        ),
+        radial-gradient(
+            ellipse 7% 18% at 87% 66%,
+            transparent 52%,
+            var(--hero-glass) 53%,
+            rgba(255, 255, 255, 0.14) 55%,
+            transparent 57%
+        ),
+        radial-gradient(
+            ellipse 7% 4% at 87% 81%,
+            var(--hero-red-hot),
+            var(--hero-red-soft) 52%,
+            transparent 70%
+        ),
+        radial-gradient(
+            ellipse 4% 14% at 87% 68%,
+            rgba(255, 255, 255, 0.12),
+            transparent 62%
+        ),
+        radial-gradient(
+            ellipse 11% 18% at 86% 75%,
+            var(--hero-red-soft),
+            transparent 68%
+        ),
+        radial-gradient(
+            circle at 91% 49%,
+            var(--hero-red-hot) 0 1.5px,
+            var(--hero-red-soft) 2px 7px,
+            transparent 16px
+        ),
+        radial-gradient(
+            circle at 61% 24%,
+            var(--hero-red-hot) 0 1px,
+            transparent 7px
+        ),
+        radial-gradient(
+            circle at 65% 70%,
+            var(--hero-red-hot) 0 1px,
+            transparent 8px
+        ),
+        radial-gradient(
+            circle at 96% 21%,
+            var(--hero-red-hot) 0 1.5px,
+            transparent 8px
+        ),
+        radial-gradient(
+            circle at 55% 58%,
+            var(--hero-red-mid) 0 1px,
+            transparent 7px
+        ),
+        radial-gradient(
+            circle at 43% 83%,
+            var(--hero-red-mid) 0 1px,
+            transparent 7px
+        ),
+        radial-gradient(
+            circle at 22% 78%,
+            var(--hero-red-mid) 0 1px,
+            transparent 8px
+        ),
+        radial-gradient(
+            ellipse at 76% 50%,
+            rgba(239, 68, 68, 0.18),
+            transparent 38%
+        ),
+        radial-gradient(
+            ellipse at 88% 75%,
+            rgba(239, 68, 68, 0.18),
+            transparent 24%
+        ),
+        radial-gradient(
+            ellipse at 50% 100%,
+            rgba(239, 68, 68, 0.08),
+            transparent 45%
+        ),
+        linear-gradient(
+            90deg,
+            transparent 0 42%,
+            rgba(239, 68, 68, 0.04) 42.2% 42.35%,
+            transparent 42.6% 58%,
+            rgba(239, 68, 68, 0.07) 58.1% 58.22%,
+            transparent 58.4% 73%,
+            rgba(255, 255, 255, 0.08) 73.1% 73.2%,
+            transparent 73.4%
+        ),
+        linear-gradient(var(--hero-bg), var(--hero-bg));
+
     /* Radii */
     --radius-pill: 9999px;
     --radius-lg: 16px;
@@ -185,19 +507,31 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 64px; /* sticky navbar height */
+    background-color: var(--wall-bg);
+    background-image: var(--site-wallpaper);
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 body {
-    background-color: var(--black);
-    background-image:
-        radial-gradient(circle at top right, var(--red-glow), transparent 40%),
-        radial-gradient(circle at bottom left, var(--red-glow), transparent 40%);
+    background-color: var(--wall-bg);
+    background-image: var(--site-wallpaper);
     background-attachment: fixed;
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
     color: var(--white);
     font-family: var(--font-b);
     font-size: 16px;
     line-height: var(--line-normal);
     min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+    }
 }
 
 /* Global Typography Hierarchy */
@@ -246,6 +580,29 @@ p,
     color: var(--muted);
 }
 
+html[data-theme="light"],
+body[data-theme="light"] {
+    --wall-bg: #fbfaf8;
+    --wall-grid: rgba(153, 27, 27, 0.045);
+    --wall-grid-soft: rgba(153, 27, 27, 0.025);
+    --wall-line: rgba(153, 27, 27, 0.07);
+    --wall-node: rgba(153, 27, 27, 0.22);
+    --wall-node-hot: rgba(190, 18, 60, 0.34);
+    --wall-ring: rgba(153, 27, 27, 0.13);
+    --wall-glow: rgba(190, 18, 60, 0.1);
+    --hero-bg: #fbfaf8;
+    --hero-red-soft: rgba(190, 18, 60, 0.1);
+    --hero-red-mid: rgba(190, 18, 60, 0.2);
+    --hero-red-hot: rgba(190, 18, 60, 0.42);
+    --hero-glass: rgba(85, 20, 28, 0.18);
+    --hero-spark: rgba(255, 255, 255, 0.92);
+}
+
+html[data-theme="light"] {
+    background-color: var(--wall-bg);
+    background-image: var(--site-wallpaper);
+}
+
 body[data-theme="light"] {
     --black: #ffffff; /* Surgical White */
     --dark: #f8f8f8; /* Ultra-Light Gray */
@@ -266,19 +623,12 @@ body[data-theme="light"] {
     --nav-bg: rgba(255, 255, 255, 0.75);
     --footer-bg: rgba(255, 255, 255, 0.75);
 
-    background-color: var(--black);
-    background-image:
-        radial-gradient(
-            circle at top right,
-            rgba(229, 9, 20, 0.08),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at bottom left,
-            rgba(229, 9, 20, 0.06),
-            transparent 32%
-        );
+    background-color: var(--wall-bg);
+    background-image: var(--site-wallpaper);
     background-attachment: fixed;
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
     color: var(--white);
 }
 
@@ -340,11 +690,30 @@ body[data-theme="light"] .area-cat-badge {
     color: #c01a3f;
 }
 
-body[data-theme="light"] .interest-icon,
 body[data-theme="light"] .contact-icon,
 body[data-theme="light"] .project-card-icon {
     background: rgba(230, 0, 0, 0.08);
     border-color: rgba(230, 0, 0, 0.2);
+}
+
+body[data-theme="light"] .interest-icon {
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            rgba(255, 255, 255, 0.85),
+            transparent 36%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(230, 0, 0, 0.12),
+            transparent 64%
+        ),
+        rgba(255, 255, 255, 0.72);
+    border-color: rgba(230, 0, 0, 0.24);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        0 12px 28px rgba(120, 0, 0, 0.08),
+        0 0 22px rgba(230, 0, 0, 0.08);
 }
 
 body[data-theme="light"] .article-preview {
@@ -367,21 +736,23 @@ body[data-theme="light"] ::-webkit-scrollbar-thumb {
 
 /* Hero background — light mode overrides */
 body[data-theme="light"] .hero {
-    background-image:
-        linear-gradient(
-            to right,
-            rgba(255, 255, 255, 0.78) 0%,
-            rgba(255, 255, 255, 0.56) 30%,
-            rgba(255, 255, 255, 0.22) 58%,
-            rgba(255, 255, 255, 0.02) 100%
-        ),
-        url("../pics/hero-bg.jpg");
+    background-color: #fafafa;
+    background-image: url("../pics/hero-biology-template-light.svg");
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
 }
 
 body[data-theme="light"] .hero::before {
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+    background-image: none;
+}
+
+body[data-theme="light"] .hero::after {
+    background: linear-gradient(
+        to bottom,
+        rgba(250, 250, 250, 0),
+        rgba(245, 245, 247, 0.88)
+    );
 }
 
 a {
@@ -959,20 +1330,27 @@ footer {
     align-items: center;
     gap: var(--space-12);
     padding: clamp(var(--space-12), 10vw, var(--space-24)) var(--space-12);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 0;
     min-height: 85vh;
     position: relative;
     overflow: hidden;
-    /* Hero background image — DNA visual, dark mode */
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        #000 0%,
+        #000 82%,
+        transparent 100%
+    );
+    mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 100%);
+    /* Custom red-biology hero template */
     background-image:
         linear-gradient(
             to right,
-            rgba(8, 9, 12, 1) 0%,
-            rgba(8, 9, 12, 0.92) 32%,
-            rgba(8, 9, 12, 0.42) 60%,
-            rgba(8, 9, 12, 0.08) 100%
+            rgba(2, 2, 4, 0.98) 0%,
+            rgba(2, 2, 4, 0.9) 33%,
+            rgba(2, 2, 4, 0.43) 64%,
+            rgba(2, 2, 4, 0.06) 100%
         ),
-        url("../pics/hero-bg.jpg");
+        url("../pics/hero-biology-template.svg");
     background-size: cover;
     background-position: center right;
     background-repeat: no-repeat;
@@ -986,6 +1364,22 @@ footer {
         linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
     background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: clamp(5rem, 12vw, 10rem);
+    background: linear-gradient(
+        to bottom,
+        rgba(8, 9, 12, 0),
+        rgba(8, 9, 12, 0.38)
+    );
     pointer-events: none;
     z-index: 0;
 }
@@ -1341,12 +1735,13 @@ footer {
         background-image:
             linear-gradient(
                 to bottom,
-                rgba(8, 9, 12, 0.96) 0%,
-                rgba(8, 9, 12, 0.72) 50%,
-                rgba(8, 9, 12, 0.96) 100%
+                rgba(2, 2, 4, 0.9) 0%,
+                rgba(2, 2, 4, 0.58) 50%,
+                rgba(2, 2, 4, 0.9) 100%
             ),
-            url("../pics/hero-bg.jpg");
-        background-position: 70% center;
+            url("../pics/hero-biology-template.svg");
+        background-size: cover;
+        background-position: 68% center;
     }
     .hero-right {
         display: none;
@@ -1398,14 +1793,10 @@ footer {
 /* Light mode — mobile hero background override */
 @media (max-width: 860px) {
     body[data-theme="light"] .hero {
-        background-image:
-            linear-gradient(
-                to bottom,
-                rgba(255, 255, 255, 0.74) 0%,
-                rgba(255, 255, 255, 0.18) 50%,
-                rgba(255, 255, 255, 0.78) 100%
-            ),
-            url("../pics/hero-bg.jpg");
+        background-color: #fafafa;
+        background-image: url("../pics/hero-biology-template-light.svg");
+        background-size: cover;
+        background-position: 68% center;
     }
 }
 
@@ -1490,16 +1881,18 @@ footer {
 
 .interest-item {
     display: grid;
-    grid-template-columns: 60px 1fr auto;
+    grid-template-columns: 76px 1fr auto;
     align-items: center;
     gap: var(--space-3xl);
-    padding: 1.8rem 2.5rem;
+    padding: 1.65rem 2.2rem;
 }
 .interest-item:hover {
     background: var(--surface-hover);
     border-color: rgba(230, 0, 0, 0.35);
     transform: translateY(-2px);
-    box-shadow: var(--shadow-soft);
+    box-shadow:
+        var(--shadow-soft),
+        0 0 32px rgba(239, 68, 68, 0.08);
 }
 
 .interest-num {
@@ -1510,23 +1903,68 @@ footer {
 }
 
 .interest-icon {
-    width: 48px;
-    height: 48px;
-    font-size: 1.5rem;
+    width: 64px;
+    height: 64px;
     line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #000;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
+    position: relative;
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            rgba(255, 255, 255, 0.08),
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(239, 68, 68, 0.18),
+            transparent 62%
+        ),
+        rgba(8, 9, 12, 0.78);
+    border: 1px solid rgba(239, 68, 68, 0.18);
+    border-radius: 18px;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 12px 28px rgba(0, 0, 0, 0.24),
+        0 0 24px rgba(239, 68, 68, 0.08);
     overflow: hidden;
+    transition:
+        transform var(--transition-normal),
+        border-color var(--transition-normal),
+        box-shadow var(--transition-normal);
+}
+
+.interest-icon::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(239, 68, 68, 0.12);
+    border-radius: 13px;
+    pointer-events: none;
 }
 
 .interest-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 82%;
+    height: 82%;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.28));
+    transition: transform var(--transition-normal);
+}
+
+.interest-item:hover .interest-icon {
+    transform: translateY(-1px) scale(1.04);
+    border-color: rgba(239, 68, 68, 0.42);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 14px 34px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(239, 68, 68, 0.16);
+}
+
+.interest-item:hover .interest-icon img {
+    transform: scale(1.06) rotate(-2deg);
 }
 
 .interest-name {
@@ -1724,7 +2162,18 @@ footer {
         grid-template-columns: 1fr;
     }
     .interest-item {
-        grid-template-columns: 40px 1fr;
+        grid-template-columns: 58px 1fr;
+        gap: 1rem;
+        padding: 1.25rem 1rem;
+    }
+    .interest-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 15px;
+    }
+    .interest-icon::before {
+        inset: 7px;
+        border-radius: 11px;
     }
     .interest-tag {
         display: none;
