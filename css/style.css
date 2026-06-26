@@ -1417,7 +1417,7 @@ footer {
             rgba(2, 2, 4, 0.43) 64%,
             rgba(2, 2, 4, 0.06) 100%
         ),
-        url("../pics/hero-biology-template.svg");
+        url("../pics/dna.jpg");
     background-size: cover;
     background-position: center right;
     background-repeat: no-repeat;
@@ -1811,7 +1811,7 @@ footer {
                 rgba(2, 2, 4, 0.58) 50%,
                 rgba(2, 2, 4, 0.9) 100%
             ),
-            url("../pics/hero-biology-template.svg");
+            url("../pics/dna.jpg");
         background-size: cover;
         background-position: 68% center;
     }
