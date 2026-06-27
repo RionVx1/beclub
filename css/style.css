@@ -774,7 +774,15 @@ body[data-theme="light"] ::-webkit-scrollbar-thumb {
 /* Hero background — light mode overrides */
 body[data-theme="light"] .hero {
     background-color: #fafafa;
-    background-image: url("../pics/hero-biology-template-light.svg");
+    background-image:
+        linear-gradient(
+            to right,
+            rgba(250, 250, 250, 0.98) 0%,
+            rgba(250, 250, 250, 0.9) 33%,
+            rgba(250, 250, 250, 0.43) 64%,
+            rgba(250, 250, 250, 0.06) 100%
+        ),
+        url("../pics/canvas.png");
     background-size: cover;
     background-position: center right;
     background-repeat: no-repeat;
@@ -1417,7 +1425,7 @@ footer {
             rgba(2, 2, 4, 0.43) 64%,
             rgba(2, 2, 4, 0.06) 100%
         ),
-        url("../pics/dna.jpg");
+        url("../pics/canvas.png");
     background-size: cover;
     background-position: center right;
     background-repeat: no-repeat;
@@ -1811,7 +1819,7 @@ footer {
                 rgba(2, 2, 4, 0.58) 50%,
                 rgba(2, 2, 4, 0.9) 100%
             ),
-            url("../pics/dna.jpg");
+            url("../pics/canvas.png");
         background-size: cover;
         background-position: 68% center;
     }
@@ -1866,7 +1874,15 @@ footer {
 @media (max-width: 860px) {
     body[data-theme="light"] .hero {
         background-color: #fafafa;
-        background-image: url("../pics/hero-biology-template-light.svg");
+        background-image:
+            linear-gradient(
+                to right,
+                rgba(250, 250, 250, 0.98) 0%,
+                rgba(250, 250, 250, 0.9) 33%,
+                rgba(250, 250, 250, 0.43) 64%,
+                rgba(250, 250, 250, 0.06) 100%
+            ),
+            url("../pics/canvas.png");
         background-size: cover;
         background-position: 68% center;
     }
