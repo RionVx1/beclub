@@ -234,10 +234,7 @@
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap">
                     <button
                         class="btn-primary"
-                        onclick="
-                            document.getElementById('reg-msg').style.display =
-                                'block'
-                        "
+                        id="apply-btn"
                     >
                         Apply Now
                     </button>
@@ -378,6 +375,21 @@
           `,
                         )
                         .join("");
+
+                    // Handle registration button based on registration value
+                    const applyBtn = document.getElementById("apply-btn");
+                    const regMsg = document.getElementById("reg-msg");
+                    if (applyBtn && regMsg) {
+                        if (data.registration === true) {
+                            applyBtn.onclick = function() {
+                                window.open("https://google.com", "_blank");
+                            };
+                        } else {
+                            applyBtn.onclick = function() {
+                                regMsg.style.display = "block";
+                            };
+                        }
+                    }
                 } catch (err) {
                     const list = document.getElementById("event-list");
                     if (list) {
