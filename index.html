@@ -382,7 +382,8 @@
                     if (applyBtn && regMsg) {
                         if (data.registration === true) {
                             applyBtn.onclick = function() {
-                                window.open("https://google.com", "_blank");
+                                const link = data.forumLink || "https://google.com";
+                                window.open(link, "_blank");
                             };
                         } else {
                             applyBtn.onclick = function() {

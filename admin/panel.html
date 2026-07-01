@@ -84,11 +84,11 @@
                 <button
                     type="button"
                     class="action-btn"
-                    data-action="previews"
+                    data-action="registration"
                     role="tab"
                     aria-selected="false"
                 >
-                    Previews
+                    Registration
                 </button>
             </div>
 
@@ -284,30 +284,41 @@
 
                 <section
                     class="action-panel"
-                    data-panel="previews"
+                    data-panel="registration"
                     role="tabpanel"
                     hidden
                 >
-                    <div class="file-section preview-tools">
-                        <h3>PREVIEW BACKFILL</h3>
+                    <form class="admin-form registration-form" id="registration-form">
+                        <h2 class="section-heading">Registration Settings</h2>
                         <p class="section-note">
-                            Generate missing SVG previews for existing PDFs in
-                            <code>Articles/articles.json</code>. Existing
-                            previews in <code>preview/</code> are skipped.
+                            Control registration status and set the registration link.
                         </p>
-                        <button
-                            type="button"
-                            class="btn-primary"
-                            id="backfill-previews-btn"
-                        >
-                            Generate Missing Previews
-                        </button>
+
+                        <label for="registration-toggle">Registration Status</label>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="registration-toggle" />
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span id="registration-status-text">Closed</span>
+                        </div>
+
+                        <label for="registration-link">Registration Link</label>
+                        <input
+                            type="url"
+                            id="registration-link"
+                            placeholder="https://"
+                        />
+
                         <div
-                            id="preview-backfill-status"
-                            class="upload-status"
+                            id="registration-status"
+                            class="upload-status registration-status"
                             hidden
                         ></div>
-                    </div>
+                        <button type="submit" class="btn-primary">
+                            Save Registration Settings
+                        </button>
+                    </form>
                 </section>
             </div>
         </div>
