@@ -54,7 +54,7 @@ async function handleRegistrationSubmit(e) {
 
   const submitBtn = e.target.querySelector('button[type="submit"]');
   submitBtn.disabled = true;
-  showRegistrationStatus("Saving registration settings…", "uploading");
+  showRegistrationStatus("Saving registration settings\u2026", "uploading");
 
   try {
     const manifest = await loadEventsManifest();

@@ -12,9 +12,15 @@ function showEventStatus(message, type) {
 }
 
 async function loadEventsManifest() {
-  const res = await fetch("../Articles/events.json");
-  if (!res.ok) return { events: [] };
-  return res.json();
+  try {
+    const res = await fetch("../Articles/events.json");
+    if (!res.ok) return { events: [] };
+    const data = await res.json();
+    return { events: Array.isArray(data?.events) ? data.events : [] };
+  } catch (err) {
+    console.error("Failed to load events manifest:", err);
+    return { events: [] };
+  }
 }
 
 async function uploadEventsManifest(token, manifestContent, title) {
@@ -31,7 +37,7 @@ function renderEventList(events) {
   const listEl = document.getElementById("event-list");
   if (!listEl) return;
 
-  if (!events.length) {
+  if (!events || !events.length) {
     listEl.innerHTML = '<p class="file-empty">No events in Articles/ yet.</p>';
     return;
   }
@@ -102,7 +108,7 @@ async function handleEventSubmit(e) {
 
   const submitBtn = e.target.querySelector('button[type="submit"]');
   submitBtn.disabled = true;
-  showEventStatus(`Saving event "${title}" to events.json…`, "uploading");
+  showEventStatus(`Saving event "${title}" to events.json\u2026`, "uploading");
 
   try {
     const manifest = await loadEventsManifest();
@@ -162,7 +168,7 @@ async function removeEvent(id) {
   buttons.forEach((b) => {
     b.disabled = true;
   });
-  showEventStatus("Removing event…", "uploading");
+  showEventStatus("Removing event\u2026", "uploading");
   try {
     manifest.events = manifest.events.filter((item) => item.id !== id);
     const manifestJson = JSON.stringify(manifest, null, 2) + "\n";

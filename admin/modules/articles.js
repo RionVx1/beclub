@@ -96,9 +96,15 @@ async function generatePreviewSvgFromPdfBuffer(pdfBuffer) {
 }
 
 async function loadManifest() {
-  const res = await fetch("../Articles/articles.json");
-  if (!res.ok) return { articles: [] };
-  return res.json();
+  try {
+    const res = await fetch("../Articles/articles.json");
+    if (!res.ok) return { articles: [] };
+    const data = await res.json();
+    return { articles: Array.isArray(data?.articles) ? data.articles : [] };
+  } catch (err) {
+    console.error("Failed to load articles manifest:", err);
+    return { articles: [] };
+  }
 }
 
 function fieldLabel(value) {
@@ -116,7 +122,7 @@ function renderArticleList(articles) {
   const listEl = document.getElementById("file-list");
   if (!listEl) return;
 
-  if (!articles.length) {
+  if (!articles || !articles.length) {
     listEl.innerHTML =
       '<p class="file-empty">No articles in Articles/ yet.</p>';
     return;
@@ -129,7 +135,7 @@ function renderArticleList(articles) {
       <div class="file-item">
         <div class="file-info">
           <span class="file-name">${a.title}</span>
-          <span class="file-meta">${fieldLabel(a.field)} · ${a.tag} · Articles/${a.file}</span>
+          <span class="file-meta">${fieldLabel(a.field)} \u00b7 ${a.tag} \u00b7 Articles/${a.file}</span>
         </div>
         <div class="file-actions">
           <a href="../Articles/read.html?file=${encodeURIComponent(a.file)}&title=${encodeURIComponent(a.title)}" class="file-link" target="_blank">View</a>
@@ -183,7 +189,7 @@ async function handleArticleSubmit(e) {
 
   const submitBtn = e.target.querySelector('button[type="submit"]');
   submitBtn.disabled = true;
-  showStatus(`Uploading ${file.name} to Articles/…`, "uploading");
+  showStatus(`Uploading ${file.name} to Articles/\u2026`, "uploading");
 
   try {
     const content = await readFileAsArrayBuffer(file);
@@ -193,7 +199,7 @@ async function handleArticleSubmit(e) {
       ? file.name
       : `${slug}.pdf`;
 
-    showStatus("Generating SVG preview from page 1…", "uploading");
+    showStatus("Generating SVG preview from page 1\u2026", "uploading");
     const previewSvgContent = await generatePreviewSvgFromPdfBuffer(content);
 
     const entry = {
@@ -256,7 +262,7 @@ async function removeArticle(id) {
 
   if (!confirm(`Remove "${article.title}" from the site?`)) return;
 
-  showStatus("Removing article…", "uploading");
+  showStatus("Removing article\u2026", "uploading");
 
   try {
     manifest.articles = manifest.articles.filter((a) => a.id !== id);

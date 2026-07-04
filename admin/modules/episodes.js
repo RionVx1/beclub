@@ -12,9 +12,15 @@ function showPodcastStatus(message, type) {
 }
 
 async function loadEpisodesManifest() {
-  const res = await fetch("../Articles/episodes.json");
-  if (!res.ok) return { episodes: [] };
-  return res.json();
+  try {
+    const res = await fetch("../Articles/episodes.json");
+    if (!res.ok) return { episodes: [] };
+    const data = await res.json();
+    return { episodes: Array.isArray(data?.episodes) ? data.episodes : [] };
+  } catch (err) {
+    console.error("Failed to load episodes manifest:", err);
+    return { episodes: [] };
+  }
 }
 
 async function uploadEpisodesManifest(token, manifestContent, title) {
@@ -31,7 +37,7 @@ function renderEpisodeList(episodes) {
   const listEl = document.getElementById("episode-list");
   if (!listEl) return;
 
-  if (!episodes.length) {
+  if (!episodes || !episodes.length) {
     listEl.innerHTML =
       '<p class="file-empty">No episodes in Articles/ yet.</p>';
     return;
@@ -44,7 +50,7 @@ function renderEpisodeList(episodes) {
       <div class="file-item">
         <div class="file-info">
           <span class="file-name">${item.title}</span>
-          <span class="file-meta">Episode ${item.episode || "—"} · ${item.date}</span>
+          <span class="file-meta">Episode ${item.episode || "\u2014"} \u00b7 ${item.date}</span>
           <span class="file-meta">${item.desc || ""}</span>
         </div>
         <div class="file-actions">
@@ -82,7 +88,7 @@ async function handleEpisodeSubmit(e) {
 
   const submitBtn = e.target.querySelector('button[type="submit"]');
   submitBtn.disabled = true;
-  showPodcastStatus(`Saving episode "${title}" to episodes.json…`, "uploading");
+  showPodcastStatus(`Saving episode "${title}" to episodes.json\u2026`, "uploading");
 
   try {
     const manifest = await loadEpisodesManifest();
@@ -136,7 +142,7 @@ async function removeEpisode(id) {
 
   if (!confirm(`Remove episode "${episode.title}" from episodes.json?`)) return;
 
-  showPodcastStatus("Removing episode…", "uploading");
+  showPodcastStatus("Removing episode\u2026", "uploading");
   try {
     manifest.episodes = manifest.episodes.filter((item) => item.id !== id);
     const manifestJson = JSON.stringify(manifest, null, 2) + "\n";
