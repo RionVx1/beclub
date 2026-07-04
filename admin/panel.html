@@ -323,9 +323,23 @@
             </div>
         </div>
 
+        <!-- PDF.js library for preview generation -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+        <!-- Core Admin Scripts (LOAD ORDER IS CRITICAL) -->
+        <!-- 1. GitHub API utilities and config -->
         <script src="github.js"></script>
+
+        <!-- 2. Authentication, utilities, and panel initialization -->
         <script src="admin.js"></script>
+
+        <!-- 3. Feature modules (depend on github.js and admin.js) -->
+        <script src="modules/articles.js"></script>
+        <script src="modules/episodes.js"></script>
+        <script src="modules/events.js"></script>
+        <script src="modules/registration.js"></script>
+
+        <!-- 4. Tab navigation and initialization -->
         <script>
             function initActionView() {
                 const buttons = Array.from(
