@@ -205,9 +205,9 @@ export function validateArticleData(data) {
     }
   }
   
-  // Validate tag
+  // Tag is optional; default to empty string if not provided
   if (!sanitized.tag || typeof sanitized.tag !== 'string') {
-    errors.push('Article tag is required');
+    sanitized.tag = "";
   }
   
   // Validate field

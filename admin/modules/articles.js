@@ -29,7 +29,6 @@ import {
 import { 
   MAX_ARTICLE_SIZE, 
   FIELDS, 
-  TAGS 
 } from "./config.js";
 import { GITHUB_CONFIG } from "./github-api.js";
 import { 
@@ -56,7 +55,8 @@ export async function handleArticleSubmit(e) {
 
   const title = document.getElementById("article-title").value.trim();
   const desc = document.getElementById("article-desc").value.trim();
-  const tag = document.getElementById("article-tag").value;
+  // `tag` field removed from panel; make it optional and default to empty string
+  const tag = "";
   const field = document.getElementById("article-field").value;
   const fileInput = document.getElementById("article-file");
   const file = fileInput.files[0];
@@ -236,13 +236,8 @@ export function renderArticleList(articles) {
  */
 export function initArticleForm() {
   const fieldSelect = document.getElementById("article-field");
-  const tagSelect = document.getElementById("article-tag");
-
   FIELDS.forEach((f) => {
     fieldSelect.add(new Option(f.label, f.value));
-  });
-  TAGS.forEach((t) => {
-    tagSelect.add(new Option(t, t));
   });
 
   const form = document.getElementById("article-form");
