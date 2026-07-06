@@ -20,7 +20,10 @@ async function generatePreviewSvgFromPdfBuffer(pdfBuffer) {
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
-    const loadingTask = pdfjsLib.getDocument({ data: new Uint8Array(pdfBuffer) });
+    // Use a copy of the ArrayBuffer so pdfjs doesn't detach the original
+    // buffer (some implementations may transfer/detach buffers for performance).
+    const bufferCopy = pdfBuffer.slice(0);
+    const loadingTask = pdfjsLib.getDocument({ data: new Uint8Array(bufferCopy) });
     const pdf = await loadingTask.promise;
     const page = await pdf.getPage(1);
     const baseViewport = page.getViewport({ scale: 1 });
