@@ -97,6 +97,10 @@
                 return pdfFileName.replace(/\.pdf$/i, ".svg");
             }
 
+            function getPreviewPath(pdfFileName) {
+                return `../Articles/preview/${previewFileFromPdf(pdfFileName)}`;
+            }
+
             function renderPreviewPlaceholder(imgEl) {
                 const preview = imgEl.closest(".article-preview");
                 if (!preview) return;
@@ -130,10 +134,10 @@
                         .map(function (a) {
                             var readUrl =
                                 "../Articles/read.html?file=" +
-                                encodeURIComponent(a.file);
+                                encodeURIComponent(a.file) + "&title=" +
+                                encodeURIComponent(a.title);
                             var previewPath =
-                                "../preview/" +
-                                encodeURIComponent(previewFileFromPdf(a.file));
+                                encodeURIComponent(getPreviewPath(a.file));
                             return (
                                 '<div class="article-card">' +
                                 '<div class="article-preview">' +

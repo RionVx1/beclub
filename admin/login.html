@@ -51,12 +51,6 @@
             </form>
         </div>
 
-        <script src="admin.js"></script>
-        <script>
-            if (isLoggedIn()) window.location.href = "panel.html";
-            document
-                .getElementById("login-form")
-                .addEventListener("submit", handleLogin);
-        </script>
+        <script type="module" src="login-main.js"></script>
     </body>
 </html>
