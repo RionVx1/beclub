@@ -138,26 +138,99 @@ export async function uploadArticle(
 ) {
   try {
     const manifestPath = `${GITHUB_CONFIG.articlesDir}/articles.json`;
-    await uploadToGithub(
+    // Create a single commit that adds/updates the article PDF, its preview SVG,
+    // and the articles manifest together so they do not race or overwrite each other.
+    await uploadMultipleFiles(
       token,
-      articlePath,
-      fileContent,
+      [
+        { path: articlePath, content: fileContent },
+        { path: previewPath, content: previewContent },
+        { path: manifestPath, content: manifestContent },
+      ],
       `Add article: ${title}`,
-    );
-    await uploadToGithub(
-      token,
-      previewPath,
-      previewContent,
-      `Add article preview: ${title}`,
-    );
-    await uploadToGithub(
-      token,
-      manifestPath,
-      manifestContent,
-      `Update articles list: ${title}`,
     );
   } catch (err) {
     console.error(`Failed to upload article ${title}:`, err);
+    throw err;
+  }
+}
+
+/**
+ * Upload multiple files in a single Git commit by creating blobs, a new tree,
+ * a new commit and updating the branch ref.
+ * `files` is an array of { path, content } where content can be string or ArrayBuffer.
+ */
+export async function uploadMultipleFiles(token, files, message) {
+  try {
+    const { owner, repo, branch } = GITHUB_CONFIG;
+
+    // Get the current commit for the branch
+    const ref = await githubApi(
+      token,
+      `/repos/${owner}/${repo}/git/ref/heads/${branch}`,
+    );
+    const latestCommitSha = ref.object.sha;
+
+    const latestCommit = await githubApi(
+      token,
+      `/repos/${owner}/${repo}/git/commits/${latestCommitSha}`,
+    );
+    const baseTreeSha = latestCommit.tree.sha;
+
+    // Create blobs for each file
+    const blobPromises = files.map(async (f) => {
+      const blob = await githubApi(
+        token,
+        `/repos/${owner}/${repo}/git/blobs`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ content: encodeContent(f.content), encoding: "base64" }),
+        },
+      );
+      return { path: f.path, sha: blob.sha };
+    });
+
+    const blobs = await Promise.all(blobPromises);
+
+    // Create a new tree based on the current tree, replacing/adding our blobs
+    const tree = blobs.map((b) => ({ path: b.path, mode: "100644", type: "blob", sha: b.sha }));
+
+    const newTree = await githubApi(
+      token,
+      `/repos/${owner}/${repo}/git/trees`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ base_tree: baseTreeSha, tree }),
+      },
+    );
+
+    // Create commit
+    const newCommit = await githubApi(
+      token,
+      `/repos/${owner}/${repo}/git/commits`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message, tree: newTree.sha, parents: [latestCommitSha] }),
+      },
+    );
+
+    // Update branch ref to point to new commit
+    await githubApi(
+      token,
+      `/repos/${owner}/${repo}/git/refs/heads/${branch}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sha: newCommit.sha }),
+      },
+    );
+
+    return newCommit;
+  } catch (err) {
+    console.error("Failed to upload multiple files:", err);
     throw err;
   }
 }
@@ -173,21 +246,113 @@ export async function removeArticleFromGithub(
     const manifestPath = `${GITHUB_CONFIG.articlesDir}/articles.json`;
     const articlePath = `${GITHUB_CONFIG.articlesDir}/${articleFile}`;
     const previewPath = `${GITHUB_CONFIG.previewDir}/${previewFilenameFromPdf(articleFile)}`;
-
-    await uploadToGithub(
+    // Create a single commit that updates the manifest and removes the article
+    // and its preview in one atomic change.
+    await commitChanges(
       token,
-      manifestPath,
-      manifestContent,
+      /* additions */ [{ path: manifestPath, content: manifestContent }],
+      /* deletions */ [articlePath, previewPath],
       `Remove article from list: ${title}`,
-    );
-    await deleteFromGithub(token, articlePath, `Delete article: ${title}`);
-    await deleteFromGithub(
-      token,
-      previewPath,
-      `Delete article preview: ${title}`,
     );
   } catch (err) {
     console.error(`Failed to remove article ${title}:`, err);
+    throw err;
+  }
+}
+
+/**
+ * Commit a set of additions/updates and deletions in a single commit.
+ * - `additions` is an array of { path, content }
+ * - `deletions` is an array of path strings to remove
+ */
+export async function commitChanges(token, additions = [], deletions = [], message) {
+  try {
+    const { owner, repo, branch } = GITHUB_CONFIG;
+
+    // Get current commit and tree
+    const ref = await githubApi(
+      token,
+      `/repos/${owner}/${repo}/git/ref/heads/${branch}`,
+    );
+    const latestCommitSha = ref.object.sha;
+
+    const latestCommit = await githubApi(
+      token,
+      `/repos/${owner}/${repo}/git/commits/${latestCommitSha}`,
+    );
+    const baseTreeSha = latestCommit.tree.sha;
+
+    // Fetch the full tree recursively so we can reconstruct it without deleted files
+    const baseTree = await githubApi(
+      token,
+      `/repos/${owner}/${repo}/git/trees/${baseTreeSha}?recursive=1`,
+    );
+
+    const additionsMap = new Map();
+    // create blobs for additions
+    for (const f of additions) {
+      const blob = await githubApi(
+        token,
+        `/repos/${owner}/${repo}/git/blobs`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ content: encodeContent(f.content), encoding: "base64" }),
+        },
+      );
+      additionsMap.set(f.path, blob.sha);
+    }
+
+    const deletionsSet = new Set(deletions || []);
+    const additionsPaths = new Set(additions.map((a) => a.path));
+
+    // Build the new tree entries: include all existing entries except deletions
+    // and except those paths that will be overwritten by additions.
+    const newTreeEntries = baseTree.tree
+      .filter((entry) => !deletionsSet.has(entry.path) && !additionsPaths.has(entry.path))
+      .map((entry) => ({ path: entry.path, mode: entry.mode, type: entry.type, sha: entry.sha }));
+
+    // Add/replace additions
+    for (const [path, sha] of additionsMap.entries()) {
+      newTreeEntries.push({ path, mode: "100644", type: "blob", sha });
+    }
+
+    // Create a new tree from our entries
+    const newTree = await githubApi(
+      token,
+      `/repos/${owner}/${repo}/git/trees`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ tree: newTreeEntries }),
+      },
+    );
+
+    // Create commit
+    const newCommit = await githubApi(
+      token,
+      `/repos/${owner}/${repo}/git/commits`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message, tree: newTree.sha, parents: [latestCommitSha] }),
+      },
+    );
+
+    // Update branch ref
+    await githubApi(
+      token,
+      `/repos/${owner}/${repo}/git/refs/heads/${branch}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sha: newCommit.sha }),
+      },
+    );
+
+    return newCommit;
+  } catch (err) {
+    console.error("Failed to commit changes:", err);
     throw err;
   }
 }
