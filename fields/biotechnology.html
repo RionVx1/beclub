@@ -1,225 +1,256 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Biotechnology — BE Club</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
-            rel="stylesheet"
-        />
-        <script src="../js/theme-init.js"></script>
-        <link rel="stylesheet" href="../css/style.css?v=14" />
-    </head>
-    <body>
-        <!-- NAV -->
-        <nav>
-            <a href="../index.html" style="display: flex; align-items: center">
-                <div class="logo">
-                    <img
-                        src="../pics/club-logo.webp"
-                        alt="BE Club"
-                        class="logo-img"
-                    width="320" height="320" decoding="async" fetchpriority="high">
-                </div>
-                <span class="logo-sub">Biotechnology Engineering Club</span>
-            </a>
-            <ul class="nav-links">
-                <li><a href="../index.html#interests">Focus Areas</a></li>
-                <li><a href="../index.html#events">Events</a></li>
-                <li class="nav-mobile-visible">
-                    <a href="projects.html">Projects</a>
-                </li>
-                <li><a href="../about.html">About</a></li>
-            </ul>
-            <button
-                type="button"
-                class="theme-toggle"
-                aria-label="Toggle theme"
-            ></button>
-            <a href="../index.html#join" class="nav-btn">Join Us</a>
-        </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biotechnology: Applications and Challenges — BE Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="../js/theme-init.js"></script>
+  <link rel="stylesheet" href="../css/style.css" />
 
-        <!-- PAGE HEADER -->
-        <div class="page-header">
-            <div class="breadcrumb">
-                <a href="../index.html">Home</a>
-                <span>/</span>
-                <a href="../index.html#interests">Interests</a>
-                <span>/</span>
-                Biotechnology
-            </div>
+  <!-- Page-scoped overrides: typography and layout adjustments for this page. -->
+  <style>
+    :root{
+      --font-h: "Inter", "Plus Jakarta Sans", sans-serif;
+      --font-b: "Inter", sans-serif;
+    }
+    body{ direction: ltr; text-align: left; }
+    .breadcrumb{ direction: ltr; }
 
-            <div class="header-inner">
-                <div>
-                    <div class="area-icon-big">
-                        <img
-                            src="../pics/bio.webp"
-                            alt="Biotechnology"
-                            width="230"
-                            height="256"
-                            loading="lazy"
-                            decoding="async"
-                        />
-                    </div>
-                    <h1 class="page-title">Biotechnology</h1>
-                    <p class="page-desc">
-                        Using living systems to solve real-world problems.
-                        Biotechnology spans medicine, agriculture, and industry
-                        — turning molecular science into vaccines, crops,
-                        biofuels, and the tools that shape modern life sciences.
-                    </p>
-                </div>
-            </div>
-        </div>
+    /* Intro layout: definition text + supporting image */
+    .intro-grid{
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: var(--space-12);
+      align-items: stretch;
+    }
+    .intro-media{
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background: var(--surface-solid);
+      min-height: 260px;
+    }
+    .intro-media img{
+      width: 100%;
+      height: 100%;
+      min-height: 260px;
+      object-fit: cover;
+    }
 
-        <!-- SECTION 1: OVERVIEW -->
-        <section class="section">
-            <div class="sec-label">Overview</div>
-            <h2 class="sec-title">WHAT IS IT?</h2>
+    /* Conclusion / final CTA box */
+    .conclusion-box{
+      background: var(--surface-solid);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6xl) var(--space-5xl);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+    }
+    .conclusion-box p{
+      max-width: 720px;
+      margin: 0 auto var(--space-8);
+      color: var(--muted);
+      line-height: var(--line-loose);
+      font-size: 0.95rem;
+    }
+    .conclusion-actions{
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
-            <div class="overview-grid">
-                <div class="overview-main">
-                    <p>
-                        Biotechnology is the use of biological processes,
-                        organisms, or systems to develop products and
-                        technologies that improve human and environmental
-                        health. From CRISPR gene editing and mRNA vaccines to
-                        drought-resistant crops and industrial fermentation,
-                        biotech sits at the core of BE Club's scientific
-                        mission.
-                    </p>
-                    <p>
-                        The field is commonly organized into three color-coded
-                        branches — red (medical), green (agricultural), and
-                        white (industrial). Each applies the same molecular
-                        toolkit to a different domain. Explore the field guides
-                        below to dive into articles, resources, and club
-                        activities for each area.
-                    </p>
-                </div>
-            </div>
-        </section>
+    @media (max-width: 860px){
+      .intro-grid{ grid-template-columns: 1fr; }
+      .intro-media{ order: -1; min-height: 200px; }
+      .intro-media img{ min-height: 200px; }
+      .conclusion-box{ padding: var(--space-3xl) 1.2rem; }
+    }
+  </style>
+</head>
+<body>
 
-        <!-- SECTION 2: FIELD GUIDES -->
-        <section class="section">
-            <div class="sec-label">Explore</div>
-            <h2 class="sec-title">FIELDS OF BIOTECHNOLOGY</h2>
-
-            <div class="articles-grid">
-                <div class="article-card">
-                    <span class="article-tag">Medical</span>
-                    <div class="article-title">Red Biotechnology</div>
-                    <p class="article-desc">
-                        Where biology saves lives — gene therapy, mRNA vaccines,
-                        monoclonal antibodies, and regenerative medicine.
-                        Articles and resources on medical biotech.
-                    </p>
-                </div>
-
-                <div class="article-card">
-                    <span class="article-tag">Agriculture</span>
-                    <div class="article-title">Green Biotechnology</div>
-                    <p class="article-desc">
-                        Engineering nature for a sustainable future — GMO
-                        research, biopesticides, plant tissue culture, and food
-                        security. Articles and resources on agricultural
-                        biotech.
-                    </p>
-                </div>
-
-                <div class="article-card">
-                    <span class="article-tag">Industrial</span>
-                    <div class="article-title">White Biotechnology</div>
-                    <p class="article-desc">
-                        Biology meets industry — fermentation, biocatalysis,
-                        metabolic engineering, and bioplastics. Articles and
-                        resources on industrial biotech.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 3: CLUB ACTIVITIES
-  <section class="section">
-    <div class="sec-label">At BE Club</div>
-    <h2 class="sec-title">WHAT WE DO</h2>
-
-    <div class="activity-list">
-      <div class="activity-item">
-        <div class="activity-num">01</div>
-        <div>
-          <div class="activity-name">Lab Workshops</div>
-          <div class="activity-desc">Articles and project notes that explore lab-based biotech techniques, experiments, and research findings.</div>
-        </div>
-        <span class="activity-badge">Lab</span>
+  <!-- NAV -->
+  <nav>
+    <a href="../index.html" style="display:flex;align-items:center">
+      <div class="logo">
+        <img src="../pics/club-logo.webp" alt="BE Club" class="logo-img" width="320" height="320" decoding="async" fetchpriority="high">
       </div>
-      <div class="activity-item">
-        <div class="activity-num">02</div>
-        <div>
-          <div class="activity-name">Field Seminars</div>
-          <div class="activity-desc">Biotech event summaries, seminar highlights, and article coverage of the latest industry discussions.</div>
-        </div>
-        <span class="activity-badge">Seminar</span>
+      <span class="logo-sub">Biotechnology Engineering Club</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html#interests">Focus Areas</a></li>
+      <li><a href="../index.html#events">Events</a></li>
+      <li class="nav-mobile-visible"><a href="projects.html">Projects</a></li>
+      <li><a href="../about.html">About</a></li>
+    </ul>
+    <button type="button" class="theme-toggle" aria-label="Toggle theme"></button>
+    <a href="../index.html#join" class="nav-btn">Join Us</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">21st Century Science</span>
       </div>
-      <div class="activity-item">
-        <div class="activity-num">03</div>
-        <div>
-          <div class="activity-name">Case Study Sessions</div>
-          <div class="activity-desc">Detailed write-ups on biotech case studies, project outcomes, and events that shaped our learning.</div>
-        </div>
-        <span class="activity-badge">Workshop</span>
-      </div>
-      <div class="activity-item">
-        <div class="activity-num">04</div>
-        <div>
-          <div class="activity-name">Research Projects</div>
-          <div class="activity-desc">Project stories and event reports focused on biotechnology innovation, collaboration, and practical application.</div>
-        </div>
-        <span class="activity-badge">Project</span>
+
+      <h1 class="hero-title ">
+        Biotechnology <span class="accent"></span><br />
+      
+      </h1>
+
+      <p class="hero-desc">
+        From precision medicine to food security, and from clean energy to marine innovation —
+        biotechnology is reshaping the future. Explore its core applications and the ethical
+        and scientific challenges that accompany rapid advancement.
+      </p>
+
+      <div class="hero-actions">
+        <a href="https://en.wikipedia.org/wiki/Biotechnology" class="btn-ghost" target="_blank" rel="noopener noreferrer">Wikipedia →</a>
+        
       </div>
     </div>
   </section>
-  -->
 
-        <!-- BACK / OTHER AREAS -->
-        <div class="back-bar">
-            <a href="../index.html#interests" class="back-link"
-                >← Back to All Interests</a
-            >
-            <div class="other-areas">
-                <span
-                    style="
-                        font-size: 0.62rem;
-                        letter-spacing: 0.1em;
-                        text-transform: uppercase;
-                        color: var(--muted);
-                        align-self: center;
-                        margin-right: 0.4rem;
-                    "
-                    >Other Interests:</span
-                >
-                <a href="it.html" class="area-pill">Information Technology</a>
-            </div>
-        </div>
+  <!-- INTRODUCTION -->
+  <section class="section">
+    <div class="sec-label">Scientific Overview</div>
+    <h2 class="sec-title">What Is Biotechnology?</h2>
 
-        <!-- FOOTER -->
-        <footer>
-            <div class="footer-logo"><span class="b">B</span>E CLUB</div>
-            <div>© 2026 BE Club — Biotechnology Engineering Club</div>
-            <a
-                href="../index.html"
-                style="
-                    color: var(--red);
-                    font-size: 0.7rem;
-                    letter-spacing: 0.1em;
-                    text-transform: uppercase;
-                "
-                >← Home</a
-            >
-        </footer>
-        <script src="../js/theme-toggle.js?v=3"></script>
-    </body>
+    <div class="intro-grid">
+      <div class="overview-main">
+        <p>
+          Biotechnology is the science of leveraging living systems, cells, enzymes,
+          and genetic material to develop products and technologies that benefit people
+          and the environment. It is the intersection of molecular biology, genetic
+          engineering, and bioinformatics, evolving from traditional fermentation
+          practices to precision genome-editing tools like CRISPR.
+        </p>
+        <p>
+          In an era of intersecting health, food, and environmental crises, biotechnology
+          is emerging as a pivotal scientific driver for addressing global challenges.
+          Its impact extends beyond research laboratories to shape economies, industry,
+          and international health policy.
+        </p>
+      </div>
+      <div class="intro-media">
+        <img
+          src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=900&q=80"
+          alt="Scientist examining a genetic sample in a laboratory with precision instruments"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATIONS -->
+  <section class="section" id="applications">
+    <div class="sec-label">Areas of Impact</div>
+    <h2 class="sec-title">Biotechnology Applications</h2>
+
+    <div class="areas">
+      <div class="area">
+        <div class="area-icon">🧬</div>
+        <div class="area-title">Medical & Healthcare</div>
+        <p class="area-desc">Gene therapies, accelerated vaccine development, and precision medicine tailored to individual genetic profiles.</p>
+        <span class="area-cat">Biotech</span>
+      </div>
+      <div class="area">
+        <div class="area-icon">🌾</div>
+        <div class="area-title">Agriculture & Food Security</div>
+        <p class="area-desc">Genetically optimized crops with greater drought and pest resistance, and technologies that improve agricultural productivity for a growing population.</p>
+        <span class="area-cat">Biotech</span>
+      </div>
+      <div class="area">
+        <div class="area-icon">🌍</div>
+        <div class="area-title">Environment & Clean Energy</div>
+        <p class="area-desc">Bioremediation, sustainable biofuels, and engineered microbes designed to reduce carbon emissions and protect ecosystems.</p>
+        <span class="area-cat">Biotech</span>
+      </div>
+      <div class="area">
+        <div class="area-icon">🏭</div>
+        <div class="area-title">Industry & Biomaterials</div>
+        <p class="area-desc">Industrial enzymes, biodegradable bioplastics, and advanced fermentation processes that reduce reliance on fossil resources.</p>
+        <span class="area-cat it">IT</span>
+      </div>
+      <div class="area">
+        <div class="area-icon">🌊</div>
+        <div class="area-title">Blue Biotechnology</div>
+        <p class="area-desc">Marine biotechnology for novel pharmaceutical and nutritional compounds, and sustainable solutions derived from ocean biodiversity.</p>
+        <span class="area-cat">IT × Biotech</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHALLENGES -->
+  <section class="section" id="challenges">
+    <div class="sec-label">Scientific Responsibility</div>
+    <h2 class="sec-title">Challenges in Modern Biotechnology</h2>
+
+    <div class="areas" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-8);">
+      <div class="key-point">
+        <h4>Ethical and Legal Boundaries </h4>
+        <p>Human genome editing and the prospect of designing inherited traits raise profound questions about the limits of intervention in human biology and the legal frameworks that should govern it.</p>
+      </div>
+      <div class="key-point">
+        <h4>Environmental and Health Risks</h4>
+        <p>Releasing genetically modified organisms into ecosystems can disrupt ecological balance, and the long-term health effects of some technologies remain under active investigation.</p>
+      </div>
+      <div class="key-point">
+        <h4>Genetic Privacy and Data Security</h4>
+        <p>The accumulation of sensitive genomic data raises serious concerns about privacy protection and potential misuse by corporations or unauthorized entities.</p>
+      </div>
+      <div class="key-point">
+        <h4>Access Inequality</h4>
+        <p>Advanced biotechnologies often remain prohibitively expensive, deepening the gap between wealthy and resource-limited regions in access to innovation.</p>
+      </div>
+      <div class="key-point">
+        <h4>Biosecurity Threats</h4>
+        <p>The potential misuse of genetic engineering tools for harmful purposes underscores the need for stringent biosafety and international biosecurity protocols.</p>
+      </div>
+      <div class="key-point">
+        <h4>Governance and Regulation</h4>
+        <p>Scientific progress often outpaces regulation, requiring international collaboration to establish frameworks that support innovation while ensuring responsible stewardship.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCLUSION / CTA -->
+  <section class="section" style="border-bottom:0;">
+    <div class="sec-label">Conclusion</div>
+    <h2 class="sec-title">A Responsible Future Begins Today</h2>
+
+    <div class="conclusion-box">
+      <p>
+        Biotechnology carries exceptional promise for improving human health and protecting our planet,
+        but these opportunities are inseparable from significant scientific and ethical responsibility.
+        True progress is measured not only by the pace of innovation, but by our ability to guide it wisely,
+        preserving the balance between scientific ambition and human values. At BE Club, we believe the
+        best way to understand this future is to participate in shaping it.
+      </p>
+      <div class="conclusion-actions">
+        <a href="../index.html#join" class="btn-primary">Join the Club</a>
+        <a href="projects.html" class="btn-ghost">Explore Our Projects →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><span class="b">B</span>E CLUB</div>
+    <div>© 2026 BE Club — Biotechnology Engineering Club · ENSBiotech, Algeria</div>
+    <a href="../index.html" style="color:var(--red);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase">← Back to Home</a>
+  </footer>
+
+  <script src="../js/typewriter.js"></script>
+  <script src="../js/theme-toggle.js?v=3"></script>
+</body>
 </html>

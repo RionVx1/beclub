@@ -1,0 +1,7 @@
+User-agent: *
+Disallow:
+
+# Allow admin pages to be indexed by search engines if desired
+Allow: /admin/
+
+Sitemap: https://rionvx1.github.io/beclub/sitemap.xml

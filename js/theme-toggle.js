@@ -36,7 +36,7 @@ function setTheme(theme, broadcast = true) {
       if (document.body) document.body.classList.remove("theme-transition");
     } catch (e) {}
     __themeTransitionTimer = null;
-  }, 400);
+  }, 620);
 
   // Set theme on both documentElement and body (body may not exist early)
   try {
