@@ -1,13 +1,3 @@
 {
-  "articles": [
-    {
-      "id": "thumbnail",
-      "title": "Thumbnail",
-      "desc": "It can be resized ; How about rewriting the fetch codes with rust? It's useless for an RSS but why not",
-      "tag": "",
-      "field": "white-biotech",
-      "file": "thumbnail.pdf",
-      "date": "2026-07-06"
-    }
-  ]
+  "articles": []
 }
