@@ -1,5 +1,6 @@
 {
   "registration": false,
+<<<<<<< HEAD
   "events": [
     {
       "title": "BE Club Launch Party",
@@ -32,4 +33,8 @@
     }
   ],
   "forumLink": "https://google.com"
+=======
+  "events": [ ],
+  "forumLink": "https://google.com",
+>>>>>>> 7bd3723 (aaaaaa)
 }

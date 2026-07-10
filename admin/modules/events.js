@@ -125,17 +125,8 @@ export async function removeEvent(id) {
   const eventItem = manifest.events.find((item) => item.id === id);
   if (!eventItem) return;
 
-  const buttons = Array.from(
-    document.querySelectorAll(
-      `.file-remove[data-id="${id}"][data-type="event"]`,
-    ),
-  );
-
   if (!confirm(`Remove event "${eventItem.title}" from events.json?`)) return;
 
-  buttons.forEach((b) => {
-    b.disabled = true;
-  });
   setStatus("event-status", "Removing event…", "uploading", "event-status");
   try {
     manifest.events = manifest.events.filter((item) => item.id !== id);
@@ -145,10 +136,6 @@ export async function removeEvent(id) {
     renderEventList(manifest.events);
   } catch (err) {
     setStatus("event-status", err.message, "error", "event-status");
-  } finally {
-    buttons.forEach((b) => {
-      b.disabled = false;
-    });
   }
 }
 
