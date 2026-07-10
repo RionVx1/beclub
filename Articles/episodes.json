@@ -1,16 +1,5 @@
 {
-<<<<<<< HEAD
   "episodes": [
-    {
-      "id": "hope",
-      "title": "hope",
-      "episode": 2,
-      "date": "2001-12-02",
-      "desc": "trial",
-      "link": "https://youtu.be/fdROzfNYtQY?si=5YUqWkP5TxMsrNaz"
-    }
+
   ]
-=======
-  "episodes": [ ]
->>>>>>> 7bd3723 (aaaaaa)
 }

@@ -1,40 +1,5 @@
 {
   "registration": false,
-<<<<<<< HEAD
-  "events": [
-    {
-      "title": "BE Club Launch Party",
-      "date": "2024-09-15",
-      "day": "15",
-      "monthYear": "Sep 2024",
-      "description": "Join us for the grand launch of the BE Club! Meet fellow enthusiasts, enjoy refreshments, and learn about our upcoming events and initiatives. Don't miss out on the fun and networking opportunities!"
-    },
-    {
-      "title": "Tech Talk: The Future of AI",
-      "date": "2024-10-10",
-      "day": "10",
-      "monthYear": "Oct 2024",
-      "description": "Dive into the world of artificial intelligence with our expert speakers. Explore the latest advancements, ethical considerations, and how AI is shaping our future. A must-attend for tech enthusiasts!"
-    },
-    {
-      "title": "Biotech Workshop: CRISPR and Beyond",
-      "date": "2024-11-05",
-      "day": "05",
-      "monthYear": "Nov 2024",
-      "description": "Get hands-on experience with cutting-edge biotechnology tools like CRISPR. Learn about gene editing, its applications, and the ethical implications in this interactive workshop."
-    },
-    {
-      "id": "guessing",
-      "title": "Guessing",
-      "date": "2026-07-10",
-      "day": "10",
-      "monthYear": "Jul 2026",
-      "description": "Ub n k 44"
-    }
-  ],
+  "events": [],
   "forumLink": "https://google.com"
-=======
-  "events": [ ],
-  "forumLink": "https://google.com",
->>>>>>> 7bd3723 (aaaaaa)
 }
