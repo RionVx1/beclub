@@ -12,6 +12,55 @@
 
   <!-- Page-scoped layout helpers (do not modify shared style.css) -->
   <style>
+
+    /* Key-point card (image embedded flush into the card, fading up into the text) */
+    .key-point{
+      position: relative;
+      overflow: hidden;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
+      border: 1px solid var(--border-subtle);
+      padding: var(--space-6) var(--space-6) 0 var(--space-6);
+      box-shadow: 0 6px 20px rgba(8,9,12,0.18);
+      transition: transform .28s ease, box-shadow .28s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .key-point:hover{ transform: translateY(-6px); box-shadow: 0 14px 36px rgba(8,9,12,0.25); }
+
+    /* Hero image embedded flush into the bottom of the card, fading into the card background */
+    .keypoint-hero{
+      position: relative;
+      width: calc(100% + (var(--space-6) * 2));
+      margin-left: calc(-1 * var(--space-6));
+      margin-right: calc(-1 * var(--space-6));
+      margin-top: auto;
+      flex-shrink: 0;
+      height: 190px;
+      overflow: hidden;
+    }
+    .keypoint-hero img.keypoint-img{
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 0;
+      transform-origin: center center;
+      transition: transform .45s cubic-bezier(.2,.9,.2,1), filter .3s ease;
+      will-change: transform;
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 28%, rgba(0,0,0,1) 55%);
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 28%, rgba(0,0,0,1) 55%);
+    }
+    .keypoint-hero img.keypoint-img:hover{ transform: scale(1.04); filter: saturate(1.05) brightness(0.98); }
+
+    /* Title and text spacing */
+    .key-point h4{ margin-top: 0; margin-bottom: 8px; font-weight: 600; position: relative; z-index: 2; }
+    .key-point p{ color: var(--muted); font-size: .95rem; line-height: 1.5; margin: 0 0 var(--space-6) 0; position: relative; z-index: 2; }
+
+    @media (max-width: 860px){
+      .keypoint-hero{ height: 150px; }
+    }
     .intro-grid{
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
@@ -129,22 +178,15 @@
     <div class="intro-grid">
       <div class="overview-main">
         <p>
-          Biology has become a data science. A single genome sequencing run
-          generates gigabytes of raw data; a single drug discovery pipeline
-          can require millions of virtual molecule simulations. Making sense
-          of this scale is no longer possible with pen, microscope, and
-          intuition alone — it requires algorithms, computational power, and
-          intelligent software.
+          Biotechnology has increasingly become a data-driven science.
+          A single genome sequencing run can generate gigabytes, even terabytes, of raw data, while a single drug discovery pipeline may require millions of virtual molecule simulations.
+          Making sense of this scale is no longer possible using only traditional tools such as microscopes and intuition; it now requires advanced algorithms, computational power, and intelligent software.
         </p>
         <p>
-          Information Technology supplies the tools that let biotechnology
-          move faster and think bigger: machine learning models that spot
-          patterns invisible to the human eye, cloud platforms that store and
-          share petabytes of biological data, and automation that turns
-          repetitive lab work into round-the-clock precision. The
-          twenty-first-century biotechnologist is, increasingly, also a
-          coder — and the twenty-first-century engineer is increasingly
-          fluent in biology.
+          Information Technology provides the tools that enable biotechnology to move faster and think bigger. 
+          Machine learning models can detect patterns that are invisible to the human eye,
+          cloud platforms allow the storage and sharing of vast amounts of biological data, and automation transforms repetitive laboratory tasks into precise, continuous processes.
+          As a result, the twenty-first-century biotechnologist is increasingly also a coder, while the modern engineer is becoming more fluent in biology.
         </p>
       </div>
       <div class="intro-media">

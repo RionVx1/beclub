@@ -1,5 +1,61 @@
 # BE Club — Full Site Map
+ 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ some junk 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       <div class="key-point">
+        <h4>Governance and Regulation</h4>
+        <p>Scientific progress often outpaces regulation, requiring international collaboration to establish frameworks that support innovation while ensuring responsible stewardship.</p>
+      </div>
 > Biotechnology Engineering Club website for ENSBiotech, Algeria.  
 > Static HTML/CSS/JS — no build step required.
 

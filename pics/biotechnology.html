@@ -68,53 +68,53 @@
       flex-wrap: wrap;
     }
 
-    /* Key-point card (image embedded flush into the card, fading up into the text) */
+    /* Key-point card (pro embedded image + soft gradients) */
     .key-point{
       position: relative;
-      overflow: hidden;
+      overflow: visible;
       border-radius: 14px;
       background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
       border: 1px solid var(--border-subtle);
-      padding: var(--space-6) var(--space-6) 0 var(--space-6);
+      padding: var(--space-6);
       box-shadow: 0 6px 20px rgba(8,9,12,0.18);
       transition: transform .28s ease, box-shadow .28s ease;
-      display: flex;
-      flex-direction: column;
     }
     .key-point:hover{ transform: translateY(-6px); box-shadow: 0 14px 36px rgba(8,9,12,0.25); }
 
-    /* Hero image embedded flush into the bottom of the card, fading into the card background */
-    .keypoint-hero{
-      position: relative;
-      width: calc(100% + (var(--space-6) * 2));
-      margin-left: calc(-1 * var(--space-6));
-      margin-right: calc(-1 * var(--space-6));
-      margin-top: auto;
-      flex-shrink: 0;
-      height: 190px;
-      overflow: hidden;
-    }
+    /* Hero image below the card text (non-overlapping, responsive) */
+    .keypoint-hero{ position: relative; width: 100%; margin-top: 12px; }
     .keypoint-hero img.keypoint-img{
       width: 100%;
-      height: 100%;
+      height: auto;
       display: block;
       object-fit: cover;
       object-position: center;
-      border-radius: 0;
+      border-radius: 10px;
       transform-origin: center center;
       transition: transform .45s cubic-bezier(.2,.9,.2,1), filter .3s ease;
       will-change: transform;
-      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 28%, rgba(0,0,0,1) 55%);
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 28%, rgba(0,0,0,1) 55%);
+      aspect-ratio: 16/9;
+      max-height: 360px;
     }
-    .keypoint-hero img.keypoint-img:hover{ transform: scale(1.04); filter: saturate(1.05) brightness(0.98); }
+    .keypoint-hero::after{
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 10px;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.18) 75%);
+      mix-blend-mode: multiply;
+      opacity: 0.9;
+    }
+    .keypoint-hero img.keypoint-img:hover{ transform: scale(1.02); filter: saturate(1.03) brightness(0.98); }
 
     /* Title and text spacing */
-    .key-point h4{ margin-top: 0; margin-bottom: 8px; font-weight: 600; position: relative; z-index: 2; }
-    .key-point p{ color: var(--muted); font-size: .95rem; line-height: 1.5; margin: 0 0 var(--space-6) 0; position: relative; z-index: 2; }
+    .key-point h4{ margin-top: 0; margin-bottom: 8px; font-weight: 600; }
+    .key-point p{ color: var(--muted); font-size: .95rem; line-height: 1.5; margin: 0; }
 
     @media (max-width: 860px){
-      .keypoint-hero{ height: 150px; }
+      .keypoint-hero img.keypoint-img{ aspect-ratio: 4/3; max-height: 220px; }
+      .keypoint-hero{ margin-top: 10px; }
     }
 
     @media (max-width: 860px){
@@ -282,7 +282,7 @@
           <img src="../pics/space.webp" alt="Space Biotechnology" class="keypoint-img" loading="lazy" decoding="async">
         </div>
         
-      <!--
+        
       </div>
       <div class="key-point">
         <h4>Public Perception and Misinformation</h4>
@@ -292,7 +292,7 @@
         <h4>Biosecurity Threats</h4>
         <p>The potential misuse of genetic engineering tools for harmful purposes underscores the need for stringent biosafety and international biosecurity protocols.</p>
       </div>
-    -->
+
     </div>
   </section>
 
