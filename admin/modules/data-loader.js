@@ -1,7 +1,7 @@
 // Data loading module
 // Handles loading JSON manifests and article PDFs from the Articles directory
 
-import { MANIFEST_PATH, EPISODES_MANIFEST_PATH, EVENTS_MANIFEST_PATH } from "./config.js";
+import { MANIFEST_PATH, EPISODES_MANIFEST_PATH, EVENTS_MANIFEST_PATH, REGISTRATION_MANIFEST_PATH } from "./config.js";
 
 /**
  * Load the main articles manifest JSON (`articles.json`).
@@ -43,6 +43,20 @@ export async function loadEventsManifest() {
   } catch (err) {
     console.error("Failed to load events manifest:", err);
     return { events: [] };
+  }
+}
+
+/**
+ * Load the registration manifest (`registration.json`). Returns { registration: false, forumLink: null } on failure.
+ */
+export async function loadRegistrationManifest() {
+  try {
+    const res = await fetch(REGISTRATION_MANIFEST_PATH);
+    if (!res.ok) return { registration: false, forumLink: null };
+    return await res.json();
+  } catch (err) {
+    console.error("Failed to load registration manifest:", err);
+    return { registration: false, forumLink: null };
   }
 }
 

@@ -8,7 +8,7 @@
 
 import { slugify, setStatus } from "./utils.js";
 import { uploadToGithub, getGithubToken } from "./github-api.js";
-import { loadEventsManifest } from "./data-loader.js";
+import { loadEventsManifest, loadRegistrationManifest } from "./data-loader.js";
 import { validateEventData, showValidationErrors } from "./validation.js";
 
 // use shared setStatus for event-status
@@ -20,6 +20,16 @@ async function uploadEventsManifest(token, manifestContent, title) {
     manifestPath,
     manifestContent,
     `Update events list: ${title}`,
+  );
+}
+
+async function uploadRegistrationManifest(token, manifestContent, title) {
+  const manifestPath = `Articles/registration.json`;
+  await uploadToGithub(
+    token,
+    manifestPath,
+    manifestContent,
+    `Update registration settings: ${title}`,
   );
 }
 
@@ -196,12 +206,13 @@ export async function handleRegistrationSubmit(e) {
   setStatus("registration-status", "Saving registration settings…", "uploading", "registration-status");
 
   try {
-    const manifest = await loadEventsManifest();
+    // Save registration settings to Articles/registration.json
+    const manifest = await loadRegistrationManifest();
     manifest.registration = registrationEnabled;
     manifest.forumLink = link || null;
 
     const manifestJson = JSON.stringify(manifest, null, 2) + "\n";
-    await uploadEventsManifest(token, manifestJson, "Update registration settings");
+    await uploadRegistrationManifest(token, manifestJson, "Update registration settings");
 
     setStatus("registration-status", "Registration settings saved!", "success", "registration-status");
   } catch (err) {
@@ -213,7 +224,7 @@ export async function handleRegistrationSubmit(e) {
 
 export async function loadRegistrationSettings() {
   try {
-    const manifest = await loadEventsManifest();
+    const manifest = await loadRegistrationManifest();
     const toggle = document.getElementById("registration-toggle");
     const link = document.getElementById("registration-link");
     const statusText = document.getElementById("registration-status-text");

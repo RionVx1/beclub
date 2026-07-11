@@ -341,8 +341,8 @@
         <script>
             async function loadEvents() {
                 try {
-                    const res = await fetch("Articles/events.json");
-                    if (!res.ok) throw new Error("Could not load events");
+                    const res = await fetch("Articles/registration.json");
+                    if (!res.ok) throw new Error("Could not load registration settings");
                     const data = await res.json();
                     const events = Array.isArray(data.events)
                         ? data.events
@@ -376,21 +376,6 @@
                         )
                         .join("");
 
-                    // Handle registration button based on registration value
-                    const applyBtn = document.getElementById("apply-btn");
-                    const regMsg = document.getElementById("reg-msg");
-                    if (applyBtn && regMsg) {
-                        if (data.registration === true) {
-                            applyBtn.onclick = function() {
-                                const link = data.forumLink || "https://google.com";
-                                window.open(link, "_blank");
-                            };
-                        } else {
-                            applyBtn.onclick = function() {
-                                regMsg.style.display = "block";
-                            };
-                        }
-                    }
                 } catch (err) {
                     const list = document.getElementById("event-list");
                     if (list) {
@@ -399,7 +384,33 @@
                 }
             }
 
+            // Ensure the join button always reflects the current registration state
+            async function initJoinButton() {
+                const applyBtn = document.getElementById("apply-btn");
+                const regMsg = document.getElementById("reg-msg");
+                if (!applyBtn || !regMsg) return;
+                try {
+                    const res = await fetch("Articles/events.json");
+                    if (!res.ok) throw new Error("Could not load events");
+                    const data = await res.json();
+                    if (data.registration === true) {
+                        applyBtn.onclick = function() {
+                            const link = data.forumLink || "https://google.com";
+                            window.open(link, "_blank");
+                        };
+                    } else {
+                        applyBtn.onclick = function() {
+                            regMsg.style.display = "block";
+                        };
+                    }
+                } catch (e) {
+                    // leave default behaviour if fetch fails
+                    console.warn("initJoinButton:", e.message);
+                }
+            }
+
             loadEvents();
+            initJoinButton();
         </script>
     </body>
 </html>
