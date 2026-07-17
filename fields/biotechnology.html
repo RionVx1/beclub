@@ -73,7 +73,7 @@
       position: relative;
       overflow: hidden;
       border-radius: 20px;
-      background: var(--surface-solid);
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
       border: 1px solid var(--border-subtle);
       padding: var(--space-6);
       box-shadow: 0 6px 20px rgba(0,0,0,0.14), 0 0 30px rgba(99,102,241,0.08);
@@ -90,22 +90,23 @@
       right: 0;
       bottom: 0;
       width: 42%;
-      background-size: cover;
+      background-size: contain;
       background-position: center right;
-      opacity: 0.16;
+      background-repeat: no-repeat;
+      opacity: 0.22;
       z-index: 0;
       pointer-events: none;
       transition: opacity .28s ease;
     }
     .area:hover::before{
-      opacity: 0.16;
+      opacity: 0.22;
     }
-    .area-medical::before{ background-image: url('../pics/medical_bg.png'); }
-    .area-agriculture::before{ background-image: url('../pics/agri_bg.png'); }
-    .area-environment::before{ background-image: url('../pics/env_bg.png'); }
-    .area-industry::before{ background-image: url('../pics/industry_bg.png'); }
-    .area-food::before{ background-image: url('../pics/food_bg.png'); }
-    .area-forensic::before{ background-image: url('../pics/forensic_bg.png'); }
+    .area-medical::before{ background-image: url('../pics/medical_bg.webp'); }
+    .area-agriculture::before{ background-image: url('../pics/agri_bg.webp'); }
+    .area-environment::before{ background-image: url('../pics/env_bg.webp'); }
+    .area-industry::before{ background-image: url('../pics/industry_bg.webp'); }
+    .area-food::before{ background-image: url('../pics/food_bg.webp'); }
+    .area-forensic::before{ background-image: url('../pics/forensic_bg.webp'); }
     
     .area:hover{
       transform: none;
@@ -123,8 +124,8 @@
       justify-content: center;
       border-radius: 16px;
       background: rgba(0,0,0,0.3);
-      border: 1px solid rgba(99,102,241,0.4);
-      box-shadow: 0 0 20px rgba(99,102,241,0.3), inset 0 0 20px rgba(99,102,241,0.1);
+      border: 1px solid rgba(206, 103, 103, 0);
+      box-shadow: 0 0 20px rgba(227, 45, 8, 0.3), inset 0 0 20px rgba(99,102,241,0.1);
       transition: all .28s ease;
       position: relative;
       z-index: 2;
@@ -342,7 +343,7 @@
     <div class="areas">
       <div class="area area-medical">
         <div class="area-icon">
-          <img src="../pics/icon_medical.png" alt="Medical & Healthcare" width="50" height="50" loading="lazy" decoding="async">
+          <img src="../pics/icon_medical.webp" alt="Medical & Healthcare" width="50" height="50" loading="lazy" decoding="async">
         </div>
         <div class="area-title">Medical & Healthcare</div>
         <p class="area-desc">Gene therapies, accelerated vaccine development, and precision medicine tailored to individual genetic profiles.</p>
@@ -350,7 +351,7 @@
       </div>
       <div class="area area-agriculture">
         <div class="area-icon">
-          <img src="../pics/icon_agri.png" alt="Agriculture & Farming" width="50" height="50" loading="lazy" decoding="async">
+          <img src="../pics/icon_agri.webp" alt="Agriculture & Farming" width="50" height="50" loading="lazy" decoding="async">
         </div>
         <div class="area-title">Agriculture & Farming</div>
         <p class="area-desc">Genetically optimized crops with greater drought and pest resistance, and technologies that improve agricultural productivity for a growing population.</p>
@@ -358,7 +359,7 @@
       </div>
       <div class="area area-environment">
         <div class="area-icon">
-          <img src="../pics/icon_env.png" alt="Environment & Clean Energy" width="50" height="50" loading="lazy" decoding="async">
+          <img src="../pics/icon_env.webp" alt="Environment & Clean Energy" width="50" height="50" loading="lazy" decoding="async">
         </div>
         <div class="area-title">Environment & Clean Energy</div>
         <p class="area-desc">Bioremediation, sustainable biofuels, and engineered microbes designed to reduce carbon emissions and protect ecosystems.</p>
@@ -366,7 +367,7 @@
       </div>
       <div class="area area-industry">
         <div class="area-icon">
-          <img src="../pics/icon_ind.png" alt="Industry & Biomaterials" width="50" height="50" loading="lazy" decoding="async">
+          <img src="../pics/icon_ind.webp" alt="Industry & Biomaterials" width="50" height="50" loading="lazy" decoding="async">
         </div>
         <div class="area-title">Industry & Biomaterials</div>
         <p class="area-desc">Industrial enzymes, biodegradable bioplastics, and advanced fermentation processes that reduce reliance on fossil resources.</p>
@@ -374,7 +375,7 @@
       </div>
       <div class="area area-food">
         <div class="area-icon">
-          <img src="../pics/icon_food.png" alt="Food Security" width="50" height="50" loading="lazy" decoding="async">
+          <img src="../pics/icon_food.webp" alt="Food Security" width="50" height="50" loading="lazy" decoding="async">
         </div>
         <div class="area-title">Food Security</div>
         <p class="area-desc">The use of biotechnological tools and techniques to improve food production, quality, and availability—ensuring a stable supply of safe and nutritious food for a growing population.</p>
@@ -382,7 +383,7 @@
       </div>
       <div class="area area-forensic">
         <div class="area-icon">
-          <img src="../pics/icon_forensic.png" alt="Forensic Biotechnology" width="50" height="50" loading="lazy" decoding="async">
+          <img src="../pics/icon_forensic.webp" alt="Forensic Biotechnology" width="50" height="50" loading="lazy" decoding="async">
         </div>
         <div class="area-title">Forensic Biotechnology</div>
         <p class="area-desc">The application of biological techniques—especially DNA analysis—to identify individuals and analyze biological evidence for use in criminal investigations and legal cases.</p>
