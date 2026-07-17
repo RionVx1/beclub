@@ -1105,6 +1105,10 @@ nav{
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     outline: none;
 }
+.theme-toggle svg{
+    width: 20px;
+    height: 20px;
+}
 
 .section{
     padding: clamp(var(--space-12), 8vw, var(--space-24)) var(--space-12);

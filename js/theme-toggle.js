@@ -66,11 +66,12 @@ function setTheme(theme, broadcast = true) {
 function updateThemeButton(theme) {
   const button = document.querySelector(".theme-toggle");
   if (!button) return;
-  if (theme === "light") {
-    button.innerHTML = "🌙";
-  } else {
-    button.innerHTML = "🔆";
-  }
+  const isLight = theme === "light";
+  button.innerHTML = isLight
+    ? '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.4 14.8A8.5 8.5 0 0 1 9.2 3.6 8.5 8.5 0 1 0 20.4 14.8Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    : '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  button.setAttribute("aria-label", isLight ? "Switch to dark theme" : "Switch to light theme");
+  button.setAttribute("title", isLight ? "Switch to dark theme" : "Switch to light theme");
 }
 
 function toggleTheme() {

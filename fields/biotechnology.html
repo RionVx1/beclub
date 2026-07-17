@@ -68,11 +68,139 @@
       flex-wrap: wrap;
     }
 
+    /* Application area card with SVG icon */
+    .area{
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      background: var(--surface-solid);
+      border: 1px solid var(--border-subtle);
+      padding: var(--space-6);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.14), 0 0 30px rgba(99,102,241,0.08);
+      transition: box-shadow .28s ease, border-color .28s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      z-index: 1;
+    }
+    .area::before{
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 42%;
+      background-size: cover;
+      background-position: center right;
+      opacity: 0.16;
+      z-index: 0;
+      pointer-events: none;
+      transition: opacity .28s ease;
+    }
+    .area:hover::before{
+      opacity: 0.16;
+    }
+    .area-medical::before{ background-image: url('../pics/medical_bg.png'); }
+    .area-agriculture::before{ background-image: url('../pics/agri_bg.png'); }
+    .area-environment::before{ background-image: url('../pics/env_bg.png'); }
+    .area-industry::before{ background-image: url('../pics/industry_bg.png'); }
+    .area-food::before{ background-image: url('../pics/food_bg.png'); }
+    .area-forensic::before{ background-image: url('../pics/forensic_bg.png'); }
+    
+    .area:hover{
+      transform: none;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.14), 0 0 30px rgba(99,102,241,0.08);
+      border-color: var(--border-subtle);
+    }
+
+    /* Area icon styling */
+    .area-icon{
+      width: 80px;
+      height: 80px;
+      margin-bottom: var(--space-4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(99,102,241,0.4);
+      box-shadow: 0 0 20px rgba(99,102,241,0.3), inset 0 0 20px rgba(99,102,241,0.1);
+      transition: all .28s ease;
+      position: relative;
+      z-index: 2;
+    }
+    .area-icon img, .area-icon svg{
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(99,102,241,0.8)) drop-shadow(0 0 20px rgba(168,85,247,0.6));
+    }
+
+    /* Area title styling */
+    .area-title{
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+      color: var(--white);
+      transition: color .28s ease;
+      position: relative;
+      z-index: 2;
+    }
+    .area:hover .area-title{
+      color: var(--white);
+    }
+
+    /* Area description */
+    .area-desc{
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: var(--space-4);
+      flex-grow: 1;
+      position: relative;
+      z-index: 2;
+    }
+    
+    /* Area category badge */
+    .area-cat{
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      transition: all .28s ease;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 0 10px rgba(99,102,241,0.12);
+    }
+    
+    .area:hover .area-cat{
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 0 15px rgba(99,102,241,0.12);
+    }
+    .area-cat.it{
+      background: rgba(0,0,0,0.4);
+      border-color: rgba(168,85,247,0.4);
+      color: #c4b5fd;
+      box-shadow: 0 0 10px rgba(168,85,247,0.2);
+    }
+    .area:hover .area-cat.it{
+      background: rgba(0,0,0,0.5);
+      border-color: rgba(168,85,247,0.6);
+      box-shadow: 0 0 15px rgba(168,85,247,0.4);
+    }
+
     /* Key-point card (image embedded flush into the card, fading up into the text) */
     .key-point{
       position: relative;
       overflow: hidden;
-      border-radius: 14px;
+      border-radius: 40px;
       background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
       border: 1px solid var(--border-subtle);
       padding: var(--space-6) var(--space-6) 0 var(--space-6);
@@ -115,6 +243,14 @@
 
     @media (max-width: 860px){
       .keypoint-hero{ height: 150px; }
+      .area-icon{
+        width: 70px;
+        height: 70px;
+      }
+      .area-icon img, .area-icon svg{
+        width: 45px;
+        height: 45px;
+      }
     }
 
     @media (max-width: 860px){
@@ -163,11 +299,6 @@
         biotechnology is reshaping the future. Explore its core applications and the ethical
         and scientific challenges that accompany rapid advancement.
       </p>
-
-      <!-- <div class="hero-actions">
-        <a href="https://en.wikipedia.org/wiki/Biotechnology" class="btn-ghost" target="_blank" rel="noopener noreferrer">Wikipedia →</a>
-        
-      </div> -->
     </div>
   </section>
 
@@ -194,7 +325,7 @@
       </div>
       <div class="intro-media">
         <img
-          src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=900&q=80"
+          src="../pics/biotech.webp"
           alt="Scientist examining a genetic sample in a laboratory with precision instruments"
           loading="lazy"
           decoding="async"
@@ -209,121 +340,110 @@
     <h2 class="sec-title">Biotechnology Applications</h2>
 
     <div class="areas">
-      <div class="area">
-        <div class="area-icon">🧬</div>
+      <div class="area area-medical">
+        <div class="area-icon">
+          <img src="../pics/icon_medical.png" alt="Medical & Healthcare" width="50" height="50" loading="lazy" decoding="async">
+        </div>
         <div class="area-title">Medical & Healthcare</div>
         <p class="area-desc">Gene therapies, accelerated vaccine development, and precision medicine tailored to individual genetic profiles.</p>
         <span class="area-cat">Biotech</span>
       </div>
-      <div class="area">
-        <div class="area-icon">🌾</div>
+      <div class="area area-agriculture">
+        <div class="area-icon">
+          <img src="../pics/icon_agri.png" alt="Agriculture & Farming" width="50" height="50" loading="lazy" decoding="async">
+        </div>
         <div class="area-title">Agriculture & Farming</div>
         <p class="area-desc">Genetically optimized crops with greater drought and pest resistance, and technologies that improve agricultural productivity for a growing population.</p>
         <span class="area-cat">Biotech</span>
       </div>
-      <div class="area">
-        <div class="area-icon">🌍</div>
+      <div class="area area-environment">
+        <div class="area-icon">
+          <img src="../pics/icon_env.png" alt="Environment & Clean Energy" width="50" height="50" loading="lazy" decoding="async">
+        </div>
         <div class="area-title">Environment & Clean Energy</div>
         <p class="area-desc">Bioremediation, sustainable biofuels, and engineered microbes designed to reduce carbon emissions and protect ecosystems.</p>
         <span class="area-cat">Biotech</span>
       </div>
-      <div class="area">
-        <div class="area-icon">🏭</div>
+      <div class="area area-industry">
+        <div class="area-icon">
+          <img src="../pics/icon_ind.png" alt="Industry & Biomaterials" width="50" height="50" loading="lazy" decoding="async">
+        </div>
         <div class="area-title">Industry & Biomaterials</div>
         <p class="area-desc">Industrial enzymes, biodegradable bioplastics, and advanced fermentation processes that reduce reliance on fossil resources.</p>
-        <span class="area-cat it">IT</span>
-      </div>
-      <div class="area">
-        <div class="area-icon">🍲</div>
-        <div class="area-title">Food Security</div>
-        <p class="area-desc">is the use of biotechnological tools and techniques to improve food production, quality, and availability—ensuring a stable supply of safe and nutritious food for a growing population.</p>
         <span class="area-cat">Biotech</span>
       </div>
-      <div class="area">
-        <div class="area-icon">🔍</div>
+      <div class="area area-food">
+        <div class="area-icon">
+          <img src="../pics/icon_food.png" alt="Food Security" width="50" height="50" loading="lazy" decoding="async">
+        </div>
+        <div class="area-title">Food Security</div>
+        <p class="area-desc">The use of biotechnological tools and techniques to improve food production, quality, and availability—ensuring a stable supply of safe and nutritious food for a growing population.</p>
+        <span class="area-cat">Biotech</span>
+      </div>
+      <div class="area area-forensic">
+        <div class="area-icon">
+          <img src="../pics/icon_forensic.png" alt="Forensic Biotechnology" width="50" height="50" loading="lazy" decoding="async">
+        </div>
         <div class="area-title">Forensic Biotechnology</div>
-        <p class="area-desc">Forensic biotechnology is the application of biotechnological techniques—especially DNA analysis—to identify individuals and analyze biological evidence for use in criminal investigations and legal cases.</p>
-        <span class="area-cat it">IT × Biotech</span>
+        <p class="area-desc">The application of biological techniques—especially DNA analysis—to identify individuals and analyze biological evidence for use in criminal investigations and legal cases.</p>
+        <span class="area-cat">Biotech</span>
       </div>
     </div>
   </section>
 
-  <!-- CHALLENGES -->
-  <section class="section" id="challenges">
-    <div class="sec-label">Future Outlook</div>
-    <h2 class="sec-title">Challenges in Modern Biotechnology</h2>
+  <!-- KEY POINTS -->
+  <section class="section">
+    <div class="sec-label">Strategic Priorities</div>
+    <h2 class="sec-title">The Future of Bio-Innovation</h2>
 
-    <div class="areas" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-8);">
+    <div class="areas">
       <div class="key-point">
-        <h4>Regenerative Medicine </h4>
-        <p>Use of stem cells to repair or replace damaged tissues and organs.</p>
+        <h4>Genomic Precision</h4>
+        <p>Advancing CRISPR and gene-editing technologies to treat hereditary diseases at their source.</p>
         <div class="keypoint-hero">
-          <img src="../pics/med.webp" alt="Space Biotechnology" class="keypoint-img" loading="lazy" decoding="async">
+          <img src="../pics/med.webp" alt="Scientist working with DNA and genetic samples" class="keypoint-img" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="key-point">
-        <h4>3D Bioprinting</h4>
-        <p>Printing tissues and potentially whole organs for transplantation.</p>
+        <h4>Circular Bioeconomy</h4>
+        <p>Developing microbial systems that convert waste into high-value chemicals and biodegradable materials.</p>
         <div class="keypoint-hero">
-          <img src="../pics/print.webp" alt="Space Biotechnology" class="keypoint-img" loading="lazy" decoding="async">
+          <img src="../pics/green.webp" alt="Biotechnology research supporting sustainable agriculture" class="keypoint-img" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="key-point">
-        <h4>Climate-Resilient Crops</h4>
-        <p>Developing plants that can survive drought, heat, and poor soil conditions.</p>
+        <h4>Synthetic Biology</h4>
+        <p>Designing and constructing new biological parts and systems for industrial and therapeutic applications.</p>
         <div class="keypoint-hero">
-          <img src="../pics/green.webp" alt="Space Biotechnology" class="keypoint-img" loading="lazy" decoding="async">
+          <img src="../pics/print.webp" alt="Bioprinting equipment creating synthetic biological structures" class="keypoint-img" loading="lazy" decoding="async">
         </div>
       </div>
-      <div class="key-point">
-        <h4>Space Biotechnology</h4>
-        <p>Growing food and tissues in space for long-term space missions.</p>
-        <div class="keypoint-hero">
-          <img src="../pics/space.webp" alt="Space Biotechnology" class="keypoint-img" loading="lazy" decoding="async">
-        </div>
-        
-      <!--
-      </div>
-      <div class="key-point">
-        <h4>Public Perception and Misinformation</h4>
-        <p>Widespread misunderstanding of biotechnology can lead to public resistance, policy challenges, and the spread of misinformation that hinders scientific progress.</p>
-      </div>
-      <div class="key-point">
-        <h4>Biosecurity Threats</h4>
-        <p>The potential misuse of genetic engineering tools for harmful purposes underscores the need for stringent biosafety and international biosecurity protocols.</p>
-      </div>
-    -->
     </div>
   </section>
 
-  <!-- CONCLUSION / CTA -->
-  <section class="section" style="border-bottom:0;">
-    <div class="sec-label">Conclusion</div>
-    <h2 class="sec-title">A Responsible Future Begins Today</h2>
-
+  <!-- CONCLUSION -->
+  <section class="section">
     <div class="conclusion-box">
+      <h2 class="sec-title">Join the Revolution</h2>
       <p>
-        Biotechnology carries exceptional promise for improving human health and protecting our planet,
-        but these opportunities are inseparable from significant scientific and ethical responsibility.
-        True progress is measured not only by the pace of innovation, but by our ability to guide it wisely,
-        preserving the balance between scientific ambition and human values. At BE Club, we believe the
-        best way to understand this future is to participate in shaping it.
+        Biotechnology is not just a field of study; it is a movement toward a more
+        sustainable and healthier world. Whether you are a student, researcher, or
+        enthusiast, there is a place for you in the BE Club.
       </p>
       <div class="conclusion-actions">
-        <a href="../index.html#join" class="btn-primary">Join the Club</a>
-        <a href="projects.html" class="btn-ghost">Explore Our Projects →</a>
+        <a href="../index.html#join" class="btn-primary">Get Involved</a>
+        <a href="../about.html" class="btn-ghost">Learn More About Us</a>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo"><span class="b">B</span>E CLUB</div>
-    <div>© 2026 BE Club — Biotechnology Engineering Club · ENSBiotech, Algeria</div>
-    <a href="../index.html" style="color:var(--red);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase">← Back to Home</a>
+    <div class="footer-content">
+      <p>&copy; 2026 Biotechnology Engineering Club. All rights reserved.</p>
+    </div>
   </footer>
 
-  <script src="../js/typewriter.js"></script>
-  <script src="../js/theme-toggle.js?v=3"></script>
+  <script src="../js/theme-toggle.js?v=4"></script>
 </body>
 </html>
