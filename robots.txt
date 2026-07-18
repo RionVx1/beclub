@@ -1,7 +1,20 @@
 User-agent: *
-Disallow:
-
-# Allow admin pages to be indexed by search engines if desired
-Allow: /admin/
-
+Disallow: /admin/
+Allow: /
+#  o__ __o     o__ __o__/_                  o                 o          
+# <|     v\   <|    v                      <|>               <|>         
+# / \     <\  < >                          / \               / >         
+# \o/     o/   |                    __o__  \o/   o       o   \o__ __o    
+#  |__  _<|    o__/_               />  \    |   <|>     <|>   |     v\   
+#  |       \   |                 o/        / \  < >     < >  / \     <\  
+# <o>      /  <o>               <|         \o/   |       |   \o/      /  
+#  |      o    |                 \\         |    o       o    |      o   
+# / \  __/>   / \  _\o__/_        _\o__</  / \   <\__ __/>   / \  __/>   
+                                                                        
+                                                                        
+                                                                        
+#
+#
+#
+#
 Sitemap: https://rionvx1.github.io/beclub/sitemap.xml

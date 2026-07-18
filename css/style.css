@@ -665,6 +665,14 @@ body[data-theme="light"]{
     color: var(--white);
 }
 
+/* Keep the same wallpaper appearance without repainting it on every desktop scroll. */
+@media (min-width: 861px){
+    body,
+    body[data-theme="light"]{
+        background-attachment: scroll;
+    }
+}
+
 body[data-theme="light"] a{
     color: #9b111e;
 }
@@ -2750,6 +2758,7 @@ footer{
 .reveal.active{
     opacity: 1;
     transform: translateY(0);
+    will-change: auto;
 }
 
 @media (max-width: 860px){
