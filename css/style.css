@@ -1536,6 +1536,12 @@ footer{
     margin-bottom: 0.85rem;
 }
 
+.area-icon img, .area-icon svg{
+    width: 56px;
+    height: 56px;
+    display: block;
+}
+
 .area-title{
     font-family: var(--font-h);
     font-size: 1.3rem;
