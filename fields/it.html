@@ -17,7 +17,7 @@
     .key-point{
       position: relative;
       overflow: hidden;
-      border-radius: 14px;
+      border-radius: 40px;
       background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
       border: 1px solid var(--border-subtle);
       padding: var(--space-6) var(--space-6) 0 var(--space-6);
@@ -81,12 +81,6 @@
       object-fit: cover;
     }
 
-    .challenges-grid{
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
-
     .conclusion-box{
       background: var(--surface-solid);
       border: 1px solid var(--border-subtle);
@@ -118,7 +112,6 @@
       .intro-grid{ grid-template-columns: 1fr; }
       .intro-media{ order: -1; min-height: 200px; }
       .intro-media img{ min-height: 200px; }
-      .challenges-grid{ grid-template-columns: 1fr; }
       .conclusion-box{ padding: var(--space-3xl) 1.2rem; }
     }
   </style>
@@ -162,12 +155,12 @@
         in months. Explore how Information Technology is rewriting the rules
         of modern biotechnology.
       </p>
-
-      <div class="hero-actions">
-        
-        <a href="https://en.wikipedia.org/wiki/Bioinformatics" class="btn-ghost" target="_blank" rel="noopener noreferrer">Wikipedia →</a>
-      </div>
+      
+       
+      
+      
     </div>
+
   </section>
 
   <!-- INTRODUCTION -->
@@ -178,15 +171,10 @@
     <div class="intro-grid">
       <div class="overview-main">
         <p>
-          Biotechnology has increasingly become a data-driven science.
-          A single genome sequencing run can generate gigabytes, even terabytes, of raw data, while a single drug discovery pipeline may require millions of virtual molecule simulations.
-          Making sense of this scale is no longer possible using only traditional tools such as microscopes and intuition; it now requires advanced algorithms, computational power, and intelligent software.
+          Biotechnology has become an increasingly data-driven science. A single genome sequencing run can generate gigabytes to terabytes of data, while modern drug discovery pipelines rely on millions of virtual molecular simulations. Interpreting this scale of information is no longer sufficient using traditional tools alone, such as microscopy and human intuition; it now requires advanced computational methods and powerful algorithms.
         </p>
         <p>
-          Information Technology provides the tools that enable biotechnology to move faster and think bigger. 
-          Machine learning models can detect patterns that are invisible to the human eye,
-          cloud platforms allow the storage and sharing of vast amounts of biological data, and automation transforms repetitive laboratory tasks into precise, continuous processes.
-          As a result, the twenty-first-century biotechnologist is increasingly also a coder, while the modern engineer is becoming more fluent in biology.
+          Information technology provides the essential tools that enable biotechnology to advance rapidly. Machine learning can uncover patterns invisible to the human eye, cloud computing facilitates large-scale data storage and sharing, and automation enhances precision and efficiency in laboratory processes. As a result, the modern biotechnologist is increasingly developing computational skills, while engineers are becoming more integrated into biological sciences.
         </p>
       </div>
       <div class="intro-media">
@@ -212,16 +200,11 @@
         <p class="area-desc">Sequence alignment, variant calling, and genome annotation pipelines that turn raw DNA data into biological insight.</p>
         <span class="area-cat it">IT × Biotech</span>
       </div>
-      <div class="area">
-        <div class="area-icon">🤖</div>
-        <div class="area-title">AI & ML in Drug Discovery</div>
-        <p class="area-desc">Deep learning models that predict molecular behavior, screen compound libraries, and cut years off the drug pipeline.</p>
-        <span class="area-cat it">IT</span>
-      </div>
+
       <div class="area">
         <div class="area-icon">🧪</div>
         <div class="area-title">Computational Biology</div>
-        <p class="area-desc">Molecular modeling and simulation reveal how proteins fold and interact — long before a single experiment is run.</p>
+        <p class="area-desc">Computational biology uses molecular modeling and simulation to predict protein folding and interactions, helping guide research before experimentation.</p>
         <span class="area-cat it">IT × Biotech</span>
       </div>
       <div class="area">
@@ -236,12 +219,7 @@
         <p class="area-desc">Robotic liquid handlers and automated workflows deliver higher throughput, fewer errors, and round-the-clock experimentation.</p>
         <span class="area-cat">Biotech</span>
       </div>
-      <div class="area">
-        <div class="area-icon">☁️</div>
-        <div class="area-title">Cloud Computing & Data</div>
-        <p class="area-desc">Scalable cloud infrastructure stores, secures, and shares research data across global collaborations in real time.</p>
-        <span class="area-cat it">IT</span>
-      </div>
+
       <div class="area">
         <div class="area-icon">✂️</div>
         <div class="area-title">CRISPR Design Software</div>
@@ -250,16 +228,11 @@
       </div>
       <div class="area">
         <div class="area-icon">🩺</div>
-        <div class="area-title">AI-Powered Personalized Medicine</div>
-        <p class="area-desc">Predictive models that tailor treatment plans to an individual's genetic profile, lifestyle, and clinical history.</p>
+        <div class="area-title">AI-Powered Precision Medicine</div>
+        <p class="area-desc">Harnessing predictive AI models to accelerate drug discovery and deliver personalized treatments by analyzing molecular structures, genetic profiles, clinical history, and lifestyle data.</p>
         <span class="area-cat">Biotech</span>
       </div>
-      <div class="area">
-        <div class="area-icon">🔗</div>
-        <div class="area-title">Blockchain in Biomedical Data</div>
-        <p class="area-desc">Distributed ledgers that secure sensitive medical and genomic records while enabling verifiable, permissioned data sharing.</p>
-        <span class="area-cat it">IT</span>
-      </div>
+
     </div>
   </section>
 
@@ -268,23 +241,49 @@
     <div class="sec-label">Looking Ahead</div>
     <h2 class="sec-title">CHALLENGES & FUTURE OUTLOOK</h2>
 
-    <div class="challenges-grid">
+    <div class="areas">
       <div class="key-point">
-        <h4>Technical Complexity ⚙️</h4>
-        <p>Integrating biological and computational systems demands interdisciplinary expertise that is still rare — biologists who code, and engineers who understand biology, remain in short supply.</p>
+        <h4>Fully Autonomous Drug Discovery </h4>
+        <p>AI systems that can independently discover, design, and validate new drugs without human intervention are still under development and not yet fully reliable.</p>
+        <div class="keypoint-hero">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="Engineers and researchers collaborating on a technical system" class="keypoint-img" loading="lazy" decoding="async">
+        </div>
       </div>
       <div class="key-point">
-        <h4>Data Privacy 🔒</h4>
-        <p>Genomic and health data are among the most sensitive information that exists. Robust security, consent frameworks, and compliance are non-negotiable as datasets scale.</p>
+        <h4>Whole-Body Digital Twins</h4>
+        <p>Creating a complete, accurate digital replica of a human body to simulate diseases and treatments in real time is still a major scientific challenge.</p>
+        <div class="keypoint-hero">
+          <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=900&q=80" alt="Digital security lock representing data privacy" class="keypoint-img" loading="lazy" decoding="async">
+        </div>
       </div>
       <div class="key-point">
-        <h4>Ethical Considerations ⚖️</h4>
-        <p>AI-driven diagnostics and gene-editing tools raise real questions about bias, accountability, and how much decision-making should be delegated to algorithms in matters of health.</p>
+        <h4>Quantum Biology & Drug Simulation</h4>
+        <p>Using quantum computing to perfectly simulate molecular interactions remains experimental due to hardware limitations and complexity.</p>
+        <div class="keypoint-hero">
+          <img src="https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?auto=format&fit=crop&w=900&q=80" alt="Scales of justice symbolizing ethical decision-making" class="keypoint-img" loading="lazy" decoding="async">
+        </div>
       </div>
       <div class="key-point">
-        <h4>Future Trends 🚀</h4>
-        <p>Expect deeper AI integration in diagnostics, quantum computing accelerating molecular simulation, and decentralized, blockchain-secured biomedical data networks becoming the norm.</p>
+        <h4>Programmable Living Cells</h4>
+        <p>Engineering cells that can be “programmed” like software to perform complex tasks (detect, compute, and respond) is still not fully achieved.</p>
+        <div class="keypoint-hero">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80" alt="Futuristic technology representing emerging trends" class="keypoint-img" loading="lazy" decoding="async">
+        </div>
       </div>
+      <div class="key-point">
+        <h4>AI-Driven Microbiome Engineering</h4>
+        <p>Using artificial intelligence to analyze and design gut microbiota for treating diseases is still developing and not yet fully precise or personalized.</p>
+        <div class="keypoint-hero">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80" alt="Ethical decision-making in biotechnology" class="keypoint-img" loading="lazy" decoding="async">
+        </div>
+      </div>  
+      <div class="key-point">
+        <h4>Self-Healing Biological Systems</h4>
+        <p>Designing organisms or tissues that can automatically repair damage or fight diseases without external treatment is still a futuristic goal.</p>
+        <div class="keypoint-hero">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80" alt="Ethical decision-making in biotechnology" class="keypoint-img" loading="lazy" decoding="async">
+        </div>
+      </div>  
     </div>
   </section>
 
