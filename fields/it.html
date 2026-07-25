@@ -12,6 +12,129 @@
 
   <!-- Page-scoped layout helpers (do not modify shared style.css) -->
   <style>
+    .area{
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));
+      border: 1px solid var(--border-subtle);
+      padding: var(--space-6);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.14), 0 0 30px rgba(99,102,241,0.08);
+      transition: box-shadow .28s ease, border-color .28s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      z-index: 1;
+    }
+    .area::before{
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 42%;
+      background-size: contain;
+      background-position: center right;
+      background-repeat: no-repeat;
+      opacity: 0.22;
+      z-index: 0;
+      pointer-events: none;
+      transition: opacity .28s ease;
+    }
+    .area:hover::before{
+      opacity: 0.22;
+    }
+    .area-genomics::before{ background-image: url('../pics/medical_bg.webp'); }
+    .area-computational::before{ background-image: url('../pics/computer_bg.webp'); }
+    .area-big-data::before{ background-image: url('../pics/big_data_bg.webp'); }
+    .area-automation::before{ background-image: url('../pics/env_bg.webp'); }
+    .area-crispr::before{ background-image: url('../pics/industry_bg.webp'); }
+    .area-precision-medicine::before{ background-image: url('../pics/precision_medicine_bg.webp'); }
+
+    .area:hover{
+      transform: none;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.14), 0 0 30px rgba(99,102,241,0.08);
+      border-color: var(--border-subtle);
+    }
+
+    .area-icon{
+      width: 80px;
+      height: 80px;
+      margin-bottom: var(--space-4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(206, 103, 103, 0);
+      box-shadow: 0 0 20px rgba(227, 45, 8, 0.3), inset 0 0 20px rgba(99,102,241,0.1);
+      transition: all .28s ease;
+      position: relative;
+      z-index: 2;
+    }
+    .area-icon img, .area-icon svg{
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(99,102,241,0.8)) drop-shadow(0 0 20px rgba(168,85,247,0.6));
+    }
+
+    .area-title{
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: var(--space-3);
+      color: var(--white);
+      transition: color .28s ease;
+      position: relative;
+      z-index: 2;
+    }
+    .area:hover .area-title{
+      color: var(--white);
+    }
+
+    .area-desc{
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: var(--space-4);
+      flex-grow: 1;
+      position: relative;
+      z-index: 2;
+    }
+
+    .area-cat{
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(206, 20, 20, 0.08);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      transition: all .28s ease;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 0 10px rgba(99,102,241,0.12);
+    }
+
+    .area:hover .area-cat{
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 0 15px rgba(99,102,241,0.12);
+    }
+    .area-cat.it{
+      background: rgba(0,0,0,0.4);
+      border-color: rgba(168,85,247,0.4);
+      color: #c4b5fd;
+      box-shadow: 0 0 10px rgba(168,85,247,0.2);
+    }
+    .area:hover .area-cat.it{
+      background: rgba(0,0,0,0.5);
+      border-color: rgba(168,85,247,0.6);
+      box-shadow: 0 0 15px rgba(168,85,247,0.4);
+    }
 
     /* Key-point card (image embedded flush into the card, fading up into the text) */
     .key-point{
@@ -194,51 +317,51 @@
     <h2 class="sec-title">KEY APPLICATIONS</h2>
 
     <div class="areas">
-      <div class="area">
+      <div class="area area-genomics">
         <div class="area-icon">
-          <img src="../pics/genom.png" alt="Bioinformatics icon" class="area-icon-img" width="48" height="48" decoding="async">
+          <img src="../pics/genom.png" alt="Bioinformatics icon" width="48" height="48" decoding="async">
         </div>
         <div class="area-title">Bioinformatics & Genomics</div>
         <p class="area-desc">Sequence alignment, variant calling, and genome annotation pipelines that turn raw DNA data into biological insight.</p>
         <span class="area-cat it">IT × Biotech</span>
       </div>
 
-      <div class="area">
+      <div class="area area-computational">
         <div class="area-icon">
-          <img src="../pics/comp.png" alt="Computational biology icon" class="area-icon-img" width="48" height="48" decoding="async">
+          <img src="../pics/comp.png" alt="Computational biology icon" width="48" height="48" decoding="async">
         </div>
         <div class="area-title">Computational Biology</div>
         <p class="area-desc">Computational biology uses molecular modeling and simulation to predict protein folding and interactions, helping guide research before experimentation.</p>
         <span class="area-cat it">IT × Biotech</span>
       </div>
-      <div class="area">
+      <div class="area area-big-data">
         <div class="area-icon">
-          <img src="../pics/bio-info.png" alt="AI icon" class="area-icon-img" width="48" height="48" decoding="async">
+          <img src="../pics/bio-info.png" alt="AI icon" width="48" height="48" decoding="async">
         </div>
         <div class="area-title">Big Data Analytics</div>
         <p class="area-desc">Turning massive, messy biological datasets — clinical, genomic, environmental — into actionable, statistically sound insight.</p>
         <span class="area-cat it">IT</span>
       </div>
-      <div class="area">
+      <div class="area area-automation">
         <div class="area-icon">
-          <img src="../pics/robot.png" alt="Lab automation icon" class="area-icon-img" width="48" height="48" decoding="async">
+          <img src="../pics/robot.png" alt="Lab automation icon" width="48" height="48" decoding="async">
         </div>
         <div class="area-title">Lab Automation & Robotics</div>
         <p class="area-desc">Robotic liquid handlers and automated workflows deliver higher throughput, fewer errors, and round-the-clock experimentation.</p>
         <span class="area-cat">Biotech</span>
       </div>
 
-      <div class="area">
+      <div class="area area-crispr">
         <div class="area-icon">
-          <img src="../pics/editing.png" alt="CRISPR icon" class="area-icon-img" width="48" height="48" decoding="async">
+          <img src="../pics/editing.png" alt="CRISPR icon" width="48" height="48" decoding="async">
         </div>
         <div class="area-title">CRISPR Design Software</div>
         <p class="area-desc">Guide RNA design tools and genome-editing platforms that make precision gene editing faster and more predictable.</p>
         <span class="area-cat it">IT × Biotech</span>
       </div>
-      <div class="area">
+      <div class="area area-precision-medicine">
         <div class="area-icon">
-          <img src="../pics/pharma.png" alt="AI icon" class="area-icon-img" width="48" height="48" decoding="async">
+          <img src="../pics/pharma.png" alt="AI icon" width="48" height="48" decoding="async">
         </div>
         <div class="area-title">AI-Powered Precision Medicine</div>
         <p class="area-desc">Harnessing predictive AI models to accelerate drug discovery and deliver personalized treatments by analyzing molecular structures, genetic profiles, clinical history, and lifestyle data.</p>
