@@ -2324,12 +2324,13 @@ footer{
     max-width: 320px;
     min-width: 0;
     margin: 0 auto;
+   transition: all 0.3s ease;
 }
 .article-card:hover{
     background: var(--surface-hover);
     border-color: var(--border-hover);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-soft);
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 20px 45px rgba(239, 68, 68, 0.25);
 }
 
 
